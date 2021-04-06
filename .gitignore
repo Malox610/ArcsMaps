@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+menuArc/menuArc.cbp
+menuArc/menuArc.depend
+*.layout
