@@ -1,7 +1,7 @@
 #include "Edge.h"
 #include <iostream>
 
-Edge::Edge(int _source, int _dest, int _weight): m_source(_source), m_dest(_dest), m_weight(_weight)
+Edge::Edge(int _source, int _dest, int _weight, std::string _type): m_source(_source), m_dest(_dest), m_weight(_weight), m_type(_type)
 {}
 
 int Edge::getSource()const
