@@ -1,30 +1,48 @@
 #include <iostream>
+#include <windows.h>
+#include <stdlib.h>
 #include <opencv2/opencv.hpp>
 using namespace std;
 using namespace cv;
-int cam(int argc, char** argv)
-{
 
-}
 int menu ()
 {
     int choix ;
     char b ;
+    std::cout<<""<<std::endl;
+
+std::cout<<""<<std::endl;
+std::cout<<""<<std::endl;
+std::cout<<""<<std::endl;
+std::cout<<""<<std::endl;
+std::cout<<""<<std::endl;
+    std::cout <<"         -------------------------                                            /%%%%%%"<<std::endl;
+    std::cout <<"         -------------------------                                          %%%%.  #%%%&"<<std::endl;
+    std::cout <<"       || Que voulez vous faire ?  ||                                    %%%%%        &%%%"<<std::endl ;
+    std::cout <<"       ||                          ||                                  &%%%%&#*,.  .*(%&%%%%*" <<std::endl;
+    std::cout <<"       ||   1. Maps                ||                                &%%% /%            % *%%%*"<<std::endl;
+    std::cout <<"       ||   2. Chemin speciaux     ||                              %%%%     &%        &(    /%%%"<<std::endl;
+    std::cout <<"       ||   3. ---                 ||                            .%%%.        %.    %&        &%%%"<<std::endl;
+    std::cout <<"       ||   4.Arret                ||                           %%%%           *%  %            %%%&"<<std::endl;
+    std::cout <<"         -------------------------                            *%%%   ./%&&&%%%%%%%%%%%%%%&&&%(,  .%%%"<<std::endl;
+    std::cout <<"         -------------------------                           &%%%              #%  %               %%%("<<std::endl;
+    std::cout <<"                                                             %%%  %/           %     *%           %& #%%&"<<std::endl;
+    std::cout <<"                                                           .%%&    ,%        %#        &&        %     %%%"<<std::endl;
+    std::cout <<"                                                          *%%&       &(    %&            %     &&       %%%"<<std::endl;
+    std::cout <<"                                                         *%%&         .%  &               *%  %          %%%"<<std::endl;
+    std::cout <<"                                                        ,%%%      (&&%%%%&%%%%&&&&&&&&&&%%%%%%%%&@&*      %%%"<<std::endl;
+    std::cout <<"                                                        %%%&          %& .%               ,%  %          &#%%%"<<std::endl;
+    std::cout <<"                                                       %%%  %        %     &%            %/    (%        % (%%%"<<std::endl;
+    std::cout <<"                                                      #%%#  &&     %#        %         /%        &%     %.  &%%"<<std::endl;
+    std::cout <<"                                                      %%%    &/  %&           &&      %,           %   &(   .%%&"<<std::endl;
+    std::cout <<"                                                      %%%%%%&,%,%               %   %&              (%&/#&%%%%%%"<<std::endl;
+    std::cout <<"                                                           %%%%%%%%%%%%%&&%(*,.  &&%  ..,*#&&&%%%%%%%%%%%&#"<<std::endl;
+    std::cout <<"                                                                     .*%&&%%%%%%%%%%%%%%%%%%&&#,"<<std::endl;
 
   do
   {
    do
    {
-
-    std::cout << " Que voulez vous faire ? "<<std::endl ;
-
-    std::cout << "1. Maps "<<std::endl;
-
-     std::cout << "2. Chemin speciaux "<<std::endl;
-
-     std::cout << "3. cam "<<std::endl;
-
-      std::cout << "4.Arret "<<std::endl;
 
       cin>>b;
       fflush(stdin);
@@ -61,11 +79,15 @@ return 4 ;
 }
 
 int main(int argc, char** argv)
-{
+  {
+
+
+system("color F0");
     int a;
     do
     {
-       cout << "Hello world!" << endl;
+
+
        a = menu();
     }while (a!=4);
 
