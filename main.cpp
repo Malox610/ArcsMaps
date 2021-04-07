@@ -6,14 +6,9 @@
 #include <queue>
 #include <climits>
 #include <fstream>
-#include <windows.h>
-#include <stdlib.h>
-#include <opencv2/opencv.hpp>
 #include "Graphe.h"
 #include "Edge.h"
 #include "Node.h"
-using namespace std;
-using namespace cv;
 
 void print_route(std::vector<int> const &prev, int i)
 {
@@ -35,77 +30,7 @@ struct comp
     }
 };
 
-int menu ()
-{
-    int choix ;
-    char b ;
-    std::cout<<""<<std::endl;
 
-std::cout<<""<<std::endl;
-std::cout<<""<<std::endl;
-std::cout<<""<<std::endl;
-std::cout<<""<<std::endl;
-std::cout<<""<<std::endl;
-    std::cout <<"         -------------------------                                            /%%%%%%"<<std::endl;
-    std::cout <<"         -------------------------                                          %%%%.  #%%%&"<<std::endl;
-    std::cout <<"       || Que voulez vous faire ?  ||                                    %%%%%        &%%%"<<std::endl ;
-    std::cout <<"       ||                          ||                                  &%%%%&#*,.  .*(%&%%%%*" <<std::endl;
-    std::cout <<"       ||   1. Maps                ||                                &%%% /%            % *%%%*"<<std::endl;
-    std::cout <<"       ||   2. Chemin speciaux     ||                              %%%%     &%        &(    /%%%"<<std::endl;
-    std::cout <<"       ||   3. ---                 ||                            .%%%.        %.    %&        &%%%"<<std::endl;
-    std::cout <<"       ||   4.Arret                ||                           %%%%           *%  %            %%%&"<<std::endl;
-    std::cout <<"         -------------------------                            *%%%   ./%&&&%%%%%%%%%%%%%%&&&%(,  .%%%"<<std::endl;
-    std::cout <<"         -------------------------                           &%%%              #%  %               %%%("<<std::endl;
-    std::cout <<"                                                             %%%  %/           %     *%           %& #%%&"<<std::endl;
-    std::cout <<"                                                           .%%&    ,%        %#        &&        %     %%%"<<std::endl;
-    std::cout <<"                                                          *%%&       &(    %&            %     &&       %%%"<<std::endl;
-    std::cout <<"                                                         *%%&         .%  &               *%  %          %%%"<<std::endl;
-    std::cout <<"                                                        ,%%%      (&&%%%%&%%%%&&&&&&&&&&%%%%%%%%&@&*      %%%"<<std::endl;
-    std::cout <<"                                                        %%%&          %& .%               ,%  %          &#%%%"<<std::endl;
-    std::cout <<"                                                       %%%  %        %     &%            %/    (%        % (%%%"<<std::endl;
-    std::cout <<"                                                      #%%#  &&     %#        %         /%        &%     %.  &%%"<<std::endl;
-    std::cout <<"                                                      %%%    &/  %&           &&      %,           %   &(   .%%&"<<std::endl;
-    std::cout <<"                                                      %%%%%%&,%,%               %   %&              (%&/#&%%%%%%"<<std::endl;
-    std::cout <<"                                                           %%%%%%%%%%%%%&&%(*,.  &&%  ..,*#&&&%%%%%%%%%%%&#"<<std::endl;
-    std::cout <<"                                                                     .*%&&%%%%%%%%%%%%%%%%%%&&#,"<<std::endl;
-
-  do
-  {
-   do
-   {
-
-      std::cin>>b;
-      fflush(stdin);
-      choix =b ;
-   }while(choix !=49 && choix !=50 && choix !=51 && choix !=52 );
-
-   switch(choix)
-   {
-   case 49:
-   std:: cout<<"partie lance " << std::endl ; /// A modifier quand on aura le programme
-
-   break ;
-
-   case 50:
-   std:: cout<<"Quel deck voulez vous modifier " << std::endl ;
-
-
-   break ;
-
-   case 51:
-   std:: cout<<" cam " << std::endl ; /// A modifier quand on aura le programme
-return 4 ;
-   break ;
-
-   case 52:
-   exit(1);
-   break;
-
-
-   }
-
-  }while(choix !=52 );
-}
 void findShortestPaths(Graph const &graph, Node source, int v, Node fin)
 {
     // prendre la source comme arrete = 0
@@ -167,7 +92,9 @@ void findShortestPaths(Graph const &graph, Node source, int v, Node fin)
     }
 }
 
-int main()
+
+
+void TrouverLeCheminLePlusCourt()
 {
     int v;
     int v1;
@@ -187,7 +114,7 @@ int main()
     std::ifstream flxPoints("data_points.txt"); // ouverture du fichier points
 
     flxPoints >> v; // premiere ligne du texte  = nombre de sommet
-    std::cout << v << std::endl;
+    //std::cout << v << std::endl;
     while(flxPoints)  /// on creer la liste d'adjacence grace au valeur r�cup�r�es dans le fichier
     {
             flxPoints >> vertex >> nodeName >> alt;
@@ -242,6 +169,11 @@ int main()
     {
         edges[i].afficher();
     }*/
+}
 
+int main()
+{
+
+    TrouverLeCheminLePlusCourt();
     return 0;
 }
