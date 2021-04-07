@@ -1,3 +1,6 @@
+/*
+    source Dijkstra : https://www.techiedelight.com/single-source-shortest-paths-dijkstras-algorithm/
+*/
 #include <iostream>
 #include <vector>
 #include <queue>
@@ -103,21 +106,21 @@ return 4 ;
 
   }while(choix !=52 );
 }
-void findShortestPaths(Graph const &graph, int source, int v, int fin)
+void findShortestPaths(Graph const &graph, Node source, int v, Node fin)
 {
     // prendre la source comme arrete = 0
     std::priority_queue<Node, std::vector<Node>, comp> min_heap;
-    min_heap.push({source, 0});
+    min_heap.push({source.getVertex(), source.getName(), 0});
 
     // mettre la distnace initial pour la source a l'infini
      std::vector<int> dist(v, INT_MAX);
     //distnace de la source a elle meme a 0
-    dist[source] = 0;
+    dist[source.getVertex()] = 0;
 
     // tableau de boolean pour traquer les sommets pour troiver le chemin minimum poiur chaque chemin
 
     std::vector<bool> done(v, false);
-    done[source] = true;
+    done[source.getVertex()] = true;
 
     // stocker les predecesseur pour ecrire le chemin
     std::vector<int> prev(v, -1);
@@ -135,7 +138,7 @@ void findShortestPaths(Graph const &graph, int source, int v, int fin)
 
         for (auto i: graph.m_adjList[u])
         {
-            int v = i.getDest();
+            int v = i.getDest().getVertex();
             int weight = i.getWeight();
 
 
@@ -143,7 +146,7 @@ void findShortestPaths(Graph const &graph, int source, int v, int fin)
             {
                 dist[v] = dist[u] + weight;
                 prev[v] = u;
-                min_heap.push({v, dist[v]});
+                min_heap.push({v," v ", dist[v]});
             }
         }
 
@@ -153,9 +156,9 @@ void findShortestPaths(Graph const &graph, int source, int v, int fin)
 
     for (int i = 0; i < v; i++)
     {
-        if (i != source && dist[i] != INT_MAX && i == fin)
+        if (i != source.getVertex() && dist[i] != INT_MAX && i == fin.getVertex())
         {
-            std::cout << "Chemin (" << source << " --> " << i << "): Poids minimal = "
+            std::cout << "Chemin (" << source.getName() << " --> " << i << "): Poids minimal = "
                  << dist[i] << ", Route = [ ";
             print_route(prev, i);
             std::cout << "]" << std::endl;
@@ -164,75 +167,81 @@ void findShortestPaths(Graph const &graph, int source, int v, int fin)
     }
 }
 
-int main(int argc, char** argv)
+int main()
 {
-    system("color F0");
-     int a;
-    do
-    {
-
-
-       a = menu();
-    }while (a!=4);
-
-    VideoCapture cap(0); //capture the video from web cam
- if (!cap.isOpened()) // if not success, exit program
- {
- return -1;
- }
-  Mat imgTmp;
-cap.read(imgTmp);
-Mat imgLines = Mat::zeros(imgTmp.size(), CV_8UC3);
- while (true)
- {
- Mat imgRetourCam;
- bool bSuccess = cap.read(imgRetourCam); // read a new frame from video
- if (!bSuccess) //recommencer la vidéo
- {
- cap.set(CAP_PROP_POS_FRAMES, 0);
-cap.read(imgRetourCam);
- }
- namedWindow("Original", WINDOW_NORMAL);
- imshow("Original", imgRetourCam); //show the original image
-if (waitKey(1) == 27)
- break;
- }
- /// suite a mettre en sous programme qui sera appelé dans menu
     int v;
-    std::ifstream flx("graph.txt");
-    flx >> v;
-    int cpt = 0;
     int v1;
     int v2;
-    int poids;
-
-    // initialize edges as per the above diagram
+    Node start;
+    Node finish;
+    int weight;
+    int vertex;
+    int alt;
+    int num;
+    std::string edgeType;
+    std::string nodeName;
+    std::string edgeName;
+    std::vector<Node> nodes;
     std::vector<Edge> edges;
 
-    while(flx)  /// on creer la liste d'adjacence grace au valeur r�cup�r�es dans le fichier
+    std::ifstream flxPoints("data_points.txt"); // ouverture du fichier points
+
+    flxPoints >> v; // premiere ligne du texte  = nombre de sommet
+    std::cout << v << std::endl;
+    while(flxPoints)  /// on creer la liste d'adjacence grace au valeur r�cup�r�es dans le fichier
     {
-        std::string ligne;
-        getline(flx, ligne);
-
-        if (cpt > v)
-        {
-            flx >> v1 >> v2 >> poids;
-            edges.push_back({v1,v2,poids});
-        }
-        cpt++;
-
+            flxPoints >> vertex >> nodeName >> alt;
+            Node sommet(vertex, nodeName, alt);
+            nodes.push_back(sommet);
+            //std::cout << vertex << "  " << nodeName << "  "  << alt << "  " << std::endl;
     }
 
-    // construct graph
-    Graph graph(edges, v);
+    std::ifstream flxEdges("data_arcs.txt"); // ouverture du fichier arcs
 
-    int source ;
-    int fin ;
+    while(flxEdges)
+    {
+        flxEdges >> num >> edgeName >> edgeType >> v1 >> v2;
+        //std::cout << num << "  " << edgeName << "  "  << edgeType << "  " << v1 << "  " << v2 <<std::endl;
+        start = nodes[v1-1];
+        finish = nodes[v2-1];
+        weight = abs(start.getWeight()- finish.getWeight());
+        Edge edge(start, finish, weight);
+        edge.setNom(edgeName);
+        edge.setType(edgeType);
+        edge.setNum(num);
+        edges.push_back(edge);
+    }
+
+
+
+    //edges.push_back({v1,v2,poids});
+
+
+
+
+    // construct graph
+    Graph graph(edges, 95);
+    int saisieSource;
+    int saisieFin;
+    Node source ;
+    Node fin ;
     std::cout <<" De quel sommet voulez vous partir ?"<<std::endl;
-    std::cin >>source ;
+    std::cin >>saisieSource;
     std::cout <<" Quel est le sommet d'arrive de votre choix ?"<<std::endl;
-    std::cin>> fin ;
+    std::cin>> saisieFin;
+    source = nodes[saisieSource-1];
+    fin = nodes[saisieFin-1];
     findShortestPaths(graph, source, v , fin);
+
+    /*for(int i = 0; i < nodes.size()-1; i++)
+    {
+        nodes[i].afficher();
+    }
+
+    for(int i = 0; i < edges.size()-1; i++)
+    {
+        edges[i].afficher();
+    }*/
 
     return 0;
 }
