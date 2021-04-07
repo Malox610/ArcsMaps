@@ -12,7 +12,9 @@
 #include "Graphe.h"
 #include "Edge.h"
 #include "Node.h"
-using namespace cv;
+
+using namespace std;
+//using namespace cv;
 
 void print_route(std::vector<int> const &prev, int i)
 {
@@ -213,7 +215,7 @@ std::cout<<""<<std::endl;
    do
    {
 
-      std::cin>>b;
+      cin>>b;
       fflush(stdin);
       choix =b ;
    }while(choix !=49 && choix !=50 && choix !=51 && choix !=52 );
@@ -221,8 +223,8 @@ std::cout<<""<<std::endl;
    switch(choix)
    {
    case 49:
-  
-    TrouverLeCheminLePlusCourt();
+
+   TrouverLeCheminLePlusCourt();
    break ;
 
    case 50:
@@ -244,37 +246,41 @@ return 4 ;
    }
 
   }while(choix !=52 );
+return -1 ;
 }
+
 int main(int argc, char** argv)
 {
- system("color F0");
-     int a;
-    do
+    system("color F0");
+    int a;
+     do
     {
        a = menu();
     }while (a!=4);
-
-    VideoCapture cap(0); //capture the video from web cam
+if (a==4)
+{
+     cv::VideoCapture cap(0); //capture the video from web cam
  if (!cap.isOpened()) // if not success, exit program
  {
  return -1;
  }
-  Mat imgTmp;
-cap.read(imgTmp);
-Mat imgLines = Mat::zeros(imgTmp.size(), CV_8UC3);
+  cv::Mat imgTmp;
+ cap.read(imgTmp);
+ cv::Mat imgLines = cv::Mat::zeros(imgTmp.size(), CV_8UC3);
  while (true)
  {
- Mat imgRetourCam;
- bool bSuccess = cap.read(imgRetourCam); // read a new frame from video
- if (!bSuccess) //recommencer la vidéo
- {
- cap.set(CAP_PROP_POS_FRAMES, 0);
-cap.read(imgRetourCam);
+ cv::Mat imgRetourCam;
+    bool bSuccess = cap.read(imgRetourCam); // read a new frame from video
+    if (!bSuccess) //recommencer la vidéo
+    {
+     cap.set(cv::CAP_PROP_POS_FRAMES, 0);
+     cap.read(imgRetourCam);
+    }
+   cv::namedWindow("Original", cv::WINDOW_NORMAL);
+   cv::imshow("Original", imgRetourCam); //show the original image
+    if (cv::waitKey(1) == 27)
+    break;
  }
- namedWindow("Original", WINDOW_NORMAL);
- imshow("Original", imgRetourCam); //show the original image
-if (waitKey(1) == 27)
- break;
-    
+}
     return 0;
 }
