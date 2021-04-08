@@ -27,7 +27,7 @@ int Edge::getWeight()const
 
 Edge::~Edge(){}
 
-std::string Edge::getType() const
+char Edge::getType() const
 {
     return m_type;
 }
@@ -42,7 +42,7 @@ void Edge::setWeight()
     m_weight = abs(m_dest.getWeight()- m_source.getWeight());
 }
 
-void Edge::setType(std::string newType)
+void Edge::setType(char newType)
 {
     m_type = newType;
 }
