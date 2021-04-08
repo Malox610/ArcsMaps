@@ -11,7 +11,7 @@ private :
     Node m_dest;
     int m_weight;
     Node m_source;
-    std::string m_type;
+    char m_type;
     std::string m_nom;
 
 public:
@@ -23,11 +23,11 @@ public:
       int getNum() const;
       Node getSource ()const;
       Node getDest ()const;
-      std::string getType()const;
+      char getType()const;
       std::string getNom()const;
       int getWeight ()const;
       void setWeight();
-      void setType(std::string newType);
+      void setType(char newType);
       void setNom(std::string newNom);
       void setNum(int newNum);
       void afficher();
