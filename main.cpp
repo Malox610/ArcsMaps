@@ -6,15 +6,9 @@
 #include <queue>
 #include <climits>
 #include <fstream>
-#include <windows.h>
-#include <stdlib.h>
-#include <opencv2/opencv.hpp>
 #include "Graphe.h"
 #include "Edge.h"
 #include "Node.h"
-
-using namespace std;
-//using namespace cv;
 
 void print_route(std::vector<int> const &prev, int i)
 {
@@ -265,7 +259,7 @@ int main()
     fin = nodes[saisieFin-1];
     findShortestPaths(graph, source, v , fin);
     AllShortestPast(graph, source, v);
-    //AdjListBFS(graph.m_adjList, source);
+    AdjListBFS(graph.m_adjList, source);
 
     /*for(int i = 0; i < nodes.size()-1; i++)
     {
