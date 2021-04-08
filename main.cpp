@@ -155,6 +155,21 @@ void AllShortestPast(Graph const &graph, Node source, int v) /// Dijkstra tous l
             print_route(prev, i, edges);
             std::cout << "]" << std::endl;
     }
+
+      std::cout<<" "<< std::endl ;
+    std::cout<<" "<< std::endl ;
+
+    int p=0;
+    char c;
+    do
+    {
+      std::cout <<" <----  retour menu ( ecrire 1)"<< std::endl;
+      std::cin>>c;
+      fflush(stdin);
+      p=c;
+    }while(p!=49);
+    system("cls");
+
 }
 
 
@@ -226,6 +241,20 @@ void findShortestPaths(Graph const &graph, Node source, int v, Node fin) /// Dij
 
         }
     }
+      std::cout<<" "<< std::endl ;
+    std::cout<<" "<< std::endl ;
+
+    int p=0;
+    char c;
+    do
+    {
+      std::cout <<" <----  retour menu ( ecrire 1)"<< std::endl;
+      std::cin>>c;
+      fflush(stdin);
+      p=c;
+    }while(p!=49);
+    system("cls");
+
 }
 
 // Given an Adjacency List, do a BFS on vertex "start"
@@ -268,11 +297,24 @@ void AdjListBFS(std::vector< std::vector<Edge> > adjList, Node start)
                 }
             }
         }
-    std::cout << std::endl ;
-    return;
+  
+  std::cout<<" "<< std::endl ;
+    std::cout<<" "<< std::endl ;
+
+    int p=0;
+    char c;
+    do
+    {
+      std::cout <<" <----  retour menu ( ecrire 1)"<< std::endl;
+      std::cin>>c;
+      fflush(stdin);
+      p=c;
+    }while(p!=49);
+    system("cls");
+
     }
    void TrouverLeCheminLePlusCourt()
-   {
+{
 
 
      int v = 0 ;//
@@ -280,25 +322,73 @@ void AdjListBFS(std::vector< std::vector<Edge> > adjList, Node start)
     std::string edgeName;
     std::vector<Node> nodes;
     std::vector<Edge> edges;
-      std::cout<<"bonjour";
-
-
-
-    //edges.push_back({v1,v2,poids});
-    // construct graph
-
 
     int saisieSource;
     int saisieFin;
     Node source ;
     Node fin ;
 
-   do{
-    do {
-        std::cout <<" De quel sommet voulez vous partir ?"<<std::endl;
-    std::cin >>saisieSource;
 
-    }while(saisieSource<1);
+    nodes = nodesTxt(&v);
+    edges = EdgesTxt(nodes);
+    Graph graph(edges, 95);
+    //edges.push_back({v1,v2,poids});
+    // construct graph
+
+   int choix ;
+    char b ;
+    std::cout<<""<<std::endl;
+    do
+    {
+    std::cout<<""<<std::endl;
+    std::cout<<""<<std::endl;
+    std::cout<<""<<std::endl;
+    std::cout<<""<<std::endl;
+    std::cout<<""<<std::endl;
+    std::cout <<"         -------------------------                                            /%%%%%%"<<std::endl;
+    std::cout <<"         -------------------------                                          %%%%.  #%%%&"<<std::endl;
+    std::cout <<"       || Que voulez vous faire ?  ||                                    %%%%%        &%%%"<<std::endl ;
+    std::cout <<"       ||                          ||                                  &%%%%&#*,.  .*(%&%%%%*" <<std::endl;
+    std::cout <<"       ||   1. Dijkstra            ||                                &%%% /%            % *%%%*"<<std::endl;
+    std::cout <<"       ||   2. Tout chelmin        ||                              %%%%     &%        &(    /%%%"<<std::endl;
+    std::cout <<"       ||   3. BFS                 ||                            .%%%.        %.    %&        &%%%"<<std::endl;
+    std::cout <<"       ||   4. Retour au menu      ||                           %%%%           *%  %            %%%&"<<std::endl;
+    std::cout <<"         -------------------------                            *%%%   ./%&&&%%%%%%%%%%%%%%&&&%(,  .%%%"<<std::endl;
+    std::cout <<"         -------------------------                           &%%%              #%  %               %%%("<<std::endl;
+    std::cout <<"                                                             %%%  %/           %     *%           %& #%%&"<<std::endl;
+    std::cout <<"                                                           .%%&    ,%        %#        &&        %     %%%"<<std::endl;
+    std::cout <<"                                                          *%%&       &(    %&            %     &&       %%%"<<std::endl;
+    std::cout <<"                                                         *%%&         .%  &               *%  %          %%%"<<std::endl;
+    std::cout <<"                                                        ,%%%      (&&%%%%&%%%%&&&&&&&&&&%%%%%%%%&@&*      %%%"<<std::endl;
+    std::cout <<"                                                        %%%&          %& .%               ,%  %          &#%%%"<<std::endl;
+    std::cout <<"                                                       %%%  %        %     &%            %/    (%        % (%%%"<<std::endl;
+    std::cout <<"                                                      #%%#  &&     %#        %         /%        &%     %.  &%%"<<std::endl;
+    std::cout <<"                                                      %%%    &/  %&           &&      %,           %   &(   .%%&"<<std::endl;
+    std::cout <<"                                                      %%%%%%&,%,%               %   %&              (%&/#&%%%%%%"<<std::endl;
+    std::cout <<"                                                           %%%%%%%%%%%%%&&%(*,.  &&%  ..,*#&&&%%%%%%%%%%%&#"<<std::endl;
+    std::cout <<"                                                                     .*%&&%%%%%%%%%%%%%%%%%%&&#,"<<std::endl;
+
+
+   do
+   {
+
+      std::cin>>b;
+      fflush(stdin);
+      choix =b ;
+   }while(choix !=49 && choix !=50 && choix !=51 && choix !=52 );
+
+
+   switch(choix)
+   {
+   case 49 :
+    system("cls");
+    do
+    {
+       do {
+           std::cout <<" De quel sommet voulez vous partir ?"<<std::endl;
+           std::cin >>saisieSource;
+
+           }while(saisieSource<1);
    }while(saisieSource>37);
    do{
     do {
@@ -306,32 +396,51 @@ void AdjListBFS(std::vector< std::vector<Edge> > adjList, Node start)
     std::cin>> saisieFin;
     }while(saisieFin<1);
    }while(saisieFin>37);
-   nodes = nodesTxt(&v);
-    edges = EdgesTxt(nodes);
-     Graph graph(edges, 95);
-
 
     source = nodes[saisieSource-1];
-
     fin = nodes[saisieFin-1];
 
+    findShortestPaths(graph, source, v , fin);
 
-    //findShortestPaths(graph, source, v , fin);
+    break ;
 
-//AllShortestPast(graph, source, v);
-    AdjListBFS(graph.m_adjList, source);
+    case 50:
+       system("cls");
 
-    /*for(int i = 0; i < nodes.size()-1; i++)
-    {
-        nodes[i].afficher();
-    }
+        do
+         {
+           do
+          {
+           std::cout <<" De quel sommet voulez vous partir ?"<<std::endl;
+           std::cin >>saisieSource;
+          }while(saisieSource<1);
+        }while(saisieSource>37);
+         source = nodes[saisieSource-1];
 
-    for(int i = 0; i < edges.size()-1; i++)
-    {
-        edges[i].afficher();
-    }*/
+        AllShortestPast(graph, source, v);
+
+   break ;
+
+   case 51:
+       system("cls");
+       do
+         {
+         do
+          {
+           std::cout <<" De quel sommet voulez vous partir ?"<<std::endl;
+           std::cin >>saisieSource;
+          }while(saisieSource<1);
+        }while(saisieSource>37);
+
+        source = nodes[saisieSource-1];
+        AdjListBFS(graph.m_adjList, source);
+   break ;
 
    }
+   system("cls");
+   }while(choix !=52);
+
+}
 int menu ()
 {
     int choix ;
