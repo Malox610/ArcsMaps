@@ -230,44 +230,45 @@ void findShortestPaths(Graph const &graph, Node source, int v, Node fin) /// Dij
 
 // Given an Adjacency List, do a BFS on vertex "start"
 
-void AdjListBFS(std::vector< std::vector<int> > adjList, Node start)
+void AdjListBFS(std::vector< std::vector<Edge> > adjList, Node start)
     {
-    std::cout << "Doing a BFS on an adjacency list";
+    std::cout << "Doing a BFS on an adjacency list : ";
 
     int n = adjList.size();
     // Create a "visited" array (true or false) to keep track of if we visited a vertex.
     bool visited[n] = { false };
 
     // Create a queue for the nodes we visit.
-    std::queue<int> q;
+    std::queue<Node> q;
 
     // Add the starting vertex to the queue and mark it as visited.
-    q.push(start.getVertex());
+    q.push(start);
     visited[start.getVertex()] = true;
 
     // While the queue is not empty..
     while(q.empty() == false)
         {
-        int vertex = q.front();
+        Node ver = q.front();
+         int vertex=ver.getVertex();
         q.pop();
 
         // Doing +1 in the cout because our graph is 1-based indexing, but our code is 0-based.
-        std::cout << vertex+1 << " ";
+        std::cout << vertex << " ";
 
         // Loop through all of it's friends.
         for(int i = 0; i < adjList[vertex].size(); i++)
             {
             // If the friend hasn't been visited yet, add it to the queue and mark it as visited
-            int neighbor = adjList[vertex][i];
+            Node neighbor = adjList[vertex][i].getDest();
 
-            if(visited[neighbor] == false)
+            if(visited[neighbor.getVertex()] == false)
                 {
                 q.push(neighbor);
-                visited[neighbor] = true;
+                visited[neighbor.getVertex()] = true;
                 }
             }
         }
-    std::cout << std::endl << std::endl;
+    std::cout << std::endl ;
     return;
     }
    void TrouverLeCheminLePlusCourt()
