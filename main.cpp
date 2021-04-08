@@ -13,7 +13,7 @@
 #include "Edge.h"
 #include "Node.h"
 
-void print_route(std::vector<int> const &prev, int i)
+void print_route(std::vector<int> const &prev, int i, std::vector<Edge> edges)
 {
     if (i < 0)
         {
@@ -21,8 +21,12 @@ void print_route(std::vector<int> const &prev, int i)
         }
 
 
-    print_route(prev, prev[i]);
+    print_route(prev, prev[i], edges);
     std::cout << i << " ";
+
+    /*Edge k =edges[i-1];
+            char type = k.getType();
+            std::cout <<k.getNom()<<" : " <<type<<std::endl;*/
 }
 
 
@@ -42,7 +46,7 @@ Node finish;
     int v2;//
     int weight;//
      int num;///
-    std::string edgeType;//
+    char edgeType;//
     std::string edgeName;//
 
     std::ifstream flxEdges("data_arcs.txt"); // ouverture du fichier arcs
@@ -95,6 +99,13 @@ void AllShortestPast(Graph const &graph, Node source, int v) /// Dijkstra tous l
     std::priority_queue<Node, std::vector<Node>, comp> min_heap;
     min_heap.push({source.getVertex(), source.getName(), 0});
 
+    std::vector<Edge> edges;
+    std::vector<Node> nodes;
+    int z=0;
+    nodes = nodesTxt(&z);
+    edges = EdgesTxt(nodes);
+
+
     // mettre la distnace initial pour la source a l'infini
      std::vector<int> dist(v, INT_MAX);
     //distnace de la source a elle meme a 0
@@ -141,7 +152,7 @@ void AllShortestPast(Graph const &graph, Node source, int v) /// Dijkstra tous l
     {
             std::cout << "Chemin (" << source.getName() << " --> " << i << "): Poids minimal = "
                  << dist[i] << ", Route = [ ";
-            print_route(prev, i);
+            print_route(prev, i, edges);
             std::cout << "]" << std::endl;
     }
 }
@@ -149,9 +160,15 @@ void AllShortestPast(Graph const &graph, Node source, int v) /// Dijkstra tous l
 
 void findShortestPaths(Graph const &graph, Node source, int v, Node fin) /// Dijkstra plus court chemins choix du depart + arrivee
 {
+
     // prendre la source comme arrete = 0
     std::priority_queue<Node, std::vector<Node>, comp> min_heap;
     min_heap.push({source.getVertex(), source.getName(), 0});
+    std::vector<Edge> edges;
+    std::vector<Node> nodes;
+    int z=0;
+    nodes = nodesTxt(&z);
+    edges = EdgesTxt(nodes);
 
     // mettre la distnace initial pour la source a l'infini
      std::vector<int> dist(v, INT_MAX);
@@ -194,14 +211,17 @@ void findShortestPaths(Graph const &graph, Node source, int v, Node fin) /// Dij
         // marquage des sommets
         done[u] = true;
     }
+///affichage
 
     for (int i = 0; i < v; i++)
     {
+
         if (i != source.getVertex() && dist[i] != INT_MAX && i == fin.getVertex())
         {
+
             std::cout << "Chemin (" << source.getName() << " --> " << i << "): Poids minimal = "
                  << dist[i] << ", Route = [ ";
-            print_route(prev, i);
+            print_route(prev, i,edges);
             std::cout << "]" << std::endl;
 
         }
@@ -254,14 +274,6 @@ void AdjListBFS(std::vector< std::vector<int> > adjList, Node start)
    {
 
 
-  //int v1;
-   // int v2;
-
-   // int weight;
-   // int vertex;//
-  //  int alt;//
-   // int num;
-  //  char edgeType;
      int v = 0 ;//
     std::string nodeName;//
     std::string edgeName;
@@ -297,16 +309,16 @@ void AdjListBFS(std::vector< std::vector<int> > adjList, Node start)
     edges = EdgesTxt(nodes);
      Graph graph(edges, 95);
 
-     
-    source = nodes[saisieSource-1];
-   
-    fin = nodes[saisieFin-1];
- 
 
-    findShortestPaths(graph, source, v , fin);
-  
-    //AllShortestPast(graph, source, v);
-//    AdjListBFS(graph.m_adjList, source);
+    source = nodes[saisieSource-1];
+
+    fin = nodes[saisieFin-1];
+
+
+    //findShortestPaths(graph, source, v , fin);
+
+//AllShortestPast(graph, source, v);
+    AdjListBFS(graph.m_adjList, source);
 
     /*for(int i = 0; i < nodes.size()-1; i++)
     {
@@ -366,18 +378,21 @@ std::cout<<""<<std::endl;
    switch(choix)
    {
    case 49:
+       system("cls");
 std::cout <<" chemin  le plus court " << std::endl;
 TrouverLeCheminLePlusCourt();
    break ;
 
    case 50:
+       system("cls");
    std:: cout<<"Quel deck voulez vous modifier " << std::endl ;
 
 
    break ;
 
    case 51:
-   std:: cout<<" cam " << std::endl ; /// A modifier quand on aura le programme
+       system("cls");
+   std:: cout<<" cam " << std::endl ;
 return 4 ;
    break ;
 
