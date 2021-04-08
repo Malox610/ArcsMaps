@@ -6,9 +6,15 @@
 #include <queue>
 #include <climits>
 #include <fstream>
+#include <windows.h>
+#include <stdlib.h>
+#include <opencv2/opencv.hpp>
 #include "Graphe.h"
 #include "Edge.h"
 #include "Node.h"
+
+using namespace std;
+//using namespace cv;
 
 void print_route(std::vector<int> const &prev, int i)
 {
