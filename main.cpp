@@ -6,6 +6,9 @@
 #include <queue>
 #include <climits>
 #include <fstream>
+#include <windows.h>
+#include <stdlib.h>
+#include <opencv2/opencv.hpp>
 #include "Graphe.h"
 #include "Edge.h"
 #include "Node.h"
@@ -29,6 +32,62 @@ struct comp
         return lhs.getWeight() > rhs.getWeight();
     }
 };
+
+std::vector<Edge> EdgesTxt(std::vector<Node> nodes )
+{
+std::vector<Edge> edges;
+Node start;
+Node finish;
+ int v1;//
+    int v2;//
+    int weight;//
+     int num;///
+    std::string edgeType;//
+    std::string edgeName;//
+
+    std::ifstream flxEdges("data_arcs.txt"); // ouverture du fichier arcs
+
+    while(flxEdges)
+    {
+        flxEdges >> num >> edgeName >> edgeType >> v1 >> v2;
+        //std::cout << num << "  " << edgeName << "  "  << edgeType << "  " << v1 << "  " << v2 <<std::endl;
+
+        start = nodes[v1-1];
+
+        finish = nodes[v2-1];
+
+        weight = abs(start.getWeight()- finish.getWeight());
+        Edge edge(start, finish, weight);
+        edge.setNom(edgeName);
+        edge.setType(edgeType);
+        edge.setNum(num);
+        edges.push_back(edge);
+
+    }
+return edges;
+}
+
+std::vector<Node> nodesTxt(int *v)
+{
+     std::vector<Node> nodes;
+
+     int vertex;//
+    int alt;//
+    std::string nodeName;//
+     std::ifstream flxPoints("data_points.txt"); // ouverture du fichier points
+
+    flxPoints >> *v; // premiere ligne du texte  = nombre de sommet
+    //std::cout << v << std::endl;
+    while(flxPoints)  /// on creer la liste d'adjacence grace au valeur r�cup�r�es dans le fichier
+    {
+            flxPoints >> vertex >> nodeName >> alt;
+            Node sommet(vertex, nodeName, alt);
+            nodes.push_back(sommet);
+            //std::cout << vertex << "  " << nodeName << "  "  << alt << "  " << std::endl;
+    }
+return nodes ;
+}
+
 
 void AllShortestPast(Graph const &graph, Node source, int v) /// Dijkstra tous les plus courts chemins
 {
@@ -153,7 +212,7 @@ void findShortestPaths(Graph const &graph, Node source, int v, Node fin) /// Dij
 
 void AdjListBFS(std::vector< std::vector<int> > adjList, Node start)
     {
-    std::cout << "\nDoing a BFS on an adjacency list.\n";
+    std::cout << "Doing a BFS on an adjacency list";
 
     int n = adjList.size();
     // Create a "visited" array (true or false) to keep track of if we visited a vertex.
@@ -191,75 +250,63 @@ void AdjListBFS(std::vector< std::vector<int> > adjList, Node start)
     std::cout << std::endl << std::endl;
     return;
     }
+   void TrouverLeCheminLePlusCourt()
+   {
 
 
-int main()
-{
-    int v;
-    int v1;
-    int v2;
-    Node start;
-    Node finish;
-    int weight;
-    int vertex;
-    int alt;
-    int num;
-    std::string edgeType;
-    std::string nodeName;
+  //int v1;
+   // int v2;
+
+   // int weight;
+   // int vertex;//
+  //  int alt;//
+   // int num;
+  //  char edgeType;
+     int v = 0 ;//
+    std::string nodeName;//
     std::string edgeName;
     std::vector<Node> nodes;
     std::vector<Edge> edges;
-
-    std::ifstream flxPoints("data_points.txt"); // ouverture du fichier points
-
-    flxPoints >> v; // premiere ligne du texte  = nombre de sommet
-    //std::cout << v << std::endl;
-    while(flxPoints)  /// on creer la liste d'adjacence grace au valeur r�cup�r�es dans le fichier
-    {
-            flxPoints >> vertex >> nodeName >> alt;
-            Node sommet(vertex, nodeName, alt);
-            nodes.push_back(sommet);
-            //std::cout << vertex << "  " << nodeName << "  "  << alt << "  " << std::endl;
-    }
-
-    std::ifstream flxEdges("data_arcs.txt"); // ouverture du fichier arcs
-
-    while(flxEdges)
-    {
-        flxEdges >> num >> edgeName >> edgeType >> v1 >> v2;
-        //std::cout << num << "  " << edgeName << "  "  << edgeType << "  " << v1 << "  " << v2 <<std::endl;
-        start = nodes[v1-1];
-        finish = nodes[v2-1];
-        weight = abs(start.getWeight()- finish.getWeight());
-        Edge edge(start, finish, weight);
-        edge.setNom(edgeName);
-        edge.setType(edgeType);
-        edge.setNum(num);
-        edges.push_back(edge);
-    }
+      std::cout<<"bonjour";
 
 
 
     //edges.push_back({v1,v2,poids});
-
-
-
-
     // construct graph
-    Graph graph(edges, 95);
+
+
     int saisieSource;
     int saisieFin;
     Node source ;
     Node fin ;
-    std::cout <<" De quel sommet voulez vous partir ?"<<std::endl;
+
+   do{
+    do {
+        std::cout <<" De quel sommet voulez vous partir ?"<<std::endl;
     std::cin >>saisieSource;
-    std::cout <<" Quel est le sommet d'arrive de votre choix ?"<<std::endl;
+
+    }while(saisieSource<1);
+   }while(saisieSource>37);
+   do{
+    do {
+          std::cout <<" Quel est le sommet d'arrive de votre choix ?"<<std::endl;
     std::cin>> saisieFin;
+    }while(saisieFin<1);
+   }while(saisieFin>37);
+   nodes = nodesTxt(&v);
+    edges = EdgesTxt(nodes);
+     Graph graph(edges, 95);
+
+     
     source = nodes[saisieSource-1];
+   
     fin = nodes[saisieFin-1];
+ 
+
     findShortestPaths(graph, source, v , fin);
-    AllShortestPast(graph, source, v);
-    AdjListBFS(graph.m_adjList, source);
+  
+    //AllShortestPast(graph, source, v);
+//    AdjListBFS(graph.m_adjList, source);
 
     /*for(int i = 0; i < nodes.size()-1; i++)
     {
@@ -270,6 +317,117 @@ int main()
     {
         edges[i].afficher();
     }*/
+
+   }
+int menu ()
+{
+    int choix ;
+    char b ;
+    std::cout<<""<<std::endl;
+    do
+    {
+        std::cout<<""<<std::endl;
+std::cout<<""<<std::endl;
+std::cout<<""<<std::endl;
+std::cout<<""<<std::endl;
+std::cout<<""<<std::endl;
+    std::cout <<"         -------------------------                                            /%%%%%%"<<std::endl;
+    std::cout <<"         -------------------------                                          %%%%.  #%%%&"<<std::endl;
+    std::cout <<"       || Que voulez vous faire ?  ||                                    %%%%%        &%%%"<<std::endl ;
+    std::cout <<"       ||                          ||                                  &%%%%&#*,.  .*(%&%%%%*" <<std::endl;
+    std::cout <<"       ||   1. Maps                ||                                &%%% /%            % *%%%*"<<std::endl;
+    std::cout <<"       ||   2. Chemin speciaux     ||                              %%%%     &%        &(    /%%%"<<std::endl;
+    std::cout <<"       ||   3. ---                 ||                            .%%%.        %.    %&        &%%%"<<std::endl;
+    std::cout <<"       ||   4.Arret                ||                           %%%%           *%  %            %%%&"<<std::endl;
+    std::cout <<"         -------------------------                            *%%%   ./%&&&%%%%%%%%%%%%%%&&&%(,  .%%%"<<std::endl;
+    std::cout <<"         -------------------------                           &%%%              #%  %               %%%("<<std::endl;
+    std::cout <<"                                                             %%%  %/           %     *%           %& #%%&"<<std::endl;
+    std::cout <<"                                                           .%%&    ,%        %#        &&        %     %%%"<<std::endl;
+    std::cout <<"                                                          *%%&       &(    %&            %     &&       %%%"<<std::endl;
+    std::cout <<"                                                         *%%&         .%  &               *%  %          %%%"<<std::endl;
+    std::cout <<"                                                        ,%%%      (&&%%%%&%%%%&&&&&&&&&&%%%%%%%%&@&*      %%%"<<std::endl;
+    std::cout <<"                                                        %%%&          %& .%               ,%  %          &#%%%"<<std::endl;
+    std::cout <<"                                                       %%%  %        %     &%            %/    (%        % (%%%"<<std::endl;
+    std::cout <<"                                                      #%%#  &&     %#        %         /%        &%     %.  &%%"<<std::endl;
+    std::cout <<"                                                      %%%    &/  %&           &&      %,           %   &(   .%%&"<<std::endl;
+    std::cout <<"                                                      %%%%%%&,%,%               %   %&              (%&/#&%%%%%%"<<std::endl;
+    std::cout <<"                                                           %%%%%%%%%%%%%&&%(*,.  &&%  ..,*#&&&%%%%%%%%%%%&#"<<std::endl;
+    std::cout <<"                                                                     .*%&&%%%%%%%%%%%%%%%%%%&&#,"<<std::endl;
+
+
+   do
+   {
+
+      std::cin>>b;
+      fflush(stdin);
+      choix =b ;
+   }while(choix !=49 && choix !=50 && choix !=51 && choix !=52 );
+
+   switch(choix)
+   {
+   case 49:
+std::cout <<" chemin  le plus court " << std::endl;
+TrouverLeCheminLePlusCourt();
+   break ;
+
+   case 50:
+   std:: cout<<"Quel deck voulez vous modifier " << std::endl ;
+
+
+   break ;
+
+   case 51:
+   std:: cout<<" cam " << std::endl ; /// A modifier quand on aura le programme
+return 4 ;
+   break ;
+
+   case 52:
+   exit(1);
+   break;
+
+
+   }
+
+  }while(choix !=52 );
+return -1 ;
+}
+
+
+
+
+int main(int argc, char** argv)
+{
+     system("color F0");
+    int a;
+     do
+    {
+       a = menu();
+     }while (a!=4);
+      if (a==4)
+       {
+        cv::VideoCapture cap(0); //capture the video from web cam
+        if (!cap.isOpened()) // if not success, exit program
+        {
+          return -1;
+        }
+              cv::Mat imgTmp;
+             cap.read(imgTmp);
+             cv::Mat imgLines = cv::Mat::zeros(imgTmp.size(), CV_8UC3);
+            while (true)
+            {
+             cv::Mat imgRetourCam;
+                bool bSuccess = cap.read(imgRetourCam); // read a new frame from video
+                if (!bSuccess) //recommencer la vidéo
+                {
+                 cap.set(cv::CAP_PROP_POS_FRAMES, 0);
+                 cap.read(imgRetourCam);
+                }
+               cv::namedWindow("Original", cv::WINDOW_NORMAL);
+               cv::imshow("Original", imgRetourCam); //show the original image
+                if (cv::waitKey(1) == 27)
+                break;
+            }
+        }
 
     return 0;
 }
