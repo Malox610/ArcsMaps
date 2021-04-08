@@ -6,7 +6,7 @@
 
 class Graph
 {
-
+int v =37 ;
 public :
 
 
