@@ -5,6 +5,11 @@
 Edge::Edge(Node _source, Node _dest, int _weight): m_source(_source), m_dest(_dest), m_weight(_weight)
 {}
 
+Edge::Edge()
+{
+
+}
+
 int Edge::getNum() const
 {
     return m_num;
@@ -37,9 +42,9 @@ std::string Edge::getNom() const
     return m_nom;
 }
 
-void Edge::setWeight()
+void Edge::setWeight(int newWeight)
 {
-    m_weight = abs(m_dest.getWeight()- m_source.getWeight());
+    m_weight = newWeight;
 }
 
 void Edge::setType(char newType)
