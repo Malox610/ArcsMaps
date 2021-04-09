@@ -127,14 +127,75 @@ Node finish;
         start = nodes[v1-1];
 
         finish = nodes[v2-1];
-
-        weight = abs(start.getWeight()- finish.getWeight());
         Edge edge(start, finish, weight);
-        edge.setNom(edgeName);
+        weight = abs(start.getWeight()- finish.getWeight());
         edge.setType(edgeType);
+
+        char k = edge.getType();
+                int mario =0; // nom au pif
+                mario = k;
+                switch(mario)
+                { ///piste
+                    case 78 : //piste noir
+                    edge.setWeight((2*weight)/100);
+                    break ;
+
+                    case 82 : //piste rouge
+                    edge.setWeight((3*weight)/100);
+                    break ;
+
+                    case 66 : //piste bleu
+                    edge.setWeight((4*weight)/100);
+                    break ;
+
+                    case 76 : //piste kilpùetre lance
+                    edge.setWeight((0.16*weight)/100);
+                    break ;
+
+                    case 70 : //snowpark
+                    edge.setWeight((10*weight)/100);
+                    break ;
+
+                    ///remonte mecanique
+                     case 75 : //teleski
+                    edge.setWeight(((4*weight)/100)+1);
+                    break ;
+
+                      case 83 : //telesiege
+                    edge.setWeight(((4*weight)/100)+1);
+                    break ;
+
+                     case 68 : //telesiege debrayable
+                    edge.setWeight(((3*weight)/100)+1);
+                    break ;
+
+                     case 67 : //telecabine
+                    edge.setWeight(((3*weight)/100)+2);
+                    break ;
+
+                     case 80 : //telepherique
+                    edge.setWeight(((2*weight)/100)+4);
+                    break ;
+
+                }
+                if(start.getName()=="arc1600"||start.getName()=="arc2000" && finish.getName()=="arc1600"|| finish.getName()=="arc2000")
+                {
+                    edge.setWeight(40);
+                }
+                  if(start.getName()=="arc1600"||start.getName()=="arc1800" && finish.getName()=="arc1600"|| finish.getName()=="arcarc1800")
+                {
+                    edge.setWeight(30);
+                }
+
+
+        edge.setNom(edgeName);
         edge.setNum(num);
         edges.push_back(edge);
 
+    }
+    for(int i = 0; i < edges.size(); i++)
+    {
+        edges[i].afficher();
     }
 return edges;
 }
