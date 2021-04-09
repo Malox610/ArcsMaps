@@ -149,7 +149,7 @@ Node finish;
                     edge.setWeight((4*weight)/100);
                     break ;
 
-                    case 76 : //piste kilpùetre lance
+                    case 76 : //piste kilometre lance
                     edge.setWeight((0.16*weight)/100);
                     break ;
 
@@ -212,7 +212,7 @@ std::vector<Node> nodesTxt(int *v)
 
     flxPoints >> *v; // premiere ligne du texte  = nombre de sommet
     //std::cout << v << std::endl;
-    while(flxPoints)  /// on creer la liste d'adjacence grace au valeur r�cup�r�es dans le fichier
+    while(flxPoints)  /// on creer la liste d'adjacence grace au valeur recuperees dans le fichier
     {
             flxPoints >> vertex >> nodeName >> alt;
             Node sommet(vertex, nodeName, alt);
@@ -505,7 +505,7 @@ void AdjListBFS(std::vector< std::vector<Edge> > adjList, Node start)
     std::cout <<"       || Que voulez vous faire ?  ||                                    %%%%%        &%%%"<<std::endl ;
     std::cout <<"       ||                          ||                                  &%%%%&#*,.  .*(%&%%%%*" <<std::endl;
     std::cout <<"       ||   1. Dijkstra            ||                                &%%% /%            % *%%%*"<<std::endl;
-    std::cout <<"       ||   2. Tout chelmin        ||                              %%%%     &%        &(    /%%%"<<std::endl;
+    std::cout <<"       ||   2. Tout chemin        ||                              %%%%     &%        &(    /%%%"<<std::endl;
     std::cout <<"       ||   3. BFS                 ||                            .%%%.        %.    %&        &%%%"<<std::endl;
     std::cout <<"       ||   4. Retour au menu      ||                           %%%%           *%  %            %%%&"<<std::endl;
     std::cout <<"         -------------------------                            *%%%   ./%&&&%%%%%%%%%%%%%%&&&%(,  .%%%"<<std::endl;
@@ -613,7 +613,7 @@ std::cout<<""<<std::endl;
     std::cout <<"       || Que voulez vous faire ?  ||                                    %%%%%        &%%%"<<std::endl ;
     std::cout <<"       ||                          ||                                  &%%%%&#*,.  .*(%&%%%%*" <<std::endl;
     std::cout <<"       ||   1. Maps                ||                                &%%% /%            % *%%%*"<<std::endl;
-    std::cout <<"       ||   2. Chemin speciaux     ||                              %%%%     &%        &(    /%%%"<<std::endl;
+    std::cout <<"       ||   2. Chemins speciaux     ||                              %%%%     &%        &(    /%%%"<<std::endl;
     std::cout <<"       ||   3. ---                 ||                            .%%%.        %.    %&        &%%%"<<std::endl;
     std::cout <<"       ||   4.Arret                ||                           %%%%           *%  %            %%%&"<<std::endl;
     std::cout <<"         -------------------------                            *%%%   ./%&&&%%%%%%%%%%%%%%&&&%(,  .%%%"<<std::endl;
