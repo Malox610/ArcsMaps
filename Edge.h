@@ -17,7 +17,7 @@ private :
 public:
 
 
-
+      Edge();
       Edge(Node _source, Node _dest, int _weight);
 
       int getNum() const;
@@ -26,7 +26,7 @@ public:
       char getType()const;
       std::string getNom()const;
       int getWeight ()const;
-      void setWeight();
+      void setWeight(int newWeight);
       void setType(char newType);
       void setNom(std::string newNom);
       void setNum(int newNum);
