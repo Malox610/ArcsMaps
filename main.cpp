@@ -220,10 +220,21 @@ void AllShortestPast(Graph const &graph, Node source, int v,std::vector<Edge> ed
 
     for (int i = 1; i < v; i++)
     {
-            std::cout << "Chemin (" << source.getName() << " --> " << i << "): Poids minimal = "
-                 << dist[i] << ", Route = [ ";
+            std::cout << std::endl;
+            std::cout << std::endl;
+            std::cout << "Chemin (" << source.getName() << " --> " << i << "): Temps estime = " << dist[i] << std::endl;
+            std::cout << std::endl;
+            std::cout << std::endl;
+            std::cout << "           ------------------------------------------------------------" << std::endl;
+            std::cout << std::endl;
+            std::cout << "Route = [ ";
             print_route(prev, i, crossedEdge);
             std::cout << "]" << std::endl;
+            std::cout << std::endl;
+            std::cout << "           ------------------------------------------------------------" << std::endl;
+            std::cout << std::endl;
+            std::cout << std::endl;
+
     }
 
 
@@ -379,7 +390,7 @@ void AdjListBFS(std::vector< std::vector<Edge> > adjList, Node start)
                 }
             }
         }
-  
+
   std::cout<<" "<< std::endl ;
     std::cout<<" "<< std::endl ;
 
@@ -482,7 +493,7 @@ void AdjListBFS(std::vector< std::vector<Edge> > adjList, Node start)
     source = nodes[saisieSource-1];
     fin = nodes[saisieFin-1];
 
-    findShortestPaths(graph, source, v , fin);
+    findShortestPaths(graph, source, v , fin, edges);
 
     break ;
 
@@ -499,7 +510,7 @@ void AdjListBFS(std::vector< std::vector<Edge> > adjList, Node start)
         }while(saisieSource>37);
          source = nodes[saisieSource-1];
 
-        AllShortestPast(graph, source, v);
+        AllShortestPast(graph, source, v, edges);
 
    break ;
 
