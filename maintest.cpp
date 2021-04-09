@@ -15,6 +15,7 @@
 
 void print_route(std::vector<int> const &prev, int i, std::vector<Edge> crossedEdge)
 {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     if (i < 0)
         {
         return;
@@ -25,7 +26,72 @@ void print_route(std::vector<int> const &prev, int i, std::vector<Edge> crossedE
     for(int x = 0; x < crossedEdge.size(); x++)
     {
         if(prev[i]== crossedEdge[x].getSource().getVertex() && i == crossedEdge[x].getDest().getVertex())
-        std::cout << " --" <<crossedEdge[x].getNom()<< "--> ";
+        {
+               std::string message="";
+                char k = crossedEdge[x].getType();
+                int mario =0; // nom au pif
+                mario = k;
+                switch(mario)
+                { ///piste
+                    case 78 : //piste noir
+                         SetConsoleTextAttribute(hConsole, 240);
+                   message="la piste noir ";
+                    break ;
+
+                    case 82 : //piste rouge
+                       SetConsoleTextAttribute(hConsole, 244);
+                   message="la piste rouge ";
+                    break ;
+
+                    case 66 : //piste bleu
+                 SetConsoleTextAttribute(hConsole, 241);
+                   message="la piste bleu ";
+                    break ;
+
+                    case 76 : //piste kilometre lance
+                  SetConsoleTextAttribute(hConsole, 245);
+                   message="la piste kilometre lance ";
+                    break ;
+
+                    case 70 : //snowpark
+                  SetConsoleTextAttribute(hConsole, 250);
+                   message="le snowpark " ;
+                    break ;
+
+                    ///remonte mecanique
+                     case 75 : //teleski
+                   SetConsoleTextAttribute(hConsole, 248);
+                   message="le tire fesse ";
+                    break ;
+
+                      case 83 : //telesiege
+                  SetConsoleTextAttribute(hConsole, 248);
+                   message="le telesiege ";
+                    break ;
+
+                     case 68 : //telesiege debrayable
+                   SetConsoleTextAttribute(hConsole, 248);
+                   message="le telesiege debrayable ";
+                    break ;
+
+                     case 67 : //telecabine
+                SetConsoleTextAttribute(hConsole, 248);
+                   message="la telecabine ";
+                    break ;
+
+                     case 80 : //telepherique
+                  SetConsoleTextAttribute(hConsole, 248);
+                   message="le tepherique ";
+                    break ;
+
+                     case 85 : //Bus
+                  SetConsoleTextAttribute(hConsole, 246);
+                   message="la ";
+                    break ;
+                }
+         std::cout << " -- " <<message<<crossedEdge[x].getNom()<< "--> ";
+        }
+        
     }
     std::cout << i << " ";
 
