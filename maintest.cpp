@@ -90,8 +90,9 @@ void print_route(std::vector<int> const &prev, int i, std::vector<Edge> crossedE
                     break ;
                 }
          std::cout << " -- " <<message<<crossedEdge[x].getNom()<< "--> ";
+          SetConsoleTextAttribute(hConsole, 240);
         }
-        
+
     }
     std::cout << i << " ";
 
@@ -390,7 +391,7 @@ void TrouverLeCheminLePlusCourt()
     fin = nodes[saisieFin-1];
 
 
-    findShortestPaths(graph, source, v , fin);
+    findShortestPaths(graph, source, v , fin,edges);
 
 //AllShortestPast(graph, source, v);
     //AdjListBFS(graph.m_adjList, source);
