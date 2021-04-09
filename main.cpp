@@ -219,6 +219,62 @@ void findShortestPaths(Graph const &graph, Node source, int v, Node fin) /// Dij
             {
                 dist[v] = dist[u] + weight;
                 prev[v] = u;
+                /*
+               // char k = quelquechose.getType();
+                int mario =0; // nom au pif
+                //mario = k;
+                switch(mario)
+                { ///piste
+                    case 78 : //piste noir
+                    dist[v]=(2*dist[v])/100;
+                    break ;
+
+                    case 82 : //piste rouge
+                    dist[v]=(3*dist[v])/100;
+                    break ;
+
+                    case 66 : //piste bleu
+                    dist[v]=(4*dist[v])/100;
+                    break ;
+
+                    case 76 : //piste kilpùetre lance
+                    dist[v]=(0.16*dist[v])/100;
+                    break ;
+
+                    case 70 : //snowpark
+                    dist[v]=(10*dist[v])/100;
+                    break ;
+
+                    ///remonte mecanique
+                     case 75 : //teleski
+                    dist[v]=((4*dist[v])/100)+1;
+                    break ;
+
+                      case 83 : //telesiege
+                    dist[v]=((4*dist[v])/100)+1;
+                    break ;
+
+                     case 68 : //telesiege debrayable
+                    dist[v]=((3*dist[v])/100)+1;
+                    break ;
+
+                     case 67 : //telecabine
+                    dist[v]=((3*dist[v])/100)+2;
+                    break ;
+
+                     case 80 : //telepherique
+                    dist[v]=((2*dist[v])/100)+4;
+                    break ;
+
+                }
+                if(source.getName()=="arc1600"||source.getName()=="arc2000" && fin.getName()=="arc1600"|| fin.getName()=="arc2000")
+                {
+                    dist[v]=40;
+                }
+                  if(source.getName()=="arc1600"||source.getName()=="arc1800" && fin.getName()=="arc1600"|| fin.getName()=="arcarc1800")
+                {
+                    dist[v]=40;
+                }*/
                 min_heap.push({v," v ", dist[v]});
             }
         }
