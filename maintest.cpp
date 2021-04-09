@@ -13,24 +13,25 @@
 #include "Edge.h"
 #include "Node.h"
 
-void print_route(std::vector<int> const &prev, int i, std::vector<Edge> edges)
+void print_route(std::vector<int> const &prev, int i, std::vector<Edge> crossedEdge)
 {
-
     if (i < 0)
         {
         return;
         }
 
-    print_route(prev, prev[i],edges);
-    Edge k =edges[i];
 
-    std::cout << i << " -"  ;
-  //std::cout << i << " -"  << k.getType() << " ->  ";
+    print_route(prev, prev[i], crossedEdge);
+    for(int x = 0; x < crossedEdge.size(); x++)
+    {
+        if(prev[i]== crossedEdge[x].getSource().getVertex() && i == crossedEdge[x].getDest().getVertex())
+        std::cout << " --" <<crossedEdge[x].getNom()<< "--> ";
+    }
+    std::cout << i << " ";
 
 
-    /*Edge k =edges[i-1];  << crossedEdge[i].getNum() << " --- "
-            char type = k.getType();
-            std::cout <<k.getNom()<<" : " <<type<<std::endl;*/
+
+
 }
 
 
@@ -97,7 +98,7 @@ return nodes ;
 }
 
 
-/*void AllShortestPast(Graph const &graph, Node source, int v) /// Dijkstra tous les plus courts chemins
+void AllShortestPast(Graph const &graph, Node source, int v,s td::vector<Edge> edges) /// Dijkstra tous les plus courts chemins
 {
     // prendre la source comme arrete = 0
     std::priority_queue<Node, std::vector<Node>, comp> min_heap;
@@ -108,6 +109,7 @@ return nodes ;
     int z=0;
     nodes = nodesTxt(&z);
     edges = EdgesTxt(nodes);
+    std::vector <Edge> crossedEdge;
 
 
     // mettre la distnace initial pour la source a l'infini
@@ -145,6 +147,7 @@ return nodes ;
                 dist[v] = dist[u] + weight;
                 prev[v] = u;
                 min_heap.push({v," v ", dist[v]});
+                crossedEdge.push_back(i);
             }
         }
 
@@ -156,147 +159,85 @@ return nodes ;
     {
             std::cout << "Chemin (" << source.getName() << " --> " << i << "): Poids minimal = "
                  << dist[i] << ", Route = [ ";
-            print_route(prev, i, edges);
+            print_route(prev, i, crossedEdge);
             std::cout << "]" << std::endl;
     }
-}*/
+}
 
 
-void findShortestPaths(Graph const &graph, Node source, int v, Node fin) /// Dijkstra plus court chemins choix du depart + arrivee
+void findShortestPaths(Graph const &graph, Node source, int v, Node fin, std::vector<Edge> edges) /// Dijkstra plus court chemins choix du depart + arrivee
 {
     // prendre la source comme arrete = 0
     std::priority_queue<Node, std::vector<Node>, comp> min_heap;
     min_heap.push({source.getVertex(), source.getName(), 0});
-    std::vector<Edge> edges;
-    std::vector<Node> nodes;
-    int z=0;
-    nodes = nodesTxt(&z);
-    edges = EdgesTxt(nodes);
-    std::vector<Edge> crossedEdge;
+    std::vector <Edge> crossedEdge;
 
-    // mettre la distance initial pour la source a l'infini
-     std::vector<int> dist(z, INT_MAX);
-    //distance de la source a elle meme a 0
+    // mettre la distnace initial pour la source a l'infini
+     std::vector<int> dist(v, INT_MAX);
+    //distnace de la source a elle meme a 0
     dist[source.getVertex()] = 0;
 
-    // tableau de boolean pour traquer les sommets pour trouver le chemin minimum pour chaque chemin
+    // tableau de boolean pour traquer les sommets pour troiver le chemin minimum poiur chaque chemin
 
-    std::vector<bool> done(z, false);
+    std::vector<bool> done(v, false);
     done[source.getVertex()] = true;
 
     // stocker les predecesseur pour ecrire le chemin
-    std::vector<int> prev(z, -1);
-    Node sommet1;
-    Node sommet2;
+    std::vector<int> prev(v, -1);
 
     // run qu'au sommet final
     while (!min_heap.empty())
     {
         //  enlever et retourner la meilleurs sommet
-       sommet1 = min_heap.top();
+        Node node = min_heap.top();
         min_heap.pop();
 
         // obtenir le numero du sommet
-        int u = sommet1.getVertex();
-         std::cout<<std::endl;
-      std::cout<<u<<" "<<std::endl;
+        int u = node.getVertex();
 
-        for (auto i: graph.m_adjList[u])
+
+        for (auto i: graph.m_adjList[u])     /// <------------
         {
-
-           std::cout<< i.getSource().getVertex() <<" "<< sommet2.getVertex()<<" "<<i.getDest().getVertex()<<" "<<sommet1.getVertex()<<std::endl;
-           if (i.getSource().getVertex()== sommet2.getVertex() && i.getDest().getVertex()== sommet1.getVertex())
-           {
-               crossedEdge.push_back({i.getSource(),i.getDest(),i.getWeight()});
-               std::cout<<crossedEdge.size()<<std::endl;
-           }
-           else {std::cout<<"rien"<<std::endl;}
-
-
-           if(crossedEdge.empty())
-           {
-               std::cout<<"ya wallou"<<std::endl;
-           }
-           // std::cout<<crossedEdge[i].getSource().getVertex(); debut de solution
             int v = i.getDest().getVertex();
             int weight = i.getWeight();
+            //int w = i.get
 
 
             if (!done[v] && (dist[u] + weight) < dist[v])
             {
                 dist[v] = dist[u] + weight;
                 prev[v] = u;
-               /* std::cout<<std::endl;
-                std::cout<<prev[v]<<" "<<std::endl;
-                std::cout<<std::endl;*/
                 min_heap.push({v," v ", dist[v]});
-
+                crossedEdge.push_back(i);
+                std::cout << u << std::endl;
             }
-           // crossedEdge.push_back({i.getSource(),i.getDest(),dist[v]}); debut de solution
+
 
         }
+
 
         // marquage des sommets
         done[u] = true;
-        sommet2=sommet1;
     }
 
-    for(int i = 0; i < prev.size()-1; i++)
-    {
-        //std::cout << prev[i] << std::endl;
-    }
-///affichage
- for (int i = 0; i < v; i++)
-    {
-
-        if (i != source.getVertex() && dist[i] != INT_MAX && i == fin.getVertex())
-        {
-
-            std::cout << "Chemin (" << source.getName() << " --> " << i << "): Poids minimal = "
-                 << dist[i] << ", Route = [ ";
-            print_route(prev, i,edges);
-            std::cout << "]" << std::endl;
-
-        }
-    }
-/*std::vector<Edge> crossedEdge;
     for (int i = 0; i < v; i++)
     {
-
         if (i != source.getVertex() && dist[i] != INT_MAX && i == fin.getVertex())
         {
-
-
-
-            for(int j = 0; j < edges.size()-1; j++)
-            {
-                std::cout<<"prev[i-1] : "<<prev[i-1]<<" prev[i] : "<<prev[i]<<std::endl;
-                if(edges[j].getSource().getVertex() == prev[i-1] && edges[j].getDest().getVertex() == prev[i])
-                {
-                     std::cout<<edges[j].getNum()<<std::endl;
-                crossedEdge.push_back(edges[j]);
-                }
-
-            }
-if(crossedEdge.empty())
-{
-    std::cout<<"ya wallou"<<std::endl;
-}
-
-            std::cout << "Chemin (" << source.getName() << " --> " << i << "): Poids minimal = " << dist[i] << ", Route = [ ";
-
-
+            std::cout << "Chemin (" << source.getName() << " --> " << i << "): Poids minimal = "
+                 << dist[i] << ", Route = [ ";
             print_route(prev, i, crossedEdge);
             std::cout << "]" << std::endl;
 
         }
-    }*/
+
+    }
 }
 
 // Given an Adjacency List, do a BFS on vertex "start"
 
 void AdjListBFS(std::vector< std::vector<Edge> > adjList, Node start)
-    {
+{
     std::cout << "Doing a BFS on an adjacency list : ";
 
     int n = adjList.size();
@@ -335,7 +276,9 @@ void AdjListBFS(std::vector< std::vector<Edge> > adjList, Node start)
         }
     std::cout << std::endl ;
     return;
-    }
+}
+
+
 void TrouverLeCheminLePlusCourt()
    {
 
