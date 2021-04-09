@@ -27,6 +27,69 @@ void print_route(std::vector<int> const &prev, int i, std::vector<Edge> edges)
     /*Edge k =edges[i-1];
             char type = k.getType();
             std::cout <<k.getNom()<<" : " <<type<<std::endl;*/
+            /* std::string message="";
+               // char k = quelquechose.getType();
+                int mario =0; // nom au pif
+                //mario = k;
+                switch(mario)
+                { ///piste
+                    case 78 : //piste noir
+                         system("color F0");
+                   message="la piste noir "+k.getNom();
+                    break ;
+
+                    case 82 : //piste rouge
+                       system("color CF");
+                   message="la piste noir "+k.getNom();
+                    break ;
+
+                    case 66 : //piste bleu
+                   system("color 1F");
+                   message="la piste noir "+k.getNom();
+                    break ;
+
+                    case 76 : //piste kilometre lance
+                  system("color 4F");
+                   message="la piste kilometre lance "+k.getNom();
+                    break ;
+
+                    case 70 : //snowpark
+                   system("color EF");
+                   message="le snowpark "+k.getNom()+"have fun ";
+                    break ;
+
+                    ///remonte mecanique
+                     case 75 : //teleski
+                   system("color 8F");
+                   message="le tire fesse "+k.getNom();
+                    break ;
+
+                      case 83 : //telesiege
+                   system("color 8F");
+                   message="le telesiege "+k.getNom();
+                    break ;
+
+                     case 68 : //telesiege debrayable
+                   system("color 8F");
+                   message="le telesiege debrayable "+k.getNom();
+                    break ;
+
+                     case 67 : //telecabine
+                  system("color 8F");
+                   message="la telecabine"+k.getNom();
+                    break ;
+
+                     case 80 : //telepherique
+                   system("color 8F");
+                   message="le tepherique "+k.getNom();
+                    break ;
+
+                     case 85 : //Bus
+                   system("color F0");
+                   message="la "+k.getNom();
+                    break ;
+
+                }*/
 }
 
 
