@@ -164,13 +164,13 @@ return nodes ;
 }
 
 
-void AllShortestPast(Graph const &graph, Node source, int v,s td::vector<Edge> edges) /// Dijkstra tous les plus courts chemins
+void AllShortestPast(Graph const &graph, Node source, int v,std::vector<Edge> edges) /// Dijkstra tous les plus courts chemins
 {
     // prendre la source comme arrete = 0
     std::priority_queue<Node, std::vector<Node>, comp> min_heap;
     min_heap.push({source.getVertex(), source.getName(), 0});
 
-    std::vector<Edge> edges;
+
     std::vector<Node> nodes;
     int z=0;
     nodes = nodesTxt(&z);
