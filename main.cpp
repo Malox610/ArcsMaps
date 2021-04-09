@@ -13,83 +13,88 @@
 #include "Edge.h"
 #include "Node.h"
 
-void print_route(std::vector<int> const &prev, int i, std::vector<Edge> edges)
+void print_route(std::vector<int> const &prev, int i, std::vector<Edge> crossedEdge)
 {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     if (i < 0)
         {
         return;
         }
 
 
-    print_route(prev, prev[i], edges);
-    std::cout << i << " ";
-
-    /*Edge k =edges[i-1];
-            char type = k.getType();
-            std::cout <<k.getNom()<<" : " <<type<<std::endl;*/
-            /* std::string message="";
-               // char k = quelquechose.getType();
+    print_route(prev, prev[i], crossedEdge);
+    for(int x = 0; x < crossedEdge.size(); x++)
+    {
+        if(prev[i]== crossedEdge[x].getSource().getVertex() && i == crossedEdge[x].getDest().getVertex())
+        {
+               std::string message="";
+                char k = crossedEdge[x].getType();
                 int mario =0; // nom au pif
-                //mario = k;
+                mario = k;
                 switch(mario)
                 { ///piste
                     case 78 : //piste noir
-                         system("color F0");
-                   message="la piste noir "+k.getNom();
+                         SetConsoleTextAttribute(hConsole, 240);
+                   message="la piste noire ";
                     break ;
 
                     case 82 : //piste rouge
-                       system("color CF");
-                   message="la piste noir "+k.getNom();
+                       SetConsoleTextAttribute(hConsole, 244);
+                   message="la piste rouge ";
                     break ;
 
                     case 66 : //piste bleu
-                   system("color 1F");
-                   message="la piste noir "+k.getNom();
+                 SetConsoleTextAttribute(hConsole, 241);
+                   message="la piste bleue ";
                     break ;
 
                     case 76 : //piste kilometre lance
-                  system("color 4F");
-                   message="la piste kilometre lance "+k.getNom();
+                  SetConsoleTextAttribute(hConsole, 245);
+                   message="la piste kilometre lance ";
                     break ;
 
                     case 70 : //snowpark
-                   system("color EF");
-                   message="le snowpark "+k.getNom()+"have fun ";
+                  SetConsoleTextAttribute(hConsole, 250);
+                   message="le snowpark " ;
                     break ;
 
                     ///remonte mecanique
                      case 75 : //teleski
-                   system("color 8F");
-                   message="le tire fesse "+k.getNom();
+                   SetConsoleTextAttribute(hConsole, 248);
+                   message="le tire fesse ";
                     break ;
 
                       case 83 : //telesiege
-                   system("color 8F");
-                   message="le telesiege "+k.getNom();
+                  SetConsoleTextAttribute(hConsole, 248);
+                   message="le telesiege ";
                     break ;
 
                      case 68 : //telesiege debrayable
-                   system("color 8F");
-                   message="le telesiege debrayable "+k.getNom();
+                   SetConsoleTextAttribute(hConsole, 248);
+                   message="le telesiege debrayable ";
                     break ;
 
                      case 67 : //telecabine
-                  system("color 8F");
-                   message="la telecabine"+k.getNom();
+                SetConsoleTextAttribute(hConsole, 248);
+                   message="la telecabine ";
                     break ;
 
                      case 80 : //telepherique
-                   system("color 8F");
-                   message="le tepherique "+k.getNom();
+                  SetConsoleTextAttribute(hConsole, 248);
+                   message="le tepherique ";
                     break ;
 
                      case 85 : //Bus
-                   system("color F0");
-                   message="la "+k.getNom();
+                  SetConsoleTextAttribute(hConsole, 246);
+                   message="la ";
                     break ;
+                }
+         std::cout << " -- " <<message<<crossedEdge[x].getNom()<< "--> ";
+          SetConsoleTextAttribute(hConsole, 240);
+        }
 
-                }*/
+    }
+    std::cout << i << " ";
 }
 
 
@@ -156,17 +161,18 @@ return nodes ;
 }
 
 
-void AllShortestPast(Graph const &graph, Node source, int v) /// Dijkstra tous les plus courts chemins
+void AllShortestPast(Graph const &graph, Node source, int v,std::vector<Edge> edges) /// Dijkstra tous les plus courts chemins
 {
     // prendre la source comme arrete = 0
     std::priority_queue<Node, std::vector<Node>, comp> min_heap;
     min_heap.push({source.getVertex(), source.getName(), 0});
 
-    std::vector<Edge> edges;
+
     std::vector<Node> nodes;
     int z=0;
     nodes = nodesTxt(&z);
     edges = EdgesTxt(nodes);
+    std::vector <Edge> crossedEdge;
 
 
     // mettre la distnace initial pour la source a l'infini
@@ -204,6 +210,7 @@ void AllShortestPast(Graph const &graph, Node source, int v) /// Dijkstra tous l
                 dist[v] = dist[u] + weight;
                 prev[v] = u;
                 min_heap.push({v," v ", dist[v]});
+                crossedEdge.push_back(i);
             }
         }
 
@@ -215,9 +222,11 @@ void AllShortestPast(Graph const &graph, Node source, int v) /// Dijkstra tous l
     {
             std::cout << "Chemin (" << source.getName() << " --> " << i << "): Poids minimal = "
                  << dist[i] << ", Route = [ ";
-            print_route(prev, i, edges);
+            print_route(prev, i, crossedEdge);
             std::cout << "]" << std::endl;
     }
+
+
 
       std::cout<<" "<< std::endl ;
     std::cout<<" "<< std::endl ;
@@ -236,17 +245,12 @@ void AllShortestPast(Graph const &graph, Node source, int v) /// Dijkstra tous l
 }
 
 
-void findShortestPaths(Graph const &graph, Node source, int v, Node fin) /// Dijkstra plus court chemins choix du depart + arrivee
+void findShortestPaths(Graph const &graph, Node source, int v, Node fin, std::vector<Edge> edges) /// Dijkstra plus court chemins choix du depart + arrivee
 {
-
     // prendre la source comme arrete = 0
     std::priority_queue<Node, std::vector<Node>, comp> min_heap;
     min_heap.push({source.getVertex(), source.getName(), 0});
-    std::vector<Edge> edges;
-    std::vector<Node> nodes;
-    int z=0;
-    nodes = nodesTxt(&z);
-    edges = EdgesTxt(nodes);
+    std::vector <Edge> crossedEdge;
 
     // mettre la distnace initial pour la source a l'infini
      std::vector<int> dist(v, INT_MAX);
@@ -272,93 +276,52 @@ void findShortestPaths(Graph const &graph, Node source, int v, Node fin) /// Dij
         int u = node.getVertex();
 
 
-        for (auto i: graph.m_adjList[u])
+        for (auto i: graph.m_adjList[u])     /// <------------
         {
             int v = i.getDest().getVertex();
             int weight = i.getWeight();
+            //int w = i.get
 
 
             if (!done[v] && (dist[u] + weight) < dist[v])
             {
                 dist[v] = dist[u] + weight;
                 prev[v] = u;
-                /*
-               // char k = quelquechose.getType();
-                int mario =0; // nom au pif
-                //mario = k;
-                switch(mario)
-                { ///piste
-                    case 78 : //piste noir
-                    dist[v]=(2*dist[v])/100;
-                    break ;
-
-                    case 82 : //piste rouge
-                    dist[v]=(3*dist[v])/100;
-                    break ;
-
-                    case 66 : //piste bleu
-                    dist[v]=(4*dist[v])/100;
-                    break ;
-
-                    case 76 : //piste kilpùetre lance
-                    dist[v]=(0.16*dist[v])/100;
-                    break ;
-
-                    case 70 : //snowpark
-                    dist[v]=(10*dist[v])/100;
-                    break ;
-
-                    ///remonte mecanique
-                     case 75 : //teleski
-                    dist[v]=((4*dist[v])/100)+1;
-                    break ;
-
-                      case 83 : //telesiege
-                    dist[v]=((4*dist[v])/100)+1;
-                    break ;
-
-                     case 68 : //telesiege debrayable
-                    dist[v]=((3*dist[v])/100)+1;
-                    break ;
-
-                     case 67 : //telecabine
-                    dist[v]=((3*dist[v])/100)+2;
-                    break ;
-
-                     case 80 : //telepherique
-                    dist[v]=((2*dist[v])/100)+4;
-                    break ;
-
-                }
-                if(source.getName()=="arc1600"||source.getName()=="arc2000" && fin.getName()=="arc1600"|| fin.getName()=="arc2000")
-                {
-                    dist[v]=40;
-                }
-                  if(source.getName()=="arc1600"||source.getName()=="arc1800" && fin.getName()=="arc1600"|| fin.getName()=="arcarc1800")
-                {
-                    dist[v]=40;
-                }*/
                 min_heap.push({v," v ", dist[v]});
+                crossedEdge.push_back(i);
+
             }
+
+
         }
+
 
         // marquage des sommets
         done[u] = true;
     }
-///affichage
 
     for (int i = 0; i < v; i++)
     {
-
         if (i != source.getVertex() && dist[i] != INT_MAX && i == fin.getVertex())
         {
 
-            std::cout << "Chemin (" << source.getName() << " --> " << i << "): Poids minimal = "
-                 << dist[i] << ", Route = [ ";
-            print_route(prev, i,edges);
+            std::cout << std::endl;
+            std::cout << std::endl;
+            std::cout << "Chemin (" << source.getName() << " --> " << i << "): Temps estime = " << dist[i] << std::endl;
+            std::cout << std::endl;
+            std::cout << std::endl;
+            std::cout << "           ------------------------------------------------------------" << std::endl;
+            std::cout << std::endl;
+            std::cout << "Route = [ ";
+            print_route(prev, i, crossedEdge);
             std::cout << "]" << std::endl;
+            std::cout << std::endl;
+            std::cout << "           ------------------------------------------------------------" << std::endl;
+            std::cout << std::endl;
+            std::cout << std::endl;
 
         }
+
     }
       std::cout<<" "<< std::endl ;
     std::cout<<" "<< std::endl ;
