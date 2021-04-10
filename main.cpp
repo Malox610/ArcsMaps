@@ -622,7 +622,72 @@ void findShortestPaths(Graph const &graph, Node source, int v, Node fin, std::ve
 
 }
 
-// Given an Adjacency List, do a BFS on vertex "start"
+
+void CheminBFS(std::vector< std::vector<Edge> > adjList, Node start,Node finish)
+{
+std::cout << "Chemin : ";
+
+    int n = adjList.size();
+    // Create a "visited" array (true or false) to keep track of if we visited a vertex.
+        bool visited[n] = { false };
+        std::vector<int>ListeSommet;
+
+    // Create a queue for the nodes we visit.
+    std::queue<Node> q;
+
+    // Add the starting vertex to the queue and mark it as visited.
+    q.push(start);
+    visited[start.getVertex()] = true;
+int fin = 0;
+    // While the queue is not empty..
+    while(q.empty() == false && fin!=1)
+        {
+        Node ver = q.front();
+        int vertex=ver.getVertex();
+        ListeSommet.push_back(vertex);
+
+            q.pop();
+
+        // Doing +1 in the cout because our graph is 1-based indexing, but our code is 0-based.
+
+        // Loop through all of it's friends.
+        for(int i = 0; i < adjList[vertex].size(); i++)
+            {
+            // If the friend hasn't been visited yet, add it to the queue and mark it as visited
+            Node neighbor = adjList[vertex][i].getDest();
+              if (vertex!=finish.getVertex())
+              {
+
+                if(visited[neighbor.getVertex()] == false)
+                {
+
+                q.push(neighbor);
+                visited[neighbor.getVertex()] = true;
+                }
+              }
+              else
+              {
+              fin=1;
+              }
+
+            }
+                  std::cout << vertex << " ";
+                                       //EKIP
+        }
+        std::cout<<" "<< std::endl ;
+        std::cout<<" "<< std::endl ;
+
+        int p=0;
+        char c;
+        do
+        {
+            std::cout <<" <----  retour menu ( ecrire 1)"<< std::endl;
+            std::cin>>c;
+            fflush(stdin);
+            p=c;
+        }while(p!=49);
+        system("cls");
+    }// Given an Adjacency List, do a BFS on vertex "start"
 
 void AdjListBFS(std::vector< std::vector<Edge> > adjList, Node start)
     {
@@ -682,6 +747,7 @@ void AdjListBFS(std::vector< std::vector<Edge> > adjList, Node start)
 {
 
 
+  
      int v = 0 ;//
     std::string nodeName;//
     std::string edgeName;
@@ -717,16 +783,16 @@ void AdjListBFS(std::vector< std::vector<Edge> > adjList, Node start)
     std::cout <<"       ||   1. Dijkstra            ||                                &%%% /%            % *%%%*"<<std::endl;
     std::cout <<"       ||   2. Tout chemin         ||                              %%%%     &%        &(    /%%%"<<std::endl;
     std::cout <<"       ||   3. BFS                 ||                            .%%%.        %.    %&        &%%%"<<std::endl;
-    std::cout <<"       ||   4. Retour au menu      ||                           %%%%           *%  %            %%%&"<<std::endl;
-    std::cout <<"         -------------------------                            *%%%   ./%&&&%%%%%%%%%%%%%%&&&%(,  .%%%"<<std::endl;
+    std::cout <<"       ||   4. BFS 2 sommet        ||                           %%%%           *%  %            %%%&"<<std::endl;
+    std::cout <<"       ||   5. Retour au menu      ||                         *%%%   ./%&&&%%%%%%%%%%%%%%&&&%(,  .%%%"<<std::endl;
     std::cout <<"         -------------------------                           &%%%              #%  %               %%%("<<std::endl;
-    std::cout <<"                                                             %%%  %/           %     *%           %& #%%&"<<std::endl;
-    std::cout <<"                                                           .%%&    ,%        %#        &&        %     %%%"<<std::endl;
-    std::cout <<"                                                          *%%&       &(    %&            %     &&       %%%"<<std::endl;
-    std::cout <<"                                                         *%%&         .%  &               *%  %          %%%"<<std::endl;
-    std::cout <<"                                                        ,%%%      (&&%%%%&%%%%&&&&&&&&&&%%%%%%%%&@&*      %%%"<<std::endl;
-    std::cout <<"                                                        %%%&          %& .%               ,%  %          &#%%%"<<std::endl;
-    std::cout <<"                                                       %%%  %        %     &%            %/    (%        % (%%%"<<std::endl;
+    std::cout <<"         -------------------------                          %%%  %/           %     *%           %& #%%&"<<std::endl;
+    std::cout <<"                                                          .%%&    ,%        %#        &&        %     %%%"<<std::endl;
+    std::cout <<"                                                         *%%&       &(    %&            %     &&       %%%"<<std::endl;
+    std::cout <<"                                                        *%%&         .%  &               *%  %          %%%"<<std::endl;
+    std::cout <<"                                                       ,%%%      (&&%%%%&%%%%&&&&&&&&&&%%%%%%%%&@&*      %%%"<<std::endl;
+    std::cout <<"                                                       %%%&          %& .%               ,%  %          &#%%%"<<std::endl;
+    std::cout <<"                                                      %%%  %        %     &%            %/    (%        % (%%%"<<std::endl;
     std::cout <<"                                                      #%%#  &&     %#        %         /%        &%     %.  &%%"<<std::endl;
     std::cout <<"                                                      %%%    &/  %&           &&      %,           %   &(   .%%&"<<std::endl;
     std::cout <<"                                                      %%%%%%&,%,%               %   %&              (%&/#&%%%%%%"<<std::endl;
@@ -740,7 +806,7 @@ void AdjListBFS(std::vector< std::vector<Edge> > adjList, Node start)
       std::cin>>b;
       fflush(stdin);
       choix =b ;
-   }while(choix !=49 && choix !=50 && choix !=51 && choix !=52 );
+   }while(choix !=49 && choix !=50 && choix !=51 && choix !=52 && choix !=53);
 
 
    switch(choix)
@@ -801,9 +867,33 @@ void AdjListBFS(std::vector< std::vector<Edge> > adjList, Node start)
         AdjListBFS(graph.m_adjList, source);
    break ;
 
+   case 52 :
+    system("cls");
+    do
+    {
+       do {
+           std::cout <<" De quel sommet voulez vous partir ?"<<std::endl;
+           std::cin >>saisieSource;
+
+           }while(saisieSource<1);
+   }while(saisieSource>37);
+   do{
+    do {
+          std::cout <<" Quel est le sommet d'arrive de votre choix ?"<<std::endl;
+    std::cin>> saisieFin;
+    }while(saisieFin<1);
+   }while(saisieFin>37);
+
+    source = nodes[saisieSource-1];
+    fin = nodes[saisieFin-1];
+
+   CheminBFS(graph.m_adjList, source,fin);
+
+    break ;
+
    }
    system("cls");
-   }while(choix !=52);
+   }while(choix !=53);
 
 }
 int menu ()
