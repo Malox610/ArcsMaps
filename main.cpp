@@ -85,8 +85,8 @@ bool verifFichier(std::string _pseudo, std::string _mdp) // vérifier que le com
     {
         Id.push_back(ligne);
     }
-
-    while( (i <= Id.size()-1) )
+int taille =Id.size();
+    while( (i <= taille-1) )
     {
 
         if (_pseudo == Id[i] && _mdp == Id[i+1])
@@ -175,72 +175,64 @@ void afficherSkieur(Skieur s)
     std::cout << "                            ";
     std::cout << s.getPseudo() <<" Est connecte(e) " <<std::endl;
     std::cout << std::endl;
-    Sleep(500);
+    Sleep(1000);
      std::system("cls");
 }
 
 void sauvegardeParam(Skieur& s)
 {
-    std::cout << "HELLOOOOOOOO" << std::endl;
-
     std::string const nomFichier("compte.txt");
     std::ifstream monFlux1(nomFichier);
     std::string ligne;
     std::vector<std::string> Id;
-    std::cout<< "lecture fichier en entier" <<std::endl;
     while(getline(monFlux1, ligne))
     {
 
-        std::cout<< ligne <<std::endl;
+       // std::cout<< ligne <<std::endl;
         Id.push_back(ligne);
     }
-    for(int i = 0; i < Id.size(); i++)
+    /*
+     int taille=Id.size();
+    for(int i = 0; i <taille; i++)
     {
         std::cout << Id[i] << std::endl;
-    }
+    }*/
     monFlux1.close();
 
-    std::cout<< "param 1 ; " << s.getParam1() << "  param 2 : " << s.getParam2()<< " pseudo : " << s.getPseudo() << std::endl;
-    std::cout<<std::endl;
-
-    for(int i = 0; i < Id.size(); i++)
+    std::cout<< "vos parametre actuel sont "<< s.getParam2()<<std::endl;
+    int taille1=Id.size();
+    for(int i = 0; i < taille1; i++)
     {
-
 
         if(Id[i] == s.getPseudo())
         {
-            std::cout<< "im in the if" <<std::endl;
-
             Id[i+2] = s.getParam1();
             Id[i+3] = s.getParam2();
-             std::cout<< "id2 : " << Id[i+2] << "  id 3 : " << Id[i+3]<<std::endl;
+
         }
     }
-    for(int i = 0; i < Id.size(); i++)
+    /*
+     int taille2=Id.size();
+    for(int i = 0; i < taille2; i++)
     {
         std::cout << Id[i] << std::endl;
-    }
+    }*/
 
 
     std::ofstream monFlux2(nomFichier.c_str());
-    for(int i = 0; i < Id.size(); i++)
+    int taille3=Id.size();
+    for(int i = 0; i < taille3; i++)
     {
         monFlux2 << Id[i] << std::endl;
     }
-
-
-
-
 }
 
 void choixParam(Skieur& s)
 {
     std::string choix;
-    bool cond = false;
+    char cond = false;
     std::string newParam1;
     std::string newParam2;
-    std::cout << "zeeeeeeeeeeeeeeeebiiiiiiiiiiii" <<std::endl;
-
     do{
 
         std::cout << " voulez vous modifier vos preferences ? 1 : oui / 2 : non " << std::endl;
@@ -253,7 +245,7 @@ void choixParam(Skieur& s)
             cond = false;
 
 
-    }while(cond = false);
+    }while(cond == false);
 
     std::string choix1;
     std::string choix2;
@@ -272,48 +264,58 @@ void choixParam(Skieur& s)
             if(choix1 == "1" || choix1 == "0")
                 cond1 = true;
 
-        }while(cond1 = false);
+        }while(cond1 == false);
 
         if(choix1 == "1" )
         {
             newParam1 = "1";
             s.setParam1(newParam1);
+            cond2=true;
         }
         else
         {
             newParam1 = "0";
             s.setParam1(newParam1);
         }
-
-        do {
-            std::cout << "Entrez  ( B ) pour eviter les pistes bleues "<< std::endl;
-            std::cout << "Entrez  ( R ) pour eviter les pistes rouges "<< std::endl;
-            std::cout << "Entrez  ( N ) pour eviter les pistes noires "<< std::endl;
+    if (cond2==(true))
+    { char b;
+    int secu;
+         do
+            {
+            std::cout << "Entrez  ( B ) pour 1. eviter les pistes bleues "<< std::endl;
+            std::cout << "Entrez  ( R ) pour 2. eviter les pistes rouges "<< std::endl;
+            std::cout << "Entrez  ( N ) pour 3. eviter les pistes noires "<< std::endl;
             std::cout <<std::endl;
             std::cout <<std::endl;
-            std::cin >> choix2;
-            std::cout <<std::endl;
-            std::cout <<std::endl;
-            if(choix2 == "B" || choix2 == "R"|| choix2 == "N")
-                cond2 = true;
+           // std::cin >> choix2;
+            std::cout<<std::endl;
+            std::cout<<std::endl;
+            std::cin>>b;
+            fflush(stdin);
+            secu =b ;
+            }while(secu!=49 && secu!=50 && secu !=51 );
+       switch(secu)
+       {
+       case 49:
+           choix2="B";
+        break;
+        case 50:
+           choix2="R";
+        break;
+        case 51:
+           choix2="N";
+        break;
 
-        }while(cond2 = false);
-
-        s.setParam2(choix2);
-
-        std::cout<< "param 1 ; " << s.getParam1() << "  param 2 : " << s.getParam2()<<std::endl;
+       }
+    s.setParam2(choix2);
+    }
         sauvegardeParam(s);
-
         return;
-
-
     }
     else
     {
          return;
     }
-
-
 }
 /// -----------------------------------------------------------------------------------------------------------------------------
 void print_route(std::vector<int> const &prev, int i, std::vector<Edge> crossedEdge)
@@ -326,7 +328,8 @@ void print_route(std::vector<int> const &prev, int i, std::vector<Edge> crossedE
 
 
     print_route(prev, prev[i], crossedEdge);
-    for(int x = 0; x < crossedEdge.size(); x++)
+    int taille = crossedEdge.size();
+    for(int x = 0; x < taille; x++)
     {
         if(prev[i]== crossedEdge[x].getSource().getVertex() && i == crossedEdge[x].getDest().getVertex())
         {
@@ -481,11 +484,11 @@ Node finish;
                     break ;
 
                 }
-                if(start.getName()=="arc1600"||start.getName()=="arc2000" && finish.getName()=="arc1600"|| finish.getName()=="arc2000")
+                if((start.getName()=="arc1600"||start.getName()=="arc2000") && (finish.getName()=="arc1600"|| finish.getName()=="arc2000"))
                 {
                     edge.setWeight(40);
                 }
-                  if(start.getName()=="arc1600"||start.getName()=="arc1800" && finish.getName()=="arc1600"|| finish.getName()=="arcarc1800")
+                  if((start.getName()=="arc1600"||start.getName()=="arc1800") && (finish.getName()=="arc1600"|| finish.getName()=="arcarc1800"))
                 {
                     edge.setWeight(30);
                 }
@@ -496,11 +499,12 @@ Node finish;
         edges.push_back(edge);
 
     }
-    for(int i = 0; i < edges.size(); i++)
+    int taille = edges.size();
+    for(int i = 0; i < taille; i++)
     {
         edges[i].afficher();
     }
-    std::cout<<std::endl;
+    std::cout<<""<<std::endl;
 return edges;
 }
 
@@ -592,7 +596,8 @@ Node finish;
         edges.push_back(edge);
 
     }
-    for(int i = 0; i < edges.size(); i++)
+     int taille =  edges.size();
+    for(int i = 0; i < taille; i++)
     {
         edges[i].afficher();
     }
@@ -895,7 +900,8 @@ void CheminBFS(std::vector< std::vector<Edge> > adjList, Node start,Node finish)
         // Doing +1 in the cout because our graph is 1-based indexing, but our code is 0-based.
 
         // Loop through all of it's friends.
-        for(int i = 0; i < adjList[vertex].size(); i++)
+        int taille = adjList[vertex].size();
+        for(int i = 0; i <taille ; i++)
             {
             // If the friend hasn't been visited yet, add it to the queue and mark it as visited
             Node neighbor = adjList[vertex][i].getDest();
@@ -956,7 +962,8 @@ void AdjListBFS(std::vector< std::vector<Edge> > adjList, Node start)
         std::cout << vertex << " ";
 
         // Loop through all of it's friends.
-        for(int i = 0; i < adjList[vertex].size(); i++)
+        int taille = adjList[vertex].size();
+        for(int i = 0; i <taille ; i++)
             {
             // If the friend hasn't been visited yet, add it to the queue and mark it as visited
             Node neighbor = adjList[vertex][i].getDest();
@@ -1005,9 +1012,6 @@ void TrouverLeCheminLePlusCourt()
     edges = EdgesTxt(nodes);
     Graph graph(edges, 95);
     Graph graphDure(edges, 95);
-
-    //edges.push_back({v1,v2,poids});
-    // construct graph
 
    int choix ;
     char b ;
