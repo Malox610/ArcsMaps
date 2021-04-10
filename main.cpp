@@ -315,7 +315,6 @@ void choixParam(Skieur& s)
 
 
 }
-
 /// -----------------------------------------------------------------------------------------------------------------------------
 void print_route(std::vector<int> const &prev, int i, std::vector<Edge> crossedEdge)
 {
@@ -505,6 +504,103 @@ Node finish;
 return edges;
 }
 
+std::vector<Edge> EdgesTxtSpe(std::vector<Node> nodes )
+{
+std::vector<Edge> edges;
+Node start;
+Node finish;
+ int v1;//
+    int v2;//
+    int weight;//
+     int num;///
+    char edgeType;//
+    std::string edgeName;//
+
+    std::ifstream flxEdges("data_arcs.txt"); // ouverture du fichier arcs
+
+    while(flxEdges)
+    {
+        flxEdges >> num >> edgeName >> edgeType >> v1 >> v2;
+        //std::cout << num << "  " << edgeName << "  "  << edgeType << "  " << v1 << "  " << v2 <<std::endl;
+
+        start = nodes[v1-1];
+
+        finish = nodes[v2-1];
+        Edge edge(start, finish, weight);
+        weight = abs(start.getWeight()- finish.getWeight());
+        edge.setType(edgeType);
+
+        char k = edge.getType();
+                int mario =0; // nom au pif
+                mario = k;
+                switch(mario)
+                { ///piste
+                    case 78 : //piste noir
+                    edge.setWeight((2*weight)/100);
+                    break ;
+
+                    case 82 : //piste rouge
+                    edge.setWeight((3*weight)/100);
+                    break ;
+
+                    case 66 : //piste bleu
+                    edge.setWeight((4*weight)/100);
+                    break ;
+
+                    case 76 : //piste kilpùetre lance
+                    edge.setWeight((0.16*weight)/100);
+                    break ;
+
+                    case 70 : //snowpark
+                    edge.setWeight((10*weight)/100);
+                    break ;
+
+                    ///remonte mecanique
+                     case 75 : //teleski
+                    edge.setWeight(((2000*weight)/100)+1);
+                    break ;
+
+                      case 83 : //telesiege
+                    edge.setWeight(((2000*weight)/100)+1);
+                    break ;
+
+                     case 68 : //telesiege debrayable
+                    edge.setWeight(((1500*weight)/100)+1);
+                    break ;
+
+                     case 67 : //telecabine
+                    edge.setWeight(((1500*weight)/100)+2);
+                    break ;
+
+                     case 80 : //telepherique
+                    edge.setWeight(((1000*weight)/100)+4);
+                    break ;
+
+                }
+                if((start.getName()=="arc1600"||start.getName()=="arc2000") && (finish.getName()=="arc1600"|| finish.getName()=="arc2000"))
+                {
+                    edge.setWeight(40);
+                }
+                  if((start.getName()=="arc1600"||start.getName()=="arc1800") && (finish.getName()=="arc1600"|| finish.getName()=="arcarc1800"))
+                {
+                    edge.setWeight(30);
+                }
+
+
+        edge.setNom(edgeName);
+        edge.setNum(num);
+        edges.push_back(edge);
+
+    }
+    for(int i = 0; i < edges.size(); i++)
+    {
+        edges[i].afficher();
+    }
+    std::cout<<std::endl;
+return edges;
+}
+
+
 std::vector<Node> nodesTxt(int *v)
 {
      std::vector<Node> nodes;
@@ -527,7 +623,7 @@ return nodes ;
 }
 
 
-void AllShortestPast(Graph const &graph, Node source, int v,std::vector<Edge> edges) /// Dijkstra tous les plus courts chemins
+void AllShortestPast(Graph const &graph, Node source, int v) /// Dijkstra tous les plus courts chemins
 {
     // prendre la source comme arrete = 0
     std::priority_queue<Node, std::vector<Node>, comp> min_heap;
@@ -537,7 +633,7 @@ void AllShortestPast(Graph const &graph, Node source, int v,std::vector<Edge> ed
     std::vector<Node> nodes;
     int z=0;
     nodes = nodesTxt(&z);
-    edges = EdgesTxt(nodes);
+
     std::vector <Edge> crossedEdge;
 
 
@@ -648,8 +744,9 @@ void AllShortestPast(Graph const &graph, Node source, int v,std::vector<Edge> ed
 }
 
 
-void findShortestPaths(Graph const &graph, Node source, int v, Node fin, std::vector<Edge> edges) /// Dijkstra plus court chemins choix du depart + arrivee
+void findShortestPaths(Graph const &graph,Graph const &graphDure, Node source, int v, Node fin ) /// Dijkstra plus court chemins choix du depart + arrivee
 {
+
     // prendre la source comme arrete = 0
     std::priority_queue<Node, std::vector<Node>, comp> min_heap;
     min_heap.push({source.getVertex(), source.getName(), 0});
@@ -657,9 +754,10 @@ void findShortestPaths(Graph const &graph, Node source, int v, Node fin, std::ve
 
     // mettre la distnace initial pour la source a l'infini
      std::vector<int> dist(v, INT_MAX);
+     std::vector<int> dure(v, INT_MAX);
     //distnace de la source a elle meme a 0
     dist[source.getVertex()] = 0;
-
+    dure[source.getVertex()] = 0;
     // tableau de boolean pour traquer les sommets pour troiver le chemin minimum poiur chaque chemin
 
     std::vector<bool> done(v, false);
@@ -683,12 +781,11 @@ void findShortestPaths(Graph const &graph, Node source, int v, Node fin, std::ve
         {
             int v = i.getDest().getVertex();
             int weight = i.getWeight();
-            //int w = i.get
-
 
             if (!done[v] && (dist[u] + weight) < dist[v])
             {
                 dist[v] = dist[u] + weight;
+                dure[v]=dure[u]+weight;
                 prev[v] = u;
                 min_heap.push({v," v ", dist[v]});
                 crossedEdge.push_back(i);
@@ -709,7 +806,7 @@ void findShortestPaths(Graph const &graph, Node source, int v, Node fin, std::ve
             tm *ltm = localtime(&actuel);
             int heure =ltm->tm_hour ;
             int minute =ltm->tm_min ;
-            int tempsTrajet =dist[i];
+            int tempsTrajet =dure[i];
             int minEstime =minute+tempsTrajet ;
             do
             {
@@ -730,7 +827,14 @@ void findShortestPaths(Graph const &graph, Node source, int v, Node fin, std::ve
             std::cout << std::endl;
             std::cout << std::endl;
             std::cout << "Chemin (" << source.getName() << " --> " << i << "): Temps estime = " << dist[i] <<" min"<< std::endl;
-            std::cout << "  Heure d'arrive estimee a : " <<heure << "h"<<  minEstime;
+            if(minEstime<10)
+            {
+                std::cout << "  Heure d'arrive estimee a : " <<heure << "h0"<<  minEstime;
+            }
+            else
+            {
+                std::cout << "  Heure d'arrive estimee a : " <<heure << "h"<<  minEstime;
+            }
             std::cout << std::endl;
             std::cout << "           ------------------------------------------------------------" << std::endl;
             std::cout << std::endl;
@@ -762,9 +866,10 @@ void findShortestPaths(Graph const &graph, Node source, int v, Node fin, std::ve
 }
 
 
+// Given an Adjacency List, do a BFS on vertex "start" and on vertex "finish"
 void CheminBFS(std::vector< std::vector<Edge> > adjList, Node start,Node finish)
 {
-std::cout << "Chemin : ";
+    std::cout << "Chemin : ";
 
     int n = adjList.size();
     // Create a "visited" array (true or false) to keep track of if we visited a vertex.
@@ -777,7 +882,7 @@ std::cout << "Chemin : ";
     // Add the starting vertex to the queue and mark it as visited.
     q.push(start);
     visited[start.getVertex()] = true;
-int fin = 0;
+    int fin = 0;
     // While the queue is not empty..
     while(q.empty() == false && fin!=1)
         {
@@ -804,18 +909,15 @@ int fin = 0;
                 visited[neighbor.getVertex()] = true;
                 }
               }
-              else
+              else                          //EKIP
               {
               fin=1;
               }
-
             }
-                  std::cout << vertex << " ";
-                                       //EKIP
+            std::cout << vertex << " ";
         }
         std::cout<<" "<< std::endl ;
         std::cout<<" "<< std::endl ;
-
         int p=0;
         char c;
         do
@@ -826,11 +928,11 @@ int fin = 0;
             p=c;
         }while(p!=49);
         system("cls");
-    }// Given an Adjacency List, do a BFS on vertex "start"
-
+    }
+// Given an Adjacency List, do a BFS on vertex "start"
 void AdjListBFS(std::vector< std::vector<Edge> > adjList, Node start)
     {
-    std::cout << "Doing a BFS on an adjacency list : ";
+   std::cout << "Tout les sommets ateignable dans l'ordre croissant : ";
 
     int n = adjList.size();
     // Create a "visited" array (true or false) to keep track of if we visited a vertex.
@@ -880,14 +982,13 @@ void AdjListBFS(std::vector< std::vector<Edge> > adjList, Node start)
       p=c;
     }while(p!=49);
     system("cls");
+}
 
-    }
-    
+
 void TrouverLeCheminLePlusCourt()
 {
 
 
-  
      int v = 0 ;//
     std::string nodeName;//
     std::string edgeName;
@@ -903,14 +1004,17 @@ void TrouverLeCheminLePlusCourt()
     nodes = nodesTxt(&v);
     edges = EdgesTxt(nodes);
     Graph graph(edges, 95);
+    Graph graphDure(edges, 95);
+
     //edges.push_back({v1,v2,poids});
     // construct graph
 
    int choix ;
     char b ;
-    std::cout<<""<<std::endl;
+
     do
     {
+    std::cout<<"normal"<<std::endl;
     std::cout<<""<<std::endl;
     std::cout<<""<<std::endl;
     std::cout<<""<<std::endl;
@@ -971,7 +1075,7 @@ void TrouverLeCheminLePlusCourt()
     source = nodes[saisieSource-1];
     fin = nodes[saisieFin-1];
 
-    findShortestPaths(graph, source, v , fin, edges);
+    findShortestPaths(graph, graphDure,source, v , fin);
 
     break ;
 
@@ -988,7 +1092,7 @@ void TrouverLeCheminLePlusCourt()
         }while(saisieSource>37);
          source = nodes[saisieSource-1];
 
-        AllShortestPast(graph, source, v, edges);
+        AllShortestPast(graph, source, v);
 
    break ;
 
@@ -1036,11 +1140,165 @@ void TrouverLeCheminLePlusCourt()
    }while(choix !=53);
 
 }
+
+void TrouverLeCheminLePlusCourtSpecial()
+{
+
+
+     int v = 0 ;//
+    std::string nodeName;//
+    std::string edgeName;
+    std::vector<Node> nodes;
+    std::vector<Edge> edges;
+    std::vector<Edge> edgesDure;
+
+    int saisieSource;
+    int saisieFin;
+    Node source ;
+    Node fin ;
+
+
+    nodes = nodesTxt(&v);
+    edges = EdgesTxt(nodes);
+    edgesDure = EdgesTxtSpe(nodes);
+    Graph graph(edges, 95);
+    Graph graphDure(edgesDure, 95);
+    //edges.push_back({v1,v2,poids});
+    // construct graph
+
+   int choix ;
+    char b ;
+
+    do
+    {
+    std::cout<<" special"<<std::endl;
+    std::cout<<""<<std::endl;
+    std::cout<<""<<std::endl;
+    std::cout<<""<<std::endl;
+    std::cout<<""<<std::endl;
+    std::cout<<""<<std::endl;
+    std::cout <<"         -------------------------                                            /%%%%%%"<<std::endl;
+    std::cout <<"         -------------------------                                          %%%%.  #%%%&"<<std::endl;
+    std::cout <<"       || Que voulez vous faire ?  ||                                    %%%%%        &%%%"<<std::endl ;
+    std::cout <<"       ||                          ||                                  &%%%%&#*,.  .*(%&%%%%*" <<std::endl;
+    std::cout <<"       ||   1. Dijkstra            ||                                &%%% /%            % *%%%*"<<std::endl;
+    std::cout <<"       ||   2. Tout chemin         ||                              %%%%     &%        &(    /%%%"<<std::endl;
+    std::cout <<"       ||   3. BFS                 ||                            .%%%.        %.    %&        &%%%"<<std::endl;
+    std::cout <<"       ||   4. BFS 2 sommet        ||                           %%%%           *%  %            %%%&"<<std::endl;
+    std::cout <<"       ||   5. Retour au menu      ||                         *%%%   ./%&&&%%%%%%%%%%%%%%&&&%(,  .%%%"<<std::endl;
+    std::cout <<"         -------------------------                           &%%%              #%  %               %%%("<<std::endl;
+    std::cout <<"         -------------------------                          %%%  %/           %     *%           %& #%%&"<<std::endl;
+    std::cout <<"                                                          .%%&    ,%        %#        &&        %     %%%"<<std::endl;
+    std::cout <<"                                                         *%%&       &(    %&            %     &&       %%%"<<std::endl;
+    std::cout <<"                                                        *%%&         .%  &               *%  %          %%%"<<std::endl;
+    std::cout <<"                                                       ,%%%      (&&%%%%&%%%%&&&&&&&&&&%%%%%%%%&@&*      %%%"<<std::endl;
+    std::cout <<"                                                       %%%&          %& .%               ,%  %          &#%%%"<<std::endl;
+    std::cout <<"                                                      %%%  %        %     &%            %/    (%        % (%%%"<<std::endl;
+    std::cout <<"                                                      #%%#  &&     %#        %         /%        &%     %.  &%%"<<std::endl;
+    std::cout <<"                                                      %%%    &/  %&           &&      %,           %   &(   .%%&"<<std::endl;
+    std::cout <<"                                                      %%%%%%&,%,%               %   %&              (%&/#&%%%%%%"<<std::endl;
+    std::cout <<"                                                           %%%%%%%%%%%%%&&%(*,.  &&%  ..,*#&&&%%%%%%%%%%%&#"<<std::endl;
+    std::cout <<"                                                                     .*%&&%%%%%%%%%%%%%%%%%%&&#,"<<std::endl;
+   do
+   {
+      std::cin>>b;
+      fflush(stdin);
+      choix =b ;
+   }while(choix !=49 && choix !=50 && choix !=51 && choix !=52 && choix !=53);
+
+
+   switch(choix)
+   {
+   case 49 :
+    system("cls");
+    do
+    {
+       do {
+           std::cout <<" De quel sommet voulez vous partir ?"<<std::endl;
+           std::cin >>saisieSource;
+
+           }while(saisieSource<1);
+   }while(saisieSource>37);
+   do{
+    do {
+          std::cout <<" Quel est le sommet d'arrive de votre choix ?"<<std::endl;
+    std::cin>> saisieFin;
+    }while(saisieFin<1);
+   }while(saisieFin>37);
+
+    source = nodes[saisieSource-1];
+    fin = nodes[saisieFin-1];
+
+    findShortestPaths(graph, graphDure,source, v , fin);
+
+    break ;
+
+    case 50:
+       system("cls");
+
+        do
+         {
+           do
+          {
+           std::cout <<" De quel sommet voulez vous partir ?"<<std::endl;
+           std::cin >>saisieSource;
+          }while(saisieSource<1);
+        }while(saisieSource>37);
+         source = nodes[saisieSource-1];
+
+        AllShortestPast(graph, source, v);
+
+   break ;
+
+   case 51:
+       system("cls");
+       do
+         {
+         do
+          {
+           std::cout <<" De quel sommet voulez vous partir ?"<<std::endl;
+           std::cin >>saisieSource;
+          }while(saisieSource<1);
+        }while(saisieSource>37);
+
+        source = nodes[saisieSource-1];
+        AdjListBFS(graph.m_adjList, source);
+   break ;
+
+   case 52 :
+    system("cls");
+    do
+    {
+       do {
+           std::cout <<" De quel sommet voulez vous partir ?"<<std::endl;
+           std::cin >>saisieSource;
+
+           }while(saisieSource<1);
+   }while(saisieSource>37);
+   do{
+    do {
+          std::cout <<" Quel est le sommet d'arrive de votre choix ?"<<std::endl;
+    std::cin>> saisieFin;
+    }while(saisieFin<1);
+   }while(saisieFin>37);
+
+    source = nodes[saisieSource-1];
+    fin = nodes[saisieFin-1];
+
+   CheminBFS(graph.m_adjList, source,fin);
+
+    break ;
+
+   }
+   system("cls");
+   }while(choix !=53);
+
+}
+
 int menu ()
 {
     int choix ;
     char b ;
-     Skieur s;
     Skieur s;
     afficherSkieur(connexionPage(s));
     choixParam(s);
@@ -1088,14 +1346,13 @@ std::cout<<""<<std::endl;
    {
    case 49:
        system("cls");
-std::cout <<" chemin  le plus court " << std::endl;
+
 TrouverLeCheminLePlusCourt();
    break ;
 
    case 50:
        system("cls");
-   std:: cout<<"Quel deck voulez vous modifier " << std::endl ;
-
+   TrouverLeCheminLePlusCourtSpecial();
 
    break ;
 
