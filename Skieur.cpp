@@ -12,12 +12,12 @@ std::string Skieur::getMdp()
     return m_mdp;
 }
 
-bool Skieur::getParam1()
+std::string Skieur::getParam1()
 {
     return m_param1;
 }
 
-char Skieur::getParam2()
+std::string Skieur::getParam2()
 {
     return m_param2;
 }
@@ -32,12 +32,12 @@ void Skieur::setMdp(std::string _mdp)
     m_mdp = _mdp;
 }
 
-void Skieur::setParam1(bool newParam1)
+void Skieur::setParam1(std::string newParam1)
 {
     m_param1 = newParam1;
 }
 
-void Skieur::setParam2(char newParam2)
+void Skieur::setParam2(std::string newParam2)
 {
     m_param2 = newParam2;
 }
