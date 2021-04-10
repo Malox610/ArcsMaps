@@ -7,6 +7,7 @@
 #include <queue>
 #include <climits>
 #include <fstream>
+#include <ctime>
 #include <windows.h>
 #include <stdlib.h>
 #include <opencv2/opencv.hpp>
@@ -14,8 +15,6 @@
 #include "Edge.h"
 #include "Node.h"
 #include "Skieur.h"
-
-/// Partie creation/connexion profil
 
 Skieur creationProfil()
 {
@@ -179,8 +178,6 @@ void afficherSkieur(Skieur s)
 }
 
 /// -----------------------------------------------------------------------------------------------------------------------------
-
-
 void print_route(std::vector<int> const &prev, int i, std::vector<Edge> crossedEdge)
 {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -275,13 +272,13 @@ struct comp
 
 std::vector<Edge> EdgesTxt(std::vector<Node> nodes )
 {
-    std::vector<Edge> edges;
-    Node start;
-    Node finish;
-    int v1;//
+std::vector<Edge> edges;
+Node start;
+Node finish;
+ int v1;//
     int v2;//
     int weight;//
-    int num;///
+     int num;///
     char edgeType;//
     std::string edgeName;//
 
@@ -365,6 +362,7 @@ std::vector<Edge> EdgesTxt(std::vector<Node> nodes )
     {
         edges[i].afficher();
     }
+    std::cout<<std::endl;
 return edges;
 }
 
@@ -447,11 +445,37 @@ void AllShortestPast(Graph const &graph, Node source, int v,std::vector<Edge> ed
         done[u] = true;
     }
 
+
+
     for (int i = 1; i < v; i++)
     {
+            ///calcul de l'heure d'arrive
+            time_t actuel = time(0);
+            tm *ltm = localtime(&actuel);
+            int heure =ltm->tm_hour ;
+            int minute =ltm->tm_min ;
+            int tempsTrajet =dist[i];
+            int minEstime =minute+tempsTrajet ;
+            do
+            {
+                if(minEstime>=60)
+                {
+
+                    heure=heure+1;
+                    minEstime=minEstime-60;
+                }
+                if(heure>=24)
+                {
+                int diff =heure-24;
+                heure =diff ;
+                }
+
+            }while(minEstime>60 || heure>24);
+///Affichage
             std::cout << std::endl;
             std::cout << std::endl;
-            std::cout << "Chemin (" << source.getName() << " --> " << i << "): Temps estime = " << dist[i] << std::endl;
+            std::cout << "Chemin (" << source.getName() << " --> " << i << "): Temps estime = " << dist[i] <<" min"<< std::endl;
+            std::cout << "  Heure d'arrive estimee a : " <<heure << "h"<<  minEstime;
             std::cout << std::endl;
             std::cout << std::endl;
             std::cout << "           ------------------------------------------------------------" << std::endl;
@@ -529,12 +553,8 @@ void findShortestPaths(Graph const &graph, Node source, int v, Node fin, std::ve
                 prev[v] = u;
                 min_heap.push({v," v ", dist[v]});
                 crossedEdge.push_back(i);
-
             }
-
-
         }
-
 
         // marquage des sommets
         done[u] = true;
@@ -545,10 +565,33 @@ void findShortestPaths(Graph const &graph, Node source, int v, Node fin, std::ve
         if (i != source.getVertex() && dist[i] != INT_MAX && i == fin.getVertex())
         {
 
+            ///calcul de l'heure d'arrive
+            time_t actuel = time(0);
+            tm *ltm = localtime(&actuel);
+            int heure =ltm->tm_hour ;
+            int minute =ltm->tm_min ;
+            int tempsTrajet =dist[i];
+            int minEstime =minute+tempsTrajet ;
+            do
+            {
+                if(minEstime>=60)
+                {
+
+                    heure=heure+1;
+                    minEstime=minEstime-60;
+                }
+                if(heure>=24)
+                {
+                int diff =heure-24;
+                heure =diff ;
+                }
+
+            }while(minEstime>60 || heure>24);
+            ///affichage
             std::cout << std::endl;
             std::cout << std::endl;
-            std::cout << "Chemin (" << source.getName() << " --> " << i << "): Temps estime = " << dist[i] << std::endl;
-            std::cout << std::endl;
+            std::cout << "Chemin (" << source.getName() << " --> " << i << "): Temps estime = " << dist[i] <<" min"<< std::endl;
+            std::cout << "  Heure d'arrive estimee a : " <<heure << "h"<<  minEstime;
             std::cout << std::endl;
             std::cout << "           ------------------------------------------------------------" << std::endl;
             std::cout << std::endl;
@@ -576,12 +619,13 @@ void findShortestPaths(Graph const &graph, Node source, int v, Node fin, std::ve
       p=c;
     }while(p!=49);
     system("cls");
+
 }
 
 // Given an Adjacency List, do a BFS on vertex "start"
 
 void AdjListBFS(std::vector< std::vector<Edge> > adjList, Node start)
-{
+    {
     std::cout << "Doing a BFS on an adjacency list : ";
 
     int n = adjList.size();
@@ -633,10 +677,8 @@ void AdjListBFS(std::vector< std::vector<Edge> > adjList, Node start)
     }while(p!=49);
     system("cls");
 
-}
-
-
-void TrouverLeCheminLePlusCourt()
+    }
+   void TrouverLeCheminLePlusCourt()
 {
 
 
@@ -764,16 +806,12 @@ void TrouverLeCheminLePlusCourt()
    }while(choix !=52);
 
 }
-
-
-
 int menu ()
 {
     int choix ;
     char b ;
-    Skieur s;
+     Skieur s;
     afficherSkieur(connexionPage(s));
-
     std::cout<<""<<std::endl;
     do
     {
@@ -787,7 +825,7 @@ std::cout<<""<<std::endl;
     std::cout <<"       || Que voulez vous faire ?  ||                                    %%%%%        &%%%"<<std::endl ;
     std::cout <<"       ||                          ||                                  &%%%%&#*,.  .*(%&%%%%*" <<std::endl;
     std::cout <<"       ||   1. Maps                ||                                &%%% /%            % *%%%*"<<std::endl;
-    std::cout <<"       ||   2. Chemins speciaux    ||                              %%%%     &%        &(    /%%%"<<std::endl;
+    std::cout <<"       ||   2. Chemin speciaux     ||                              %%%%     &%        &(    /%%%"<<std::endl;
     std::cout <<"       ||   3. ---                 ||                            .%%%.        %.    %&        &%%%"<<std::endl;
     std::cout <<"       ||   4.Arret                ||                           %%%%           *%  %            %%%&"<<std::endl;
     std::cout <<"         -------------------------                            *%%%   ./%&&&%%%%%%%%%%%%%%&&&%(,  .%%%"<<std::endl;
@@ -847,8 +885,6 @@ return -1 ;
 }
 
 
-
-
 int main(int argc, char** argv)
 {
      system("color F0");
@@ -885,4 +921,3 @@ int main(int argc, char** argv)
 
     return 0;
 }
-
