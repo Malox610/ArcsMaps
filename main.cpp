@@ -187,16 +187,9 @@ void sauvegardeParam(Skieur& s)
     std::vector<std::string> Id;
     while(getline(monFlux1, ligne))
     {
-
-       // std::cout<< ligne <<std::endl;
         Id.push_back(ligne);
     }
-    /*
-     int taille=Id.size();
-    for(int i = 0; i <taille; i++)
-    {
-        std::cout << Id[i] << std::endl;
-    }*/
+
     monFlux1.close();
 
     std::cout<< "vos parametre actuel sont "<< s.getParam2()<<std::endl;
@@ -280,47 +273,45 @@ void choixParam(Skieur& s)
     if (cond2==(true))
     { char b;
     int secu;
-         do
-            {
-                    std::cout<<""<<std::endl;
-    std::cout<<""<<std::endl;
-    std::cout<<""<<std::endl;
-    std::cout<<""<<std::endl;
-    std::cout<<""<<std::endl;
-    std::cout <<"         ------------------------------                                     /%%%%%%"<<std::endl;
-    std::cout <<"         ------------------------------                                   %%%%.  #%%%&"<<std::endl;
-    std::cout <<"       || Que voulez vous faire ?      ||                               %%%%%        &%%%"<<std::endl ;
-    std::cout <<"       ||                              ||                             &%%%%&#*,.  .*(%&%%%%*" <<std::endl;
-    std::cout <<"       ||   1.Eviter les pistes bleues ||                           &%%% /%            % *%%%*"<<std::endl;
-    std::cout <<"       ||   2.Eviter les pistes rouges ||                          %%%%     &%        &(    /%%%"<<std::endl;
-    std::cout <<"       ||   3.Eviter les pistes noires ||                        .%%%.        %.    %&        &%%%"<<std::endl;
-    std::cout <<"       ||   4. Ne rien eviter          ||                       %%%%           *%  %            %%%&"<<std::endl;
-    std::cout <<"         ------------------------------                       *%%%   ./%&&&%%%%%%%%%%%%%%&&&%(,  .%%%"<<std::endl;
-    std::cout <<"         ------------------------------                      &%%%              #%  %               %%%("<<std::endl;
-    std::cout <<"                                                            %%%  %/           %     *%           %& #%%&"<<std::endl;
-    std::cout <<"                                                          .%%&    ,%        %#        &&        %     %%%"<<std::endl;
-    std::cout <<"                                                         *%%&       &(    %&            %     &&       %%%"<<std::endl;
-    std::cout <<"                                                        *%%&         .%  &               *%  %          %%%"<<std::endl;
-    std::cout <<"                                                       ,%%%      (&&%%%%&%%%%&&&&&&&&&&%%%%%%%%&@&*      %%%"<<std::endl;
-    std::cout <<"                                                       %%%&          %& .%               ,%  %          &#%%%"<<std::endl;
-    std::cout <<"                                                      %%%  %        %     &%            %/    (%        % (%%%"<<std::endl;
-    std::cout <<"                                                      #%%#  &&     %#        %         /%        &%     %.  &%%"<<std::endl;
-    std::cout <<"                                                      %%%    &/  %&           &&      %,           %   &(   .%%&"<<std::endl;
-    std::cout <<"                                                      %%%%%%&,%,%               %   %&              (%&/#&%%%%%%"<<std::endl;
-    std::cout <<"                                                           %%%%%%%%%%%%%&&%(*,.  &&%  ..,*#&&&%%%%%%%%%%%&#"<<std::endl;
-    std::cout <<"                                                                     .*%&&%%%%%%%%%%%%%%%%%%&&#,"<<std::endl;
-
-            std::cout <<std::endl;
-            std::cout <<std::endl;
-           // std::cin >> choix2;
-            std::cout<<std::endl;
-            std::cout<<std::endl;
-            std::cin>>b;
-            fflush(stdin);
-            secu =b ;
-            }while(secu!=49 && secu!=50 && secu !=51 && secu !=52 );
-       switch(secu)
-       {
+    do
+    {
+        std::cout<<std::endl;
+        std::cout<<std::endl;
+        std::cout<<std::endl;
+        std::cout<<std::endl;
+        std::cout<<std::endl;
+        std::cout <<"         ------------------------------                                     /%%%%%%"<<std::endl;
+        std::cout <<"         ------------------------------                                   %%%%.  #%%%&"<<std::endl;
+        std::cout <<"       || Que voulez vous faire ?      ||                               %%%%%        &%%%"<<std::endl ;
+        std::cout <<"       ||                              ||                             &%%%%&#*,.  .*(%&%%%%*" <<std::endl;
+        std::cout <<"       ||   1.Eviter les pistes bleues ||                           &%%% /%            % *%%%*"<<std::endl;
+        std::cout <<"       ||   2.Eviter les pistes rouges ||                          %%%%     &%        &(    /%%%"<<std::endl;
+        std::cout <<"       ||   3.Eviter les pistes noires ||                        .%%%.        %.    %&        &%%%"<<std::endl;
+        std::cout <<"       ||   4. Ne rien eviter          ||                       %%%%           *%  %            %%%&"<<std::endl;
+        std::cout <<"         ------------------------------                       *%%%   ./%&&&%%%%%%%%%%%%%%&&&%(,  .%%%"<<std::endl;
+        std::cout <<"         ------------------------------                      &%%%              #%  %               %%%("<<std::endl;
+        std::cout <<"                                                            %%%  %/           %     *%           %& #%%&"<<std::endl;
+        std::cout <<"                                                          .%%&    ,%        %#        &&        %     %%%"<<std::endl;
+        std::cout <<"                                                         *%%&       &(    %&            %     &&       %%%"<<std::endl;
+        std::cout <<"                                                        *%%&         .%  &               *%  %          %%%"<<std::endl;
+        std::cout <<"                                                       ,%%%      (&&%%%%&%%%%&&&&&&&&&&%%%%%%%%&@&*      %%%"<<std::endl;
+        std::cout <<"                                                       %%%&          %& .%               ,%  %          &#%%%"<<std::endl;
+        std::cout <<"                                                      %%%  %        %     &%            %/    (%        % (%%%"<<std::endl;
+        std::cout <<"                                                      #%%#  &&     %#        %         /%        &%     %.  &%%"<<std::endl;
+        std::cout <<"                                                      %%%    &/  %&           &&      %,           %   &(   .%%&"<<std::endl;
+        std::cout <<"                                                      %%%%%%&,%,%               %   %&              (%&/#&%%%%%%"<<std::endl;
+        std::cout <<"                                                           %%%%%%%%%%%%%&&%(*,.  &&%  ..,*#&&&%%%%%%%%%%%&#"<<std::endl;
+        std::cout <<"                                                                     .*%&&%%%%%%%%%%%%%%%%%%&&#,"<<std::endl;
+        std::cout <<std::endl;
+        std::cout <<std::endl;
+        std::cout<<std::endl;
+        std::cout<<std::endl;
+        std::cin>>b;
+        fflush(stdin);
+        secu =b ;
+    }while(secu!=49 && secu!=50 && secu !=51 && secu !=52 );
+    switch(secu)
+    {
        case 49:
            choix2=66;
         break;
@@ -335,7 +326,7 @@ void choixParam(Skieur& s)
         break;
 
 
-       }
+    }
     s.setParam2(choix2);
     }
         sauvegardeParam(s);
@@ -346,15 +337,16 @@ void choixParam(Skieur& s)
          return;
     }
 }
+
 /// -----------------------------------------------------------------------------------------------------------------------------
+
 void print_route(std::vector<int> const &prev, int i, std::vector<Edge> crossedEdge)
 {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     if (i < 0)
-        {
+    {
         return;
-        }
-
+    }
 
     print_route(prev, prev[i], crossedEdge);
     int taille = crossedEdge.size();
@@ -362,12 +354,12 @@ void print_route(std::vector<int> const &prev, int i, std::vector<Edge> crossedE
     {
         if(prev[i]== crossedEdge[x].getSource().getVertex() && i == crossedEdge[x].getDest().getVertex())
         {
-               std::string message="";
-                char k = crossedEdge[x].getType();
-                int mario =0; // nom au pif
-                mario = k;
-                switch(mario)
-                { ///piste
+            std::string message="";
+            char k = crossedEdge[x].getType();
+            int mario =0; // nom au pif
+            mario = k;
+            switch(mario)
+            { ///piste
                     case 78 : //piste noir
                          SetConsoleTextAttribute(hConsole, 240);
                    message="la piste noire ";
@@ -423,11 +415,10 @@ void print_route(std::vector<int> const &prev, int i, std::vector<Edge> crossedE
                   SetConsoleTextAttribute(hConsole, 246);
                    message="la ";
                     break ;
-                }
-         std::cout << " -- " <<message<<crossedEdge[x].getNom()<< "--> ";
-          SetConsoleTextAttribute(hConsole, 240);
+            }
+            std::cout << " -- " <<message<<crossedEdge[x].getNom()<< "--> ";
+            SetConsoleTextAttribute(hConsole, 240);
         }
-
     }
     std::cout << i << " ";
 }
@@ -442,23 +433,21 @@ struct comp
 
 std::vector<Edge> EdgesTxt(std::vector<Node> nodes)
 {
-std::vector<Edge> edges;
-Node start;
-Node finish;
- int v1;//
-    int v2;//
-    int weight;//
-     int num;///
-    char edgeType;//
-    std::string edgeName;//
+    std::vector<Edge> edges;
+    Node start;
+    Node finish;
+    int v1;
+    int v2;
+    int weight;
+    int num;
+    char edgeType;
+    std::string edgeName;
     std::ifstream flxEdges("data_arcs.txt"); // ouverture du fichier arcs
 
     while(flxEdges)
     {
         flxEdges >> num >> edgeName >> edgeType >> v1 >> v2;
-
-            start = nodes[v1-1];
-
+        start = nodes[v1-1];
         finish = nodes[v2-1];
         Edge edge(start, finish, weight);
         weight = abs(start.getWeight()- finish.getWeight());
@@ -511,15 +500,14 @@ Node finish;
                     break ;
 
                 }
-                if((start.getName()=="arc1600"||start.getName()=="arc2000") && (finish.getName()=="arc1600"|| finish.getName()=="arc2000"))
-                {
-                    edge.setWeight(40);
-                }
-                  if((start.getName()=="arc1600"||start.getName()=="arc1800") && (finish.getName()=="arc1600"|| finish.getName()=="arcarc1800"))
-                {
-                    edge.setWeight(30);
-                }
-
+        if((start.getName()=="arc1600"||start.getName()=="arc2000") && (finish.getName()=="arc1600"|| finish.getName()=="arc2000"))
+        {
+            edge.setWeight(40);
+        }
+        if((start.getName()=="arc1600"||start.getName()=="arc1800") && (finish.getName()=="arc1600"|| finish.getName()=="arcarc1800"))
+        {
+            edge.setWeight(30);
+        }
 
         edge.setNom(edgeName);
         edge.setNum(num);
@@ -529,6 +517,7 @@ Node finish;
 
     }
     int taille = edges.size();
+
     for(int i = 0; i < taille; i++)
     {
         edges[i].afficher();
@@ -536,33 +525,35 @@ Node finish;
     std::cout<<""<<std::endl;
 return edges;
 }
+
+
 std::vector<Edge> EdgesTxtEx(std::vector<Node> nodes,Skieur s)
 {
-std::vector<Edge> edges;
-Node start;
-Node finish;
- int v1;//
-    int v2;//
-    int weight;//
-     int num;///
-    char edgeType;//
-    std::string edgeName;//
+    std::vector<Edge> edges;
+    Node start;
+    Node finish;
+    int v1;
+    int v2;
+    int weight;
+    int num;
+    char edgeType;
+    std::string edgeName;
     char pisteEnleve=s.getParam2();
     std::ifstream flxEdges("data_arcs.txt"); // ouverture du fichier arcs
 
     while(flxEdges)
     {
         flxEdges >> num >> edgeName >> edgeType >> v1 >> v2;
+
         if(edgeType!=pisteEnleve)
         {
             start = nodes[v1-1];
+            finish = nodes[v2-1];
+            Edge edge(start, finish, weight);
+            weight = abs(start.getWeight()- finish.getWeight());
+            edge.setType(edgeType);
 
-        finish = nodes[v2-1];
-        Edge edge(start, finish, weight);
-        weight = abs(start.getWeight()- finish.getWeight());
-        edge.setType(edgeType);
-
-        char k = edge.getType();
+            char k = edge.getType();
                 int mario =0; // nom au pif
                 mario = k;
                 switch(mario)
@@ -609,54 +600,52 @@ Node finish;
                     break ;
 
                 }
-                if((start.getName()=="arc1600"||start.getName()=="arc2000") && (finish.getName()=="arc1600"|| finish.getName()=="arc2000"))
-                {
-                    edge.setWeight(400);
-                }
-                  if((start.getName()=="arc1600"||start.getName()=="arc1800") && (finish.getName()=="arc1600"|| finish.getName()=="arcarc1800"))
-                {
-                    edge.setWeight(300);
-                }
+            if((start.getName()=="arc1600"||start.getName()=="arc2000") && (finish.getName()=="arc1600"|| finish.getName()=="arc2000"))
+            {
+                edge.setWeight(400);
+            }
+            if((start.getName()=="arc1600"||start.getName()=="arc1800") && (finish.getName()=="arc1600"|| finish.getName()=="arcarc1800"))
+            {
+                edge.setWeight(300);
+            }
 
+            edge.setNom(edgeName);
+            edge.setNum(num);
+            edges.push_back(edge);
 
-        edge.setNom(edgeName);
-        edge.setNum(num);
-        edges.push_back(edge);
         }
 
 
     }
+
     int taille = edges.size();
     for(int i = 0; i < taille; i++)
     {
         edges[i].afficher();
     }
     std::cout<<""<<std::endl;
+
 return edges;
 }
 
 
-
-
 std::vector<Node> nodesTxt(int *v)
 {
-     std::vector<Node> nodes;
-
-     int vertex;//
+    std::vector<Node> nodes;
+    int vertex;//
     int alt;//
     std::string nodeName;//
-     std::ifstream flxPoints("data_points.txt"); // ouverture du fichier points
+    std::ifstream flxPoints("data_points.txt"); // ouverture du fichier points
 
     flxPoints >> *v; // premiere ligne du texte  = nombre de sommet
-    //std::cout << v << std::endl;
+
     while(flxPoints)  /// on creer la liste d'adjacence grace au valeur r�cup�r�es dans le fichier
     {
-            flxPoints >> vertex >> nodeName >> alt;
-            Node sommet(vertex, nodeName, alt);
-            nodes.push_back(sommet);
-            //std::cout << vertex << "  " << nodeName << "  "  << alt << "  " << std::endl;
+        flxPoints >> vertex >> nodeName >> alt;
+        Node sommet(vertex, nodeName, alt);
+        nodes.push_back(sommet);
     }
-return nodes ;
+    return nodes ;
 }
 
 
@@ -665,22 +654,19 @@ void AllShortestPast(Graph const &graph, Node source, int v) /// Dijkstra tous l
     // prendre la source comme arrete = 0
     std::priority_queue<Node, std::vector<Node>, comp> min_heap;
     min_heap.push({source.getVertex(), source.getName(), 0});
-
-
     std::vector<Node> nodes;
     int z=0;
     nodes = nodesTxt(&z);
-
     std::vector <Edge> crossedEdge;
 
 
     // mettre la distnace initial pour la source a l'infini
      std::vector<int> dist(v, INT_MAX);
+
     //distnace de la source a elle meme a 0
     dist[source.getVertex()] = 0;
 
     // tableau de boolean pour traquer les sommets pour troiver le chemin minimum poiur chaque chemin
-
     std::vector<bool> done(v, false);
     done[source.getVertex()] = true;
 
@@ -703,7 +689,6 @@ void AllShortestPast(Graph const &graph, Node source, int v) /// Dijkstra tous l
             int v = i.getDest().getVertex();
             int weight = i.getWeight();
 
-
             if (!done[v] && (dist[u] + weight) < dist[v])
             {
                 dist[v] = dist[u] + weight;
@@ -716,8 +701,6 @@ void AllShortestPast(Graph const &graph, Node source, int v) /// Dijkstra tous l
         // marquage des sommets
         done[u] = true;
     }
-
-
 
     for (int i = 1; i < v; i++)
     {
@@ -732,17 +715,17 @@ void AllShortestPast(Graph const &graph, Node source, int v) /// Dijkstra tous l
             {
                 if(minEstime>=60)
                 {
-
                     heure=heure+1;
                     minEstime=minEstime-60;
                 }
                 if(heure>=24)
                 {
-                int diff =heure-24;
-                heure =diff ;
+                    int diff =heure-24;
+                    heure =diff ;
                 }
 
             }while(minEstime>60 || heure>24);
+
 ///Affichage
             std::cout << std::endl;
             std::cout << std::endl;
@@ -762,19 +745,16 @@ void AllShortestPast(Graph const &graph, Node source, int v) /// Dijkstra tous l
 
     }
 
-
-
-      std::cout<<" "<< std::endl ;
     std::cout<<" "<< std::endl ;
-
+    std::cout<<" "<< std::endl ;
     int p=0;
     char c;
     do
     {
-      std::cout <<" <----  retour menu ( ecrire 1)"<< std::endl;
-      std::cin>>c;
-      fflush(stdin);
-      p=c;
+        std::cout <<" <----  retour menu ( ecrire 1)"<< std::endl;
+        std::cin>>c;
+        fflush(stdin);
+        p=c;
     }while(p!=49);
     system("cls");
 
@@ -792,18 +772,19 @@ void findShortestPaths(Graph const &graph, Node source, int v, Node fin ) /// Di
     // mettre la distnace initial pour la source a l'infini
      std::vector<int> dist(v, INT_MAX);
      std::vector<int> dure(v, INT_MAX);
+
     //distnace de la source a elle meme a 0
     dist[source.getVertex()] = 0;
     dure[source.getVertex()] = 0;
-    // tableau de boolean pour traquer les sommets pour troiver le chemin minimum poiur chaque chemin
 
+    // tableau de boolean pour traquer les sommets pour trouver le chemin minimum pour chaque chemin
     std::vector<bool> done(v, false);
     done[source.getVertex()] = true;
 
-    // stocker les predecesseur pour ecrire le chemin
+    // stocker les predecesseurs pour ecrire le chemin
     std::vector<int> prev(v, -1);
 
-    // run qu'au sommet final
+    // run jusqu'au sommet final
     while (!min_heap.empty())
     {
         //  enlever et retourner la meilleurs sommet
@@ -812,7 +793,6 @@ void findShortestPaths(Graph const &graph, Node source, int v, Node fin ) /// Di
 
         // obtenir le numero du sommet
         int u = node.getVertex();
-
 
         for (auto i: graph.m_adjList[u])     /// <------------
         {
@@ -849,17 +829,17 @@ void findShortestPaths(Graph const &graph, Node source, int v, Node fin ) /// Di
             {
                 if(minEstime>=60)
                 {
-
                     heure=heure+1;
                     minEstime=minEstime-60;
                 }
                 if(heure>=24)
                 {
-                int diff =heure-24;
-                heure =diff ;
+                    int diff =heure-24;
+                    heure =diff ;
                 }
 
             }while(minEstime>60 || heure>24);
+
             ///affichage
             std::cout << std::endl;
             std::cout << std::endl;
@@ -886,20 +866,20 @@ void findShortestPaths(Graph const &graph, Node source, int v, Node fin ) /// Di
         }
 
     }
-      std::cout<<" "<< std::endl ;
-    std::cout<<" "<< std::endl ;
 
+    std::cout<<" "<< std::endl ;
+    std::cout<<" "<< std::endl ;
     int p=0;
     char c;
     do
     {
-      std::cout <<" <----  retour menu ( ecrire 1)"<< std::endl;
-      std::cin>>c;
-      fflush(stdin);
-      p=c;
+        std::cout <<" <----  retour menu ( ecrire 1)"<< std::endl;
+        std::cin>>c;
+        fflush(stdin);
+        p=c;
+
     }while(p!=49);
     system("cls");
-
 }
 
 
@@ -907,11 +887,11 @@ void findShortestPaths(Graph const &graph, Node source, int v, Node fin ) /// Di
 void CheminBFS(std::vector< std::vector<Edge> > adjList, Node start,Node finish)
 {
     std::cout << "Chemin : ";
-
     int n = adjList.size();
+
     // Create a "visited" array (true or false) to keep track of if we visited a vertex.
-        bool visited[n] = { false };
-        std::vector<int>ListeSommet;
+    bool visited[n] = { false };
+    std::vector<int>ListeSommet;
 
     // Create a queue for the nodes we visit.
     std::queue<Node> q;
@@ -920,39 +900,35 @@ void CheminBFS(std::vector< std::vector<Edge> > adjList, Node start,Node finish)
     q.push(start);
     visited[start.getVertex()] = true;
     int fin = 0;
+
     // While the queue is not empty..
     while(q.empty() == false && fin!=1)
-        {
+    {
         Node ver = q.front();
         int vertex=ver.getVertex();
         ListeSommet.push_back(vertex);
-
-            q.pop();
-
-        // Doing +1 in the cout because our graph is 1-based indexing, but our code is 0-based.
+        q.pop();
 
         // Loop through all of it's friends.
         int taille = adjList[vertex].size();
         for(int i = 0; i <taille ; i++)
-            {
+        {
             // If the friend hasn't been visited yet, add it to the queue and mark it as visited
             Node neighbor = adjList[vertex][i].getDest();
-              if (vertex!=finish.getVertex())
-              {
-
+            if (vertex!=finish.getVertex())
+            {
                 if(visited[neighbor.getVertex()] == false)
                 {
-
-                q.push(neighbor);
-                visited[neighbor.getVertex()] = true;
+                    q.push(neighbor);
+                    visited[neighbor.getVertex()] = true;
                 }
-              }
-              else                          //EKIP
-              {
-              fin=1;
-              }
             }
-            std::cout << vertex << " ";
+            else
+            {
+                fin=1;
+            }
+        }
+        std::cout << vertex << " ";
         }
         std::cout<<" "<< std::endl ;
         std::cout<<" "<< std::endl ;
@@ -965,14 +941,15 @@ void CheminBFS(std::vector< std::vector<Edge> > adjList, Node start,Node finish)
             fflush(stdin);
             p=c;
         }while(p!=49);
-        system("cls");
-    }
+    system("cls");
+}
+
 // Given an Adjacency List, do a BFS on vertex "start"
 void AdjListBFS(std::vector< std::vector<Edge> > adjList, Node start)
-    {
-   std::cout << "Tout les sommets ateignable dans l'ordre croissant : ";
-
+{
+    std::cout << "Tout les sommets ateignable dans l'ordre croissant : ";
     int n = adjList.size();
+
     // Create a "visited" array (true or false) to keep track of if we visited a vertex.
     bool visited[n] = { false };
 
@@ -985,9 +962,9 @@ void AdjListBFS(std::vector< std::vector<Edge> > adjList, Node start)
 
     // While the queue is not empty..
     while(q.empty() == false)
-        {
+    {
         Node ver = q.front();
-         int vertex=ver.getVertex();
+        int vertex=ver.getVertex();
         q.pop();
 
         // Doing +1 in the cout because our graph is 1-based indexing, but our code is 0-based.
@@ -996,29 +973,29 @@ void AdjListBFS(std::vector< std::vector<Edge> > adjList, Node start)
         // Loop through all of it's friends.
         int taille = adjList[vertex].size();
         for(int i = 0; i <taille ; i++)
-            {
+        {
             // If the friend hasn't been visited yet, add it to the queue and mark it as visited
             Node neighbor = adjList[vertex][i].getDest();
 
             if(visited[neighbor.getVertex()] == false)
-                {
+            {
                 q.push(neighbor);
                 visited[neighbor.getVertex()] = true;
-                }
             }
         }
+    }
 
-  std::cout<<" "<< std::endl ;
+    std::cout<<" "<< std::endl ;
     std::cout<<" "<< std::endl ;
 
     int p=0;
     char c;
     do
     {
-      std::cout <<" <----  retour menu ( ecrire 1)"<< std::endl;
-      std::cin>>c;
-      fflush(stdin);
-      p=c;
+        std::cout <<" <----  retour menu ( ecrire 1)"<< std::endl;
+        std::cin>>c;
+        fflush(stdin);
+        p=c;
     }while(p!=49);
     system("cls");
 }
@@ -1028,7 +1005,7 @@ void TrouverLeCheminLePlusCourt()
 {
 
 
-     int v = 0 ;//
+    int v = 0 ;//
     std::string nodeName;//
     std::string edgeName;
     std::vector<Node> nodes;
@@ -1045,133 +1022,136 @@ void TrouverLeCheminLePlusCourt()
     Graph graph(edges, 95);
     Graph graphDure(edges, 95);
 
-   int choix ;
+    int choix ;
     char b ;
 
     do
     {
-    std::cout<<"normal"<<std::endl;
-    std::cout<<""<<std::endl;
-    std::cout<<""<<std::endl;
-    std::cout<<""<<std::endl;
-    std::cout<<""<<std::endl;
-    std::cout<<""<<std::endl;
-    std::cout <<"         -------------------------                                            /%%%%%%"<<std::endl;
-    std::cout <<"         -------------------------                                          %%%%.  #%%%&"<<std::endl;
-    std::cout <<"       || Que voulez vous faire ?  ||                                    %%%%%        &%%%"<<std::endl ;
-    std::cout <<"       ||                          ||                                  &%%%%&#*,.  .*(%&%%%%*" <<std::endl;
-    std::cout <<"       ||   1. Dijkstra            ||                                &%%% /%            % *%%%*"<<std::endl;
-    std::cout <<"       ||   2. Tout chemin         ||                              %%%%     &%        &(    /%%%"<<std::endl;
-    std::cout <<"       ||   3. BFS                 ||                            .%%%.        %.    %&        &%%%"<<std::endl;
-    std::cout <<"       ||   4. BFS 2 sommet        ||                           %%%%           *%  %            %%%&"<<std::endl;
-    std::cout <<"       ||   5. Retour au menu      ||                         *%%%   ./%&&&%%%%%%%%%%%%%%&&&%(,  .%%%"<<std::endl;
-    std::cout <<"         -------------------------                           &%%%              #%  %               %%%("<<std::endl;
-    std::cout <<"         -------------------------                          %%%  %/           %     *%           %& #%%&"<<std::endl;
-    std::cout <<"                                                          .%%&    ,%        %#        &&        %     %%%"<<std::endl;
-    std::cout <<"                                                         *%%&       &(    %&            %     &&       %%%"<<std::endl;
-    std::cout <<"                                                        *%%&         .%  &               *%  %          %%%"<<std::endl;
-    std::cout <<"                                                       ,%%%      (&&%%%%&%%%%&&&&&&&&&&%%%%%%%%&@&*      %%%"<<std::endl;
-    std::cout <<"                                                       %%%&          %& .%               ,%  %          &#%%%"<<std::endl;
-    std::cout <<"                                                      %%%  %        %     &%            %/    (%        % (%%%"<<std::endl;
-    std::cout <<"                                                      #%%#  &&     %#        %         /%        &%     %.  &%%"<<std::endl;
-    std::cout <<"                                                      %%%    &/  %&           &&      %,           %   &(   .%%&"<<std::endl;
-    std::cout <<"                                                      %%%%%%&,%,%               %   %&              (%&/#&%%%%%%"<<std::endl;
-    std::cout <<"                                                           %%%%%%%%%%%%%&&%(*,.  &&%  ..,*#&&&%%%%%%%%%%%&#"<<std::endl;
-    std::cout <<"                                                                     .*%&&%%%%%%%%%%%%%%%%%%&&#,"<<std::endl;
+        std::cout<<""<<std::endl;
+        std::cout<<""<<std::endl;
+        std::cout<<"                                          normal               "<<std::endl;
+        std::cout<<""<<std::endl;
+        std::cout<<""<<std::endl;
+        std::cout<<""<<std::endl;
+        std::cout<<""<<std::endl;
+        std::cout<<""<<std::endl;
+        std::cout <<"         -------------------------                                            /%%%%%%"<<std::endl;
+        std::cout <<"         -------------------------                                          %%%%.  #%%%&"<<std::endl;
+        std::cout <<"       || Que voulez vous faire ?  ||                                    %%%%%        &%%%"<<std::endl ;
+        std::cout <<"       ||                          ||                                  &%%%%&#*,.  .*(%&%%%%*" <<std::endl;
+        std::cout <<"       ||   1. Dijkstra            ||                                &%%% /%            % *%%%*"<<std::endl;
+        std::cout <<"       ||   2. Tout chemin         ||                              %%%%     &%        &(    /%%%"<<std::endl;
+        std::cout <<"       ||   3. BFS                 ||                            .%%%.        %.    %&        &%%%"<<std::endl;
+        std::cout <<"       ||   4. BFS 2 sommet        ||                           %%%%           *%  %            %%%&"<<std::endl;
+        std::cout <<"       ||   5. Retour au menu      ||                         *%%%   ./%&&&%%%%%%%%%%%%%%&&&%(,  .%%%"<<std::endl;
+        std::cout <<"         -------------------------                           &%%%              #%  %               %%%("<<std::endl;
+        std::cout <<"         -------------------------                          %%%  %/           %     *%           %& #%%&"<<std::endl;
+        std::cout <<"                                                          .%%&    ,%        %#        &&        %     %%%"<<std::endl;
+        std::cout <<"                                                         *%%&       &(    %&            %     &&       %%%"<<std::endl;
+        std::cout <<"                                                        *%%&         .%  &               *%  %          %%%"<<std::endl;
+        std::cout <<"                                                       ,%%%      (&&%%%%&%%%%&&&&&&&&&&%%%%%%%%&@&*      %%%"<<std::endl;
+        std::cout <<"                                                       %%%&          %& .%               ,%  %          &#%%%"<<std::endl;
+        std::cout <<"                                                      %%%  %        %     &%            %/    (%        % (%%%"<<std::endl;
+        std::cout <<"                                                      #%%#  &&     %#        %         /%        &%     %.  &%%"<<std::endl;
+        std::cout <<"                                                      %%%    &/  %&           &&      %,           %   &(   .%%&"<<std::endl;
+        std::cout <<"                                                      %%%%%%&,%,%               %   %&              (%&/#&%%%%%%"<<std::endl;
+        std::cout <<"                                                           %%%%%%%%%%%%%&&%(*,.  &&%  ..,*#&&&%%%%%%%%%%%&#"<<std::endl;
+        std::cout <<"                                                                     .*%&&%%%%%%%%%%%%%%%%%%&&#,"<<std::endl;
 
 
    do
    {
-
       std::cin>>b;
       fflush(stdin);
       choix =b ;
    }while(choix !=49 && choix !=50 && choix !=51 && choix !=52 && choix !=53);
 
-
-   switch(choix)
-   {
-   case 49 :
-    system("cls");
-    do
+    switch(choix)
     {
-       do {
-           std::cout <<" De quel sommet voulez vous partir ?"<<std::endl;
-           std::cin >>saisieSource;
-
-           }while(saisieSource<1);
-   }while(saisieSource>37);
-   do{
-    do {
-          std::cout <<" Quel est le sommet d'arrive de votre choix ?"<<std::endl;
-    std::cin>> saisieFin;
-    }while(saisieFin<1);
-   }while(saisieFin>37);
-
-    source = nodes[saisieSource-1];
-    fin = nodes[saisieFin-1];
-
-    findShortestPaths(graphDure,source, v , fin);
-
-    break ;
-
-    case 50:
-       system("cls");
-
+        case 49 :
+        system("cls");
         do
-         {
-           do
-          {
-           std::cout <<" De quel sommet voulez vous partir ?"<<std::endl;
-           std::cin >>saisieSource;
-          }while(saisieSource<1);
+        {
+            do
+            {
+                std::cout <<" De quel sommet voulez vous partir ?"<<std::endl;
+                std::cin >>saisieSource;
+           }while(saisieSource<1);
+
         }while(saisieSource>37);
-         source = nodes[saisieSource-1];
-
-        AllShortestPast(graph, source, v);
-
-   break ;
-
-   case 51:
-       system("cls");
-       do
-         {
-         do
-          {
-           std::cout <<" De quel sommet voulez vous partir ?"<<std::endl;
-           std::cin >>saisieSource;
-          }while(saisieSource<1);
-        }while(saisieSource>37);
+        do
+        {
+            do
+            {
+                std::cout <<" Quel est le sommet d'arrive de votre choix ?"<<std::endl;
+                std::cin>> saisieFin;
+            }while(saisieFin<1);
+        }while(saisieFin>37);
 
         source = nodes[saisieSource-1];
-        AdjListBFS(graph.m_adjList, source);
-   break ;
+        fin = nodes[saisieFin-1];
 
-   case 52 :
-    system("cls");
-    do
-    {
-       do {
-           std::cout <<" De quel sommet voulez vous partir ?"<<std::endl;
-           std::cin >>saisieSource;
+        findShortestPaths(graphDure,source, v , fin);
 
-           }while(saisieSource<1);
-   }while(saisieSource>37);
-   do{
-    do {
-          std::cout <<" Quel est le sommet d'arrive de votre choix ?"<<std::endl;
-    std::cin>> saisieFin;
-    }while(saisieFin<1);
-   }while(saisieFin>37);
+        break ;
 
-    source = nodes[saisieSource-1];
-    fin = nodes[saisieFin-1];
+        case 50:
+        system("cls");
 
-   CheminBFS(graph.m_adjList, source,fin);
+            do
+            {
+                do
+                {
+                    std::cout <<" De quel sommet voulez vous partir ?"<<std::endl;
+                    std::cin >>saisieSource;
+                }while(saisieSource<1);
+            }while(saisieSource>37);
+            source = nodes[saisieSource-1];
 
-    break ;
+            AllShortestPast(graph, source, v);
 
-   }
+        break ;
+
+        case 51:
+            system("cls");
+            do
+            {
+                do
+                {
+                    std::cout <<" De quel sommet voulez vous partir ?"<<std::endl;
+                    std::cin >>saisieSource;
+                }while(saisieSource<1);
+            }while(saisieSource>37);
+
+            source = nodes[saisieSource-1];
+            AdjListBFS(graph.m_adjList, source);
+        break ;
+
+        case 52 :
+            system("cls");
+            do
+            {
+                do
+                {
+                    std::cout <<" De quel sommet voulez vous partir ?"<<std::endl;
+                    std::cin >>saisieSource;
+                }while(saisieSource<1);
+            }while(saisieSource>37);
+            do
+            {
+                do
+                {
+                    std::cout <<" Quel est le sommet d'arrive de votre choix ?"<<std::endl;
+                    std::cin>> saisieFin;
+                }while(saisieFin<1);
+            }while(saisieFin>37);
+
+            source = nodes[saisieSource-1];
+            fin = nodes[saisieFin-1];
+            CheminBFS(graph.m_adjList, source,fin);
+            break ;
+
+    }
    system("cls");
    }while(choix !=53);
 
@@ -1180,8 +1160,7 @@ void TrouverLeCheminLePlusCourt()
 void TrouverLeCheminLePlusCourtSpecial(Skieur s)
 {
 
-
-     int v = 0 ;//
+    int v = 0 ;//
     std::string nodeName;//
     std::string edgeName;
     std::vector<Node> nodes;
@@ -1201,136 +1180,146 @@ void TrouverLeCheminLePlusCourtSpecial(Skieur s)
     Graph graph(edges, 95);
     Graph graphDure(edgesDure, 95);
 
-   int choix ;
+    int choix ;
     char b ;
 
     do
     {
-    std::cout<<" special"<<std::endl;
-  std::cout<<""<<std::endl;
-    std::cout<<""<<std::endl;
-    std::cout<<""<<std::endl;
-    std::cout<<""<<std::endl;
-    std::cout<<""<<std::endl;
-    std::cout <<"         -------------------------                                            /%%%%%%"<<std::endl;
-    std::cout <<"         -------------------------                                          %%%%.  #%%%&"<<std::endl;
-    std::cout <<"       || Que voulez vous faire ?  ||                                    %%%%%        &%%%"<<std::endl ;
-    std::cout <<"       ||                          ||                                  &%%%%&#*,.  .*(%&%%%%*" <<std::endl;
-    std::cout <<"       ||   1. Dijkstra            ||                                &%%% /%            % *%%%*"<<std::endl;
-    std::cout <<"       ||   2. Tout chemin         ||                              %%%%     &%        &(    /%%%"<<std::endl;
-    std::cout <<"       ||   3. BFS                 ||                            .%%%.        %.    %&        &%%%"<<std::endl;
-    std::cout <<"       ||   4. BFS 2 sommet        ||                           %%%%           *%  %            %%%&"<<std::endl;
-    std::cout <<"       ||   5. Retour au menu      ||                         *%%%   ./%&&&%%%%%%%%%%%%%%&&&%(,  .%%%"<<std::endl;
-    std::cout <<"         -------------------------                           &%%%              #%  %               %%%("<<std::endl;
-    std::cout <<"         -------------------------                          %%%  %/           %     *%           %& #%%&"<<std::endl;
-    std::cout <<"                                                          .%%&    ,%        %#        &&        %     %%%"<<std::endl;
-    std::cout <<"                                                         *%%&       &(    %&            %     &&       %%%"<<std::endl;
-    std::cout <<"                                                        *%%&         .%  &               *%  %          %%%"<<std::endl;
-    std::cout <<"                                                       ,%%%      (&&%%%%&%%%%&&&&&&&&&&%%%%%%%%&@&*      %%%"<<std::endl;
-    std::cout <<"                                                       %%%&          %& .%               ,%  %          &#%%%"<<std::endl;
-    std::cout <<"                                                      %%%  %        %     &%            %/    (%        % (%%%"<<std::endl;
-    std::cout <<"                                                      #%%#  &&     %#        %         /%        &%     %.  &%%"<<std::endl;
-    std::cout <<"                                                      %%%    &/  %&           &&      %,           %   &(   .%%&"<<std::endl;
-    std::cout <<"                                                      %%%%%%&,%,%               %   %&              (%&/#&%%%%%%"<<std::endl;
-    std::cout <<"                                                           %%%%%%%%%%%%%&&%(*,.  &&%  ..,*#&&&%%%%%%%%%%%&#"<<std::endl;
-    std::cout <<"                                                            .*%&&%%%%%%%%%%%%%%%%%%&&#,"<<std::endl;
-   do
-   {
-      std::cin>>b;
-      fflush(stdin);
-      choix =b ;
-   }while(choix !=49 && choix !=50 && choix !=51 && choix !=52 && choix !=53);
-
-
-   switch(choix)
-   {
-   case 49 :
-    system("cls");
-
-    do
-    {
-       do {
-           std::cout <<" De quel sommet voulez vous partir ?"<<std::endl;
-           std::cin >>saisieSource;
-
-           }while(saisieSource<1);
-   }while(saisieSource>37);
-   do{
-    do {
-          std::cout <<" Quel est le sommet d'arrive de votre choix ?"<<std::endl;
-    std::cin>> saisieFin;
-    }while(saisieFin<1);
-   }while(saisieFin>37);
-
-    source = nodes[saisieSource-1];
-    fin = nodes[saisieFin-1];
-
-    findShortestPaths(graphDure,source, v , fin);
-    break ;
-
-    case 50:
-    system("cls");
+        std::cout<<std::endl;
+        std::cout<<std::endl;
+        std::cout<<"                                               special                 "<<std::endl;
+        std::cout<<std::endl;
+        std::cout<<std::endl;
+        std::cout<<std::endl;
+        std::cout<<std::endl;
+        std::cout<<std::endl;
+        std::cout <<"         -------------------------                                            /%%%%%%"<<std::endl;
+        std::cout <<"         -------------------------                                          %%%%.  #%%%&"<<std::endl;
+        std::cout <<"       || Que voulez vous faire ?  ||                                    %%%%%        &%%%"<<std::endl ;
+        std::cout <<"       ||                          ||                                  &%%%%&#*,.  .*(%&%%%%*" <<std::endl;
+        std::cout <<"       ||   1. Dijkstra            ||                                &%%% /%            % *%%%*"<<std::endl;
+        std::cout <<"       ||   2. Tout chemin         ||                              %%%%     &%        &(    /%%%"<<std::endl;
+        std::cout <<"       ||   3. BFS                 ||                            .%%%.        %.    %&        &%%%"<<std::endl;
+        std::cout <<"       ||   4. BFS 2 sommet        ||                           %%%%           *%  %            %%%&"<<std::endl;
+        std::cout <<"       ||   5. Retour au menu      ||                         *%%%   ./%&&&%%%%%%%%%%%%%%&&&%(,  .%%%"<<std::endl;
+        std::cout <<"         -------------------------                           &%%%              #%  %               %%%("<<std::endl;
+        std::cout <<"         -------------------------                          %%%  %/           %     *%           %& #%%&"<<std::endl;
+        std::cout <<"                                                          .%%&    ,%        %#        &&        %     %%%"<<std::endl;
+        std::cout <<"                                                         *%%&       &(    %&            %     &&       %%%"<<std::endl;
+        std::cout <<"                                                        *%%&         .%  &               *%  %          %%%"<<std::endl;
+        std::cout <<"                                                       ,%%%      (&&%%%%&%%%%&&&&&&&&&&%%%%%%%%&@&*      %%%"<<std::endl;
+        std::cout <<"                                                       %%%&          %& .%               ,%  %          &#%%%"<<std::endl;
+        std::cout <<"                                                      %%%  %        %     &%            %/    (%        % (%%%"<<std::endl;
+        std::cout <<"                                                      #%%#  &&     %#        %         /%        &%     %.  &%%"<<std::endl;
+        std::cout <<"                                                      %%%    &/  %&           &&      %,           %   &(   .%%&"<<std::endl;
+        std::cout <<"                                                      %%%%%%&,%,%               %   %&              (%&/#&%%%%%%"<<std::endl;
+        std::cout <<"                                                           %%%%%%%%%%%%%&&%(*,.  &&%  ..,*#&&&%%%%%%%%%%%&#"<<std::endl;
+        std::cout <<"                                                            .*%&&%%%%%%%%%%%%%%%%%%&&#,"<<std::endl;
         do
-         {
-           do
-          {
-           std::cout <<" De quel sommet voulez vous partir ?"<<std::endl;
-           std::cin >>saisieSource;
-          }while(saisieSource<1);
-        }while(saisieSource>37);
-         source = nodes[saisieSource-1];
+        {
+            std::cin>>b;
+            fflush(stdin);
+            choix =b ;
+        }while(choix !=49 && choix !=50 && choix !=51 && choix !=52 && choix !=53);
 
-        AllShortestPast(graphDure, source, v);
 
-   break ;
+        switch(choix)
+        {
+            case 49 :
+            system("cls");
 
-   case 51:    ///dijkra sans le type de piste choisi
-       system("cls");
- do
-    {
-       do {
-           std::cout <<" De quel sommet voulez vous partir ?"<<std::endl;
-           std::cin >>saisieSource;
+            do
+            {
+                do
+                {
+                    std::cout <<" De quel sommet voulez vous partir ?"<<std::endl;
+                    std::cin >>saisieSource;
+                }while(saisieSource<1);
+            }while(saisieSource>37);
 
-           }while(saisieSource<1);
-   }while(saisieSource>37);
-   do{
-    do {
-          std::cout <<" Quel est le sommet d'arrive de votre choix ?"<<std::endl;
-    std::cin>> saisieFin;
-    }while(saisieFin<1);
-   }while(saisieFin>37);
-        source = nodes[saisieSource-1];
-        fin = nodes[saisieFin-1];
-        findShortestPaths(graphDure,source, v , fin);
-   break ;
+            do
+            {
+                do
+                {
+                    std::cout <<" Quel est le sommet d'arrive de votre choix ?"<<std::endl;
+                    std::cin>> saisieFin;
+                }while(saisieFin<1);
+            }while(saisieFin>37);
 
-   case 52 :   ///BFS d'un point a un autre
-    system("cls");
-    do
-    {
-       do {
-           std::cout <<" De quel sommet voulez vous partir ?"<<std::endl;
-           std::cin >>saisieSource;
+            source = nodes[saisieSource-1];
+            fin = nodes[saisieFin-1];
 
-           }while(saisieSource<1);
-   }while(saisieSource>37);
-   do{
-    do {
-          std::cout <<" Quel est le sommet d'arrive de votre choix ?"<<std::endl;
-    std::cin>> saisieFin;
-    }while(saisieFin<1);
-   }while(saisieFin>37);
+            findShortestPaths(graphDure,source, v , fin);
+            break ;
 
-    source = nodes[saisieSource-1];
-    fin = nodes[saisieFin-1];
+            case 50:
+            system("cls");
+            do
+            {
+                do
+                {
+                    std::cout <<" De quel sommet voulez vous partir ?"<<std::endl;
+                    std::cin >>saisieSource;
+                }while(saisieSource<1);
+            }while(saisieSource>37);
 
-   CheminBFS(graph.m_adjList, source,fin);
+            source = nodes[saisieSource-1];
+            AllShortestPast(graphDure, source, v);
 
-    break ;
+            break ;
 
-   }
-   system("cls");
+            case 51:    ///dijkra sans le type de piste choisi
+            system("cls");
+            do
+            {
+                do
+                {
+                    std::cout <<" De quel sommet voulez vous partir ?"<<std::endl;
+                    std::cin >>saisieSource;
+                }while(saisieSource<1);
+            }while(saisieSource>37);
+            do
+            {
+                do
+                {
+                    std::cout <<" Quel est le sommet d'arrive de votre choix ?"<<std::endl;
+                    std::cin>> saisieFin;
+                }while(saisieFin<1);
+            }while(saisieFin>37);
+            source = nodes[saisieSource-1];
+            fin = nodes[saisieFin-1];
+            findShortestPaths(graphDure,source, v , fin);
+            break ;
+
+            case 52 :   ///BFS d'un point a un autre
+            system("cls");
+            do
+            {
+                do
+                {
+                    std::cout <<" De quel sommet voulez vous partir ?"<<std::endl;
+                    std::cin >>saisieSource;
+
+                }while(saisieSource<1);
+            }while(saisieSource>37);
+            do
+            {
+                do
+                {
+                    std::cout <<" Quel est le sommet d'arrive de votre choix ?"<<std::endl;
+                    std::cin>> saisieFin;
+                }while(saisieFin<1);
+                }while(saisieFin>37);
+
+            source = nodes[saisieSource-1];
+            fin = nodes[saisieFin-1];
+
+            CheminBFS(graph.m_adjList, source,fin);
+
+            break ;
+        }
+        system("cls");
+
    }while(choix !=53);
 
 }
@@ -1346,107 +1335,102 @@ int menu ()
     do
     {
         std::cout<<""<<std::endl;
-std::cout<<""<<std::endl;
-std::cout<<""<<std::endl;
-std::cout<<""<<std::endl;
-std::cout<<""<<std::endl;
-    std::cout <<"         -------------------------                                            /%%%%%%"<<std::endl;
-    std::cout <<"         -------------------------                                          %%%%.  #%%%&"<<std::endl;
-    std::cout <<"       || Que voulez vous faire ?  ||                                    %%%%%        &%%%"<<std::endl ;
-    std::cout <<"       ||                          ||                                  &%%%%&#*,.  .*(%&%%%%*" <<std::endl;
-    std::cout <<"       ||   1. Maps                ||                                &%%% /%            % *%%%*"<<std::endl;
-    std::cout <<"       ||   2. Chemin speciaux     ||                              %%%%     &%        &(    /%%%"<<std::endl;
-    std::cout <<"       ||   3. ---                 ||                            .%%%.        %.    %&        &%%%"<<std::endl;
-    std::cout <<"       ||   4.Arret                ||                           %%%%           *%  %            %%%&"<<std::endl;
-    std::cout <<"         -------------------------                            *%%%   ./%&&&%%%%%%%%%%%%%%&&&%(,  .%%%"<<std::endl;
-    std::cout <<"         -------------------------                           &%%%              #%  %               %%%("<<std::endl;
-    std::cout <<"                                                             %%%  %/           %     *%           %& #%%&"<<std::endl;
-    std::cout <<"                                                           .%%&    ,%        %#        &&        %     %%%"<<std::endl;
-    std::cout <<"                                                          *%%&       &(    %&            %     &&       %%%"<<std::endl;
-    std::cout <<"                                                         *%%&         .%  &               *%  %          %%%"<<std::endl;
-    std::cout <<"                                                        ,%%%      (&&%%%%&%%%%&&&&&&&&&&%%%%%%%%&@&*      %%%"<<std::endl;
-    std::cout <<"                                                        %%%&          %& .%               ,%  %          &#%%%"<<std::endl;
-    std::cout <<"                                                       %%%  %        %     &%            %/    (%        % (%%%"<<std::endl;
-    std::cout <<"                                                      #%%#  &&     %#        %         /%        &%     %.  &%%"<<std::endl;
-    std::cout <<"                                                      %%%    &/  %&           &&      %,           %   &(   .%%&"<<std::endl;
-    std::cout <<"                                                      %%%%%%&,%,%               %   %&              (%&/#&%%%%%%"<<std::endl;
-    std::cout <<"                                                           %%%%%%%%%%%%%&&%(*,.  &&%  ..,*#&&&%%%%%%%%%%%&#"<<std::endl;
-    std::cout <<"                                                                     .*%&&%%%%%%%%%%%%%%%%%%&&#,"<<std::endl;
+        std::cout<<std::endl;
+        std::cout<<std::endl;
+        std::cout<<std::endl;
+        std::cout<<std::endl;
+        std::cout <<"         -------------------------                                            /%%%%%%"<<std::endl;
+        std::cout <<"         -------------------------                                          %%%%.  #%%%&"<<std::endl;
+        std::cout <<"       || Que voulez vous faire ?  ||                                    %%%%%        &%%%"<<std::endl ;
+        std::cout <<"       ||                          ||                                  &%%%%&#*,.  .*(%&%%%%*" <<std::endl;
+        std::cout <<"       ||   1. Maps                ||                                &%%% /%            % *%%%*"<<std::endl;
+        std::cout <<"       ||   2. Chemin speciaux     ||                              %%%%     &%        &(    /%%%"<<std::endl;
+        std::cout <<"       ||   3. ---                 ||                            .%%%.        %.    %&        &%%%"<<std::endl;
+        std::cout <<"       ||   4.Arret                ||                           %%%%           *%  %            %%%&"<<std::endl;
+        std::cout <<"         -------------------------                            *%%%   ./%&&&%%%%%%%%%%%%%%&&&%(,  .%%%"<<std::endl;
+        std::cout <<"         -------------------------                           &%%%              #%  %               %%%("<<std::endl;
+        std::cout <<"                                                             %%%  %/           %     *%           %& #%%&"<<std::endl;
+        std::cout <<"                                                           .%%&    ,%        %#        &&        %     %%%"<<std::endl;
+        std::cout <<"                                                          *%%&       &(    %&            %     &&       %%%"<<std::endl;
+        std::cout <<"                                                         *%%&         .%  &               *%  %          %%%"<<std::endl;
+        std::cout <<"                                                        ,%%%      (&&%%%%&%%%%&&&&&&&&&&%%%%%%%%&@&*      %%%"<<std::endl;
+        std::cout <<"                                                        %%%&          %& .%               ,%  %          &#%%%"<<std::endl;
+        std::cout <<"                                                       %%%  %        %     &%            %/    (%        % (%%%"<<std::endl;
+        std::cout <<"                                                      #%%#  &&     %#        %         /%        &%     %.  &%%"<<std::endl;
+        std::cout <<"                                                      %%%    &/  %&           &&      %,           %   &(   .%%&"<<std::endl;
+        std::cout <<"                                                      %%%%%%&,%,%               %   %&              (%&/#&%%%%%%"<<std::endl;
+        std::cout <<"                                                           %%%%%%%%%%%%%&&%(*,.  &&%  ..,*#&&&%%%%%%%%%%%&#"<<std::endl;
+        std::cout <<"                                                                     .*%&&%%%%%%%%%%%%%%%%%%&&#,"<<std::endl;
+        do
+        {
 
+            std::cin>>b;
+            fflush(stdin);
+            choix =b ;
+        }while(choix !=49 && choix !=50 && choix !=51 && choix !=52 );
 
-   do
-   {
+        switch(choix)
+        {
+            case 49:
+                system("cls");
+                TrouverLeCheminLePlusCourt();
+            break ;
 
-      std::cin>>b;
-      fflush(stdin);
-      choix =b ;
-   }while(choix !=49 && choix !=50 && choix !=51 && choix !=52 );
+            case 50:
+                system("cls");
+                TrouverLeCheminLePlusCourtSpecial(s);
+            break ;
 
-   switch(choix)
-   {
-   case 49:
-       system("cls");
+            case 51:
+                system("cls");
+                std:: cout<<" cam " << std::endl ;
+                return 4 ;
+            break ;
 
-TrouverLeCheminLePlusCourt();
-   break ;
+            case 52:
+                exit(1);
+            break;
+        }
 
-   case 50:
-       system("cls");
-   TrouverLeCheminLePlusCourtSpecial(s);
-
-   break ;
-
-   case 51:
-       system("cls");
-   std:: cout<<" cam " << std::endl ;
-return 4 ;
-   break ;
-
-   case 52:
-   exit(1);
-   break;
-
-
-   }
-
-  }while(choix !=52 );
-return -1 ;
+    }while(choix !=52 );
+    return -1 ;
 }
 
 
 int main(int argc, char** argv)
 {
-     system("color F0");
+    system("color F0");
     int a;
-     do
+    do
     {
-       a = menu();
-     }while (a!=4);
-      if (a==4)
-       {
+        a = menu();
+    }while (a!=4);
+
+    if (a==4)
+    {
         cv::VideoCapture cap(0); //capture the video from web cam
         if (!cap.isOpened()) // if not success, exit program
         {
           return -1;
         }
-              cv::Mat imgTmp;
-             cap.read(imgTmp);
-             cv::Mat imgLines = cv::Mat::zeros(imgTmp.size(), CV_8UC3);
-            while (true)
+        cv::Mat imgTmp;
+        cap.read(imgTmp);
+        cv::Mat imgLines = cv::Mat::zeros(imgTmp.size(), CV_8UC3);
+        while (true)
+        {
+            cv::Mat imgRetourCam;
+            bool bSuccess = cap.read(imgRetourCam); // read a new frame from video
+            if (!bSuccess) //recommencer la vidéo
             {
-             cv::Mat imgRetourCam;
-                bool bSuccess = cap.read(imgRetourCam); // read a new frame from video
-                if (!bSuccess) //recommencer la vidéo
-                {
-                 cap.set(cv::CAP_PROP_POS_FRAMES, 0);
-                 cap.read(imgRetourCam);
-                }
-               cv::namedWindow("Original", cv::WINDOW_NORMAL);
-               cv::imshow("Original", imgRetourCam); //show the original image
-                if (cv::waitKey(1) == 27)
-                break;
+                cap.set(cv::CAP_PROP_POS_FRAMES, 0);
+                cap.read(imgRetourCam);
             }
+            cv::namedWindow("Original", cv::WINDOW_NORMAL);
+            cv::imshow("Original", imgRetourCam); //show the original image
+            if (cv::waitKey(1) == 27)
+                break;
         }
+    }
 
     return 0;
 }
