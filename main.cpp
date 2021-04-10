@@ -227,12 +227,13 @@ void sauvegardeParam(Skieur& s)
     }
 }
 
+
 void choixParam(Skieur& s)
 {
     std::string choix;
     char cond = false;
     std::string newParam1;
-    std::string newParam2;
+    char newParam2;
     do{
 
         std::cout << " voulez vous modifier vos preferences ? 1 : oui / 2 : non " << std::endl;
@@ -248,7 +249,7 @@ void choixParam(Skieur& s)
     }while(cond == false);
 
     std::string choix1;
-    std::string choix2;
+    char choix2;
     bool cond1 = false;
     bool cond2 = false;
 
@@ -282,9 +283,34 @@ void choixParam(Skieur& s)
     int secu;
          do
             {
-            std::cout << "Entrez  ( B ) pour 1. eviter les pistes bleues "<< std::endl;
-            std::cout << "Entrez  ( R ) pour 2. eviter les pistes rouges "<< std::endl;
-            std::cout << "Entrez  ( N ) pour 3. eviter les pistes noires "<< std::endl;
+                    std::cout<<""<<std::endl;
+    std::cout<<""<<std::endl;
+    std::cout<<""<<std::endl;
+    std::cout<<""<<std::endl;
+    std::cout<<""<<std::endl;
+    std::cout <<"         ------------------------------                                     /%%%%%%"<<std::endl;
+    std::cout <<"         ------------------------------                                   %%%%.  #%%%&"<<std::endl;
+    std::cout <<"       || Que voulez vous faire ?      ||                               %%%%%        &%%%"<<std::endl ;
+    std::cout <<"       ||                              ||                             &%%%%&#*,.  .*(%&%%%%*" <<std::endl;
+    std::cout <<"       ||   1.Eviter les pistes bleues ||                           &%%% /%            % *%%%*"<<std::endl;
+    std::cout <<"       ||   2.Eviter les pistes rouges ||                          %%%%     &%        &(    /%%%"<<std::endl;
+    std::cout <<"       ||   3.Eviter les pistes noires ||                        .%%%.        %.    %&        &%%%"<<std::endl;
+    std::cout <<"       ||   4. Ne rien eviter          ||                       %%%%           *%  %            %%%&"<<std::endl;
+    std::cout <<"         ------------------------------                       *%%%   ./%&&&%%%%%%%%%%%%%%&&&%(,  .%%%"<<std::endl;
+    std::cout <<"         ------------------------------                      &%%%              #%  %               %%%("<<std::endl;
+    std::cout <<"                                                            %%%  %/           %     *%           %& #%%&"<<std::endl;
+    std::cout <<"                                                          .%%&    ,%        %#        &&        %     %%%"<<std::endl;
+    std::cout <<"                                                         *%%&       &(    %&            %     &&       %%%"<<std::endl;
+    std::cout <<"                                                        *%%&         .%  &               *%  %          %%%"<<std::endl;
+    std::cout <<"                                                       ,%%%      (&&%%%%&%%%%&&&&&&&&&&%%%%%%%%&@&*      %%%"<<std::endl;
+    std::cout <<"                                                       %%%&          %& .%               ,%  %          &#%%%"<<std::endl;
+    std::cout <<"                                                      %%%  %        %     &%            %/    (%        % (%%%"<<std::endl;
+    std::cout <<"                                                      #%%#  &&     %#        %         /%        &%     %.  &%%"<<std::endl;
+    std::cout <<"                                                      %%%    &/  %&           &&      %,           %   &(   .%%&"<<std::endl;
+    std::cout <<"                                                      %%%%%%&,%,%               %   %&              (%&/#&%%%%%%"<<std::endl;
+    std::cout <<"                                                           %%%%%%%%%%%%%&&%(*,.  &&%  ..,*#&&&%%%%%%%%%%%&#"<<std::endl;
+    std::cout <<"                                                                     .*%&&%%%%%%%%%%%%%%%%%%&&#,"<<std::endl;
+          
             std::cout <<std::endl;
             std::cout <<std::endl;
            // std::cin >> choix2;
@@ -293,18 +319,22 @@ void choixParam(Skieur& s)
             std::cin>>b;
             fflush(stdin);
             secu =b ;
-            }while(secu!=49 && secu!=50 && secu !=51 );
+            }while(secu!=49 && secu!=50 && secu !=51 && secu !=52 );
        switch(secu)
        {
        case 49:
-           choix2="B";
+           choix2=66;
         break;
         case 50:
-           choix2="R";
+           choix2=82;
         break;
         case 51:
-           choix2="N";
+           choix2=78;
         break;
+        case 52:
+           choix2=79;
+        break;
+
 
        }
     s.setParam2(choix2);
@@ -317,6 +347,7 @@ void choixParam(Skieur& s)
          return;
     }
 }
+
 /// -----------------------------------------------------------------------------------------------------------------------------
 void print_route(std::vector<int> const &prev, int i, std::vector<Edge> crossedEdge)
 {
