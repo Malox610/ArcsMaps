@@ -42,10 +42,11 @@ Skieur creationProfil()
 void archivageProfil(Skieur s) // Ecriture (sauvegarde) dans un fichier le pseudo et le mdp de l'utilisateur
 {
     std::string const fichierProfil("compte.txt");
-
     std::ofstream monFlux(fichierProfil.c_str(), std::ios::app);
     monFlux << s.getPseudo() << std::endl;
     monFlux << s.getMdp() << std::endl;
+    monFlux << s.getParam1()<< std::endl;
+    monFlux << s.getParam2()<< std::endl;
 }
 
 std::string saisiePseudo()
@@ -85,7 +86,7 @@ bool verifFichier(std::string _pseudo, std::string _mdp) // vérifier que le com
         Id.push_back(ligne);
     }
 
-    while( (i <= Id.size()-1) ) // Affchage du vector
+    while( (i <= Id.size()-1) )
     {
 
         if (_pseudo == Id[i] && _mdp == Id[i+1])
@@ -95,6 +96,7 @@ bool verifFichier(std::string _pseudo, std::string _mdp) // vérifier que le com
 
         i+=2;
     }
+    fichierProfil.close();
      return false;
 }
 
@@ -128,7 +130,7 @@ bool Selection() // savoir si l'utilisateur veut se connecter ou créer un compt
 
 }
 
-Skieur connexionPage(Skieur s) // on vérifie si le pseudo du joueur correspond a son mot de passe ou on lui créer un compte si il n'en possede pas (appel de la fonction créationProfil)
+Skieur connexionPage(Skieur& s) // on vérifie si le pseudo du joueur correspond a son mot de passe ou on lui créer un compte si il n'en possede pas (appel de la fonction créationProfil)
 {
     int a = 1;
 
@@ -175,6 +177,143 @@ void afficherSkieur(Skieur s)
     std::cout << std::endl;
     Sleep(500);
      std::system("cls");
+}
+
+void sauvegardeParam(Skieur& s)
+{
+    std::cout << "HELLOOOOOOOO" << std::endl;
+
+    std::string const nomFichier("compte.txt");
+    std::ifstream monFlux1(nomFichier);
+    std::string ligne;
+    std::vector<std::string> Id;
+    std::cout<< "lecture fichier en entier" <<std::endl;
+    while(getline(monFlux1, ligne))
+    {
+
+        std::cout<< ligne <<std::endl;
+        Id.push_back(ligne);
+    }
+    for(int i = 0; i < Id.size(); i++)
+    {
+        std::cout << Id[i] << std::endl;
+    }
+    monFlux1.close();
+
+    std::cout<< "param 1 ; " << s.getParam1() << "  param 2 : " << s.getParam2()<< " pseudo : " << s.getPseudo() << std::endl;
+    std::cout<<std::endl;
+
+    for(int i = 0; i < Id.size(); i++)
+    {
+
+
+        if(Id[i] == s.getPseudo())
+        {
+            std::cout<< "im in the if" <<std::endl;
+
+            Id[i+2] = s.getParam1();
+            Id[i+3] = s.getParam2();
+             std::cout<< "id2 : " << Id[i+2] << "  id 3 : " << Id[i+3]<<std::endl;
+        }
+    }
+    for(int i = 0; i < Id.size(); i++)
+    {
+        std::cout << Id[i] << std::endl;
+    }
+
+
+    std::ofstream monFlux2(nomFichier.c_str());
+    for(int i = 0; i < Id.size(); i++)
+    {
+        monFlux2 << Id[i] << std::endl;
+    }
+
+
+
+
+}
+
+void choixParam(Skieur& s)
+{
+    std::string choix;
+    bool cond = false;
+    std::string newParam1;
+    std::string newParam2;
+    std::cout << "zeeeeeeeeeeeeeeeebiiiiiiiiiiii" <<std::endl;
+
+    do{
+
+        std::cout << " voulez vous modifier vos preferences ? 1 : oui / 2 : non " << std::endl;
+        std::cin >> choix;
+        if(choix == "1" || choix == "2")
+        {
+            cond = true;
+        }
+        else
+            cond = false;
+
+
+    }while(cond = false);
+
+    std::string choix1;
+    std::string choix2;
+    bool cond1 = false;
+    bool cond2 = false;
+
+    if(choix == "1")
+    {
+        do {
+            std::cout << "Entrez  ( 1 ) si vous souhaiter eviter les remontes et profiter au maximum des pistes et ( 0 ) si non : " << std::endl;
+            std::cout <<std::endl;
+            std::cout <<std::endl;
+            std::cin >> choix1;
+            std::cout <<std::endl;
+            std::cout <<std::endl;
+            if(choix1 == "1" || choix1 == "0")
+                cond1 = true;
+
+        }while(cond1 = false);
+
+        if(choix1 == "1" )
+        {
+            newParam1 = "1";
+            s.setParam1(newParam1);
+        }
+        else
+        {
+            newParam1 = "0";
+            s.setParam1(newParam1);
+        }
+
+        do {
+            std::cout << "Entrez  ( B ) pour eviter les pistes bleues "<< std::endl;
+            std::cout << "Entrez  ( R ) pour eviter les pistes rouges "<< std::endl;
+            std::cout << "Entrez  ( N ) pour eviter les pistes noires "<< std::endl;
+            std::cout <<std::endl;
+            std::cout <<std::endl;
+            std::cin >> choix2;
+            std::cout <<std::endl;
+            std::cout <<std::endl;
+            if(choix2 == "B" || choix2 == "R"|| choix2 == "N")
+                cond2 = true;
+
+        }while(cond2 = false);
+
+        s.setParam2(choix2);
+
+        std::cout<< "param 1 ; " << s.getParam1() << "  param 2 : " << s.getParam2()<<std::endl;
+        sauvegardeParam(s);
+
+        return;
+
+
+    }
+    else
+    {
+         return;
+    }
+
+
 }
 
 /// -----------------------------------------------------------------------------------------------------------------------------
@@ -743,7 +882,8 @@ void AdjListBFS(std::vector< std::vector<Edge> > adjList, Node start)
     system("cls");
 
     }
-   void TrouverLeCheminLePlusCourt()
+    
+void TrouverLeCheminLePlusCourt()
 {
 
 
@@ -901,7 +1041,9 @@ int menu ()
     int choix ;
     char b ;
      Skieur s;
+    Skieur s;
     afficherSkieur(connexionPage(s));
+    choixParam(s);
     std::cout<<""<<std::endl;
     do
     {
