@@ -13,6 +13,173 @@
 #include "Graphe.h"
 #include "Edge.h"
 #include "Node.h"
+#include "Skieur.h"
+
+/// Partie creation/connexion profil
+
+Skieur creationProfil()
+{
+
+    Skieur s;
+    std::string _pseudo;
+    std::string _mdp;
+    std::cout << std::endl;
+    std::cout << "---------- Bienvenue nous allons creer votre profil ----------" << std::endl;
+    std::cout << std::endl;
+    std::cout << "Veuillez entrer le pseudo de votre choix : " << std::endl;
+    std::cout << std::endl;
+    std::cin >> _pseudo;
+    s.setPseudo(_pseudo);
+    std::cout << std::endl;
+    std::cout << "Veuillez a present creer un mot de passe : " << std::endl;
+    std::cout << std::endl;
+    std::cin >> _mdp;
+
+    s.setMdp(_mdp);
+
+    return s;
+}
+
+void archivageProfil(Skieur s) // Ecriture (sauvegarde) dans un fichier le pseudo et le mdp de l'utilisateur
+{
+    std::string const fichierProfil("compte.txt");
+
+    std::ofstream monFlux(fichierProfil.c_str(), std::ios::app);
+    monFlux << s.getPseudo() << std::endl;
+    monFlux << s.getMdp() << std::endl;
+}
+
+std::string saisiePseudo()
+{
+    std::string _pseudo;
+    std::cout << "                            ";
+    std::cout << "Veuillez saisir votre pseudo : " << std::endl;
+    std::cout << "                            ";
+    std::cin >> _pseudo;
+    std::cout<<std::endl;
+    return _pseudo;
+}
+
+std::string saisieMdp()
+{
+    std::string _mdp;
+    std::cout << "                            ";
+    std::cout << "Veuillez saisir votre mot de passe : " <<std::endl;
+    std::cout << "                            ";
+    std::cin >> _mdp;
+
+    return _mdp;
+}
+
+bool verifFichier(std::string _pseudo, std::string _mdp) // vérifier que le compte de l'utilisateur existe
+{
+
+    int i = 0;
+    std::ifstream fichierProfil("compte.txt"); // ouverture du fichier en lectuer
+
+    std::vector<std::string> Id;
+
+    std::string ligne;
+
+    while(getline(fichierProfil, ligne)) // remplissage du vector : ligne par ligne (une ligne dans une case)
+    {
+        Id.push_back(ligne);
+    }
+
+    while( (i <= Id.size()-1) ) // Affchage du vector
+    {
+
+        if (_pseudo == Id[i] && _mdp == Id[i+1])
+        {
+            return true;
+        }
+
+        i+=2;
+    }
+     return false;
+}
+
+bool Selection() // savoir si l'utilisateur veut se connecter ou créer un compte
+{
+    bool cond;
+
+    int a = 0;
+    char b;
+
+    do
+    {
+        std::cout << "                            ";
+        std::cout << "Bonjour, pour vous connecter entrez : 1 , " << std::endl;
+        std::cout << "                            ";
+        std::cout << "Pour creer un compte entrez : 2"<< std::endl;
+       std::cout<<std::endl;
+        std::cout << "                            ";
+        std::cin >> b;
+        std::cout<<std::endl;
+        a=b;
+         fflush(stdin);
+    }while(a!=49 && a!=50);
+
+    if(a == 49)
+        cond = true;
+    else
+        cond = false;
+
+    return cond;
+
+}
+
+Skieur connexionPage(Skieur s) // on vérifie si le pseudo du joueur correspond a son mot de passe ou on lui créer un compte si il n'en possede pas (appel de la fonction créationProfil)
+{
+    int a = 1;
+
+    if (Selection() == true)
+    {
+
+
+        do
+        {
+            s.setPseudo(saisiePseudo());
+            s.setMdp(saisieMdp());
+            std::string pseudo= s.getPseudo() ;
+            std::string mdp = s.getMdp();
+            if (verifFichier(pseudo ,mdp ) != true)
+            {
+                a=1;
+                std::cout<<std::endl;
+                std::cout << "                            ";
+                std::cout << "Erreur d'authentification, veuillez reessayer ! " << std::endl;
+
+            }
+            else
+            {
+                 a = 0;
+                return s;
+            }
+
+        }while(a != 0);
+    }
+    else
+    {
+        s = creationProfil();
+        archivageProfil(s);
+        return s;
+    }
+return s ;
+}
+
+void afficherSkieur(Skieur s)
+{
+    std::cout<<std::endl;
+    std::cout << "                            ";
+    std::cout << s.getPseudo() <<" Est connecte(e) " <<std::endl;
+    std::cout << std::endl;
+    Sleep(500);
+     std::system("cls");
+}
+
+/// -----------------------------------------------------------------------------------------------------------------------------
+
 
 void print_route(std::vector<int> const &prev, int i, std::vector<Edge> crossedEdge)
 {
@@ -108,13 +275,13 @@ struct comp
 
 std::vector<Edge> EdgesTxt(std::vector<Node> nodes )
 {
-std::vector<Edge> edges;
-Node start;
-Node finish;
- int v1;//
+    std::vector<Edge> edges;
+    Node start;
+    Node finish;
+    int v1;//
     int v2;//
     int weight;//
-     int num;///
+    int num;///
     char edgeType;//
     std::string edgeName;//
 
@@ -149,7 +316,7 @@ Node finish;
                     edge.setWeight((4*weight)/100);
                     break ;
 
-                    case 76 : //piste kilometre lance
+                    case 76 : //piste kilpùetre lance
                     edge.setWeight((0.16*weight)/100);
                     break ;
 
@@ -212,7 +379,7 @@ std::vector<Node> nodesTxt(int *v)
 
     flxPoints >> *v; // premiere ligne du texte  = nombre de sommet
     //std::cout << v << std::endl;
-    while(flxPoints)  /// on creer la liste d'adjacence grace au valeur recuperees dans le fichier
+    while(flxPoints)  /// on creer la liste d'adjacence grace au valeur r�cup�r�es dans le fichier
     {
             flxPoints >> vertex >> nodeName >> alt;
             Node sommet(vertex, nodeName, alt);
@@ -409,13 +576,12 @@ void findShortestPaths(Graph const &graph, Node source, int v, Node fin, std::ve
       p=c;
     }while(p!=49);
     system("cls");
-
 }
 
 // Given an Adjacency List, do a BFS on vertex "start"
 
 void AdjListBFS(std::vector< std::vector<Edge> > adjList, Node start)
-    {
+{
     std::cout << "Doing a BFS on an adjacency list : ";
 
     int n = adjList.size();
@@ -467,8 +633,10 @@ void AdjListBFS(std::vector< std::vector<Edge> > adjList, Node start)
     }while(p!=49);
     system("cls");
 
-    }
-   void TrouverLeCheminLePlusCourt()
+}
+
+
+void TrouverLeCheminLePlusCourt()
 {
 
 
@@ -596,10 +764,16 @@ void AdjListBFS(std::vector< std::vector<Edge> > adjList, Node start)
    }while(choix !=52);
 
 }
+
+
+
 int menu ()
 {
     int choix ;
     char b ;
+    Skieur s;
+    afficherSkieur(connexionPage(s));
+
     std::cout<<""<<std::endl;
     do
     {
@@ -613,7 +787,7 @@ std::cout<<""<<std::endl;
     std::cout <<"       || Que voulez vous faire ?  ||                                    %%%%%        &%%%"<<std::endl ;
     std::cout <<"       ||                          ||                                  &%%%%&#*,.  .*(%&%%%%*" <<std::endl;
     std::cout <<"       ||   1. Maps                ||                                &%%% /%            % *%%%*"<<std::endl;
-    std::cout <<"       ||   2. Chemins speciaux     ||                              %%%%     &%        &(    /%%%"<<std::endl;
+    std::cout <<"       ||   2. Chemins speciaux    ||                              %%%%     &%        &(    /%%%"<<std::endl;
     std::cout <<"       ||   3. ---                 ||                            .%%%.        %.    %&        &%%%"<<std::endl;
     std::cout <<"       ||   4.Arret                ||                           %%%%           *%  %            %%%&"<<std::endl;
     std::cout <<"         -------------------------                            *%%%   ./%&&&%%%%%%%%%%%%%%&&&%(,  .%%%"<<std::endl;
@@ -711,3 +885,4 @@ int main(int argc, char** argv)
 
     return 0;
 }
+
