@@ -227,13 +227,12 @@ void sauvegardeParam(Skieur& s)
     }
 }
 
-
 void choixParam(Skieur& s)
 {
     std::string choix;
     char cond = false;
     std::string newParam1;
-    char newParam2;
+
     do{
 
         std::cout << " voulez vous modifier vos preferences ? 1 : oui / 2 : non " << std::endl;
@@ -310,7 +309,7 @@ void choixParam(Skieur& s)
     std::cout <<"                                                      %%%%%%&,%,%               %   %&              (%&/#&%%%%%%"<<std::endl;
     std::cout <<"                                                           %%%%%%%%%%%%%&&%(*,.  &&%  ..,*#&&&%%%%%%%%%%%&#"<<std::endl;
     std::cout <<"                                                                     .*%&&%%%%%%%%%%%%%%%%%%&&#,"<<std::endl;
-          
+
             std::cout <<std::endl;
             std::cout <<std::endl;
            // std::cin >> choix2;
@@ -347,7 +346,6 @@ void choixParam(Skieur& s)
          return;
     }
 }
-
 /// -----------------------------------------------------------------------------------------------------------------------------
 void print_route(std::vector<int> const &prev, int i, std::vector<Edge> crossedEdge)
 {
@@ -442,7 +440,7 @@ struct comp
     }
 };
 
-std::vector<Edge> EdgesTxt(std::vector<Node> nodes )
+std::vector<Edge> EdgesTxt(std::vector<Node> nodes)
 {
 std::vector<Edge> edges;
 Node start;
@@ -453,15 +451,13 @@ Node finish;
      int num;///
     char edgeType;//
     std::string edgeName;//
-
     std::ifstream flxEdges("data_arcs.txt"); // ouverture du fichier arcs
 
     while(flxEdges)
     {
         flxEdges >> num >> edgeName >> edgeType >> v1 >> v2;
-        //std::cout << num << "  " << edgeName << "  "  << edgeType << "  " << v1 << "  " << v2 <<std::endl;
 
-        start = nodes[v1-1];
+            start = nodes[v1-1];
 
         finish = nodes[v2-1];
         Edge edge(start, finish, weight);
@@ -529,6 +525,8 @@ Node finish;
         edge.setNum(num);
         edges.push_back(edge);
 
+
+
     }
     int taille = edges.size();
     for(int i = 0; i < taille; i++)
@@ -538,8 +536,7 @@ Node finish;
     std::cout<<""<<std::endl;
 return edges;
 }
-
-std::vector<Edge> EdgesTxtSpe(std::vector<Node> nodes )
+std::vector<Edge> EdgesTxtEx(std::vector<Node> nodes,Skieur s)
 {
 std::vector<Edge> edges;
 Node start;
@@ -550,15 +547,15 @@ Node finish;
      int num;///
     char edgeType;//
     std::string edgeName;//
-
+    char pisteEnleve=s.getParam2();
     std::ifstream flxEdges("data_arcs.txt"); // ouverture du fichier arcs
 
     while(flxEdges)
     {
         flxEdges >> num >> edgeName >> edgeType >> v1 >> v2;
-        //std::cout << num << "  " << edgeName << "  "  << edgeType << "  " << v1 << "  " << v2 <<std::endl;
-
-        start = nodes[v1-1];
+        if(edgeType!=pisteEnleve)
+        {
+            start = nodes[v1-1];
 
         finish = nodes[v2-1];
         Edge edge(start, finish, weight);
@@ -570,7 +567,7 @@ Node finish;
                 mario = k;
                 switch(mario)
                 { ///piste
-                    case 78 : //piste noir
+                   case 78 : //piste noir
                     edge.setWeight((2*weight)/100);
                     break ;
 
@@ -592,49 +589,53 @@ Node finish;
 
                     ///remonte mecanique
                      case 75 : //teleski
-                    edge.setWeight(((2000*weight)/100)+1);
+                    edge.setWeight(((20000*weight)/100)+1);
                     break ;
 
                       case 83 : //telesiege
-                    edge.setWeight(((2000*weight)/100)+1);
+                    edge.setWeight(((20000*weight)/100)+1);
                     break ;
 
                      case 68 : //telesiege debrayable
-                    edge.setWeight(((1500*weight)/100)+1);
+                    edge.setWeight(((15000*weight)/100)+1);
                     break ;
 
                      case 67 : //telecabine
-                    edge.setWeight(((1500*weight)/100)+2);
+                    edge.setWeight(((15000*weight)/100)+2);
                     break ;
 
                      case 80 : //telepherique
-                    edge.setWeight(((1000*weight)/100)+4);
+                    edge.setWeight(((10000*weight)/100)+4);
                     break ;
 
                 }
                 if((start.getName()=="arc1600"||start.getName()=="arc2000") && (finish.getName()=="arc1600"|| finish.getName()=="arc2000"))
                 {
-                    edge.setWeight(40);
+                    edge.setWeight(400);
                 }
                   if((start.getName()=="arc1600"||start.getName()=="arc1800") && (finish.getName()=="arc1600"|| finish.getName()=="arcarc1800"))
                 {
-                    edge.setWeight(30);
+                    edge.setWeight(300);
                 }
 
 
         edge.setNom(edgeName);
         edge.setNum(num);
         edges.push_back(edge);
+        }
+
 
     }
-     int taille =  edges.size();
+    int taille = edges.size();
     for(int i = 0; i < taille; i++)
     {
         edges[i].afficher();
     }
-    std::cout<<std::endl;
+    std::cout<<""<<std::endl;
 return edges;
 }
+
+
 
 
 std::vector<Node> nodesTxt(int *v)
@@ -780,7 +781,7 @@ void AllShortestPast(Graph const &graph, Node source, int v) /// Dijkstra tous l
 }
 
 
-void findShortestPaths(Graph const &graph,Graph const &graphDure, Node source, int v, Node fin ) /// Dijkstra plus court chemins choix du depart + arrivee
+void findShortestPaths(Graph const &graph, Node source, int v, Node fin ) /// Dijkstra plus court chemins choix du depart + arrivee
 {
 
     // prendre la source comme arrete = 0
@@ -1110,7 +1111,7 @@ void TrouverLeCheminLePlusCourt()
     source = nodes[saisieSource-1];
     fin = nodes[saisieFin-1];
 
-    findShortestPaths(graph, graphDure,source, v , fin);
+    findShortestPaths(graphDure,source, v , fin);
 
     break ;
 
@@ -1176,7 +1177,7 @@ void TrouverLeCheminLePlusCourt()
 
 }
 
-void TrouverLeCheminLePlusCourtSpecial()
+void TrouverLeCheminLePlusCourtSpecial(Skieur s)
 {
 
 
@@ -1192,14 +1193,13 @@ void TrouverLeCheminLePlusCourtSpecial()
     Node source ;
     Node fin ;
 
-
     nodes = nodesTxt(&v);
+
     edges = EdgesTxt(nodes);
-    edgesDure = EdgesTxtSpe(nodes);
+    edgesDure = EdgesTxtEx(nodes,s);
+
     Graph graph(edges, 95);
     Graph graphDure(edgesDure, 95);
-    //edges.push_back({v1,v2,poids});
-    // construct graph
 
    int choix ;
     char b ;
@@ -1207,7 +1207,7 @@ void TrouverLeCheminLePlusCourtSpecial()
     do
     {
     std::cout<<" special"<<std::endl;
-    std::cout<<""<<std::endl;
+  std::cout<<""<<std::endl;
     std::cout<<""<<std::endl;
     std::cout<<""<<std::endl;
     std::cout<<""<<std::endl;
@@ -1233,7 +1233,7 @@ void TrouverLeCheminLePlusCourtSpecial()
     std::cout <<"                                                      %%%    &/  %&           &&      %,           %   &(   .%%&"<<std::endl;
     std::cout <<"                                                      %%%%%%&,%,%               %   %&              (%&/#&%%%%%%"<<std::endl;
     std::cout <<"                                                           %%%%%%%%%%%%%&&%(*,.  &&%  ..,*#&&&%%%%%%%%%%%&#"<<std::endl;
-    std::cout <<"                                                                     .*%&&%%%%%%%%%%%%%%%%%%&&#,"<<std::endl;
+    std::cout <<"                                                            .*%&&%%%%%%%%%%%%%%%%%%&&#,"<<std::endl;
    do
    {
       std::cin>>b;
@@ -1246,6 +1246,7 @@ void TrouverLeCheminLePlusCourtSpecial()
    {
    case 49 :
     system("cls");
+
     do
     {
        do {
@@ -1264,13 +1265,11 @@ void TrouverLeCheminLePlusCourtSpecial()
     source = nodes[saisieSource-1];
     fin = nodes[saisieFin-1];
 
-    findShortestPaths(graph, graphDure,source, v , fin);
-
+    findShortestPaths(graphDure,source, v , fin);
     break ;
 
     case 50:
-       system("cls");
-
+    system("cls");
         do
          {
            do
@@ -1281,26 +1280,32 @@ void TrouverLeCheminLePlusCourtSpecial()
         }while(saisieSource>37);
          source = nodes[saisieSource-1];
 
-        AllShortestPast(graph, source, v);
+        AllShortestPast(graphDure, source, v);
 
    break ;
 
-   case 51:
+   case 51:    ///dijkra sans le type de piste choisi
        system("cls");
-       do
-         {
-         do
-          {
+ do
+    {
+       do {
            std::cout <<" De quel sommet voulez vous partir ?"<<std::endl;
            std::cin >>saisieSource;
-          }while(saisieSource<1);
-        }while(saisieSource>37);
 
+           }while(saisieSource<1);
+   }while(saisieSource>37);
+   do{
+    do {
+          std::cout <<" Quel est le sommet d'arrive de votre choix ?"<<std::endl;
+    std::cin>> saisieFin;
+    }while(saisieFin<1);
+   }while(saisieFin>37);
         source = nodes[saisieSource-1];
-        AdjListBFS(graph.m_adjList, source);
+        fin = nodes[saisieFin-1];
+        findShortestPaths(graphDure,source, v , fin);
    break ;
 
-   case 52 :
+   case 52 :   ///BFS d'un point a un autre
     system("cls");
     do
     {
@@ -1387,7 +1392,7 @@ TrouverLeCheminLePlusCourt();
 
    case 50:
        system("cls");
-   TrouverLeCheminLePlusCourtSpecial();
+   TrouverLeCheminLePlusCourtSpecial(s);
 
    break ;
 
