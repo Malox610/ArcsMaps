@@ -17,7 +17,7 @@ std::string Skieur::getParam1()
     return m_param1;
 }
 
-std::string Skieur::getParam2()
+char Skieur::getParam2()
 {
     return m_param2;
 }
@@ -37,7 +37,7 @@ void Skieur::setParam1(std::string newParam1)
     m_param1 = newParam1;
 }
 
-void Skieur::setParam2(std::string newParam2)
+void Skieur::setParam2(char newParam2)
 {
     m_param2 = newParam2;
 }
