@@ -13,7 +13,8 @@ private :
 
 public :
 
-
+    Skieur();
+    ~Skieur();
     std::string getPseudo();
     std::string getMdp();
     std::string getParam1();
