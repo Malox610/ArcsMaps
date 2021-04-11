@@ -2,12 +2,14 @@
 #include "Node.h"
 #include <iostream>
 
-Edge::Edge(Node _source, Node _dest, int _weight): m_source(_source), m_dest(_dest), m_weight(_weight)
-{}
 
 Edge::Edge()
 {
 
+}
+
+Edge::Edge(Node _source, Node _dest, int _weight): m_source(_source), m_dest(_dest), m_weight(_weight)
+{
 }
 
 int Edge::getNum() const
