@@ -567,25 +567,25 @@ void findShortestPaths(Graph const &graph, Node source, int v, Node fin ) /// Di
 }
 
 
-// Given an Adjacency List, do a BFS on vertex "start" and on vertex "finish"
+// Avec une liste d'adjacence , faire un BFS a partir d'un sommetde depart jusqu'a un sommet de fin
 void CheminBFS(std::vector< std::vector<Edge> > adjList, Node start,Node finish)
 {
     std::cout << "Chemin : ";
     int n = adjList.size();
 
-    // Create a "visited" array (true or false) to keep track of if we visited a vertex.
+    // Cree un tableau de boolean pour les sommet deja visite pour garder une trace de quel sommet a ete visite
     bool visited[n] = { false };
     std::vector<int>ListeSommet;
 
-    // Create a queue for the nodes we visit.
+    //  cree un une queue pour stocker les sommet
     std::queue<Node> q;
 
-    // Add the starting vertex to the queue and mark it as visited.
+    //mettre en premier point de la queue le sommet de depart et le marque comme visite
     q.push(start);
     visited[start.getVertex()] = true;
     int fin = 0;
 
-    // While the queue is not empty..
+    // tant que la queue contient un sommmet et qu'elle n'a pas rencontre le sommet de fin
     while(q.empty() == false && fin!=1)
     {
         Node ver = q.front();
@@ -593,11 +593,11 @@ void CheminBFS(std::vector< std::vector<Edge> > adjList, Node start,Node finish)
         ListeSommet.push_back(vertex);
         q.pop();
 
-        // Loop through all of it's friends.
+        // boucle pour connaitre tout ses voisin
         int taille = adjList[vertex].size();
         for(int i = 0; i <taille ; i++)
         {
-            // If the friend hasn't been visited yet, add it to the queue and mark it as visited
+
             Node neighbor = adjList[vertex][i].getDest();
             if (vertex!=finish.getVertex())
             {
@@ -628,37 +628,36 @@ void CheminBFS(std::vector< std::vector<Edge> > adjList, Node start,Node finish)
     system("cls");
 }
 
-// Given an Adjacency List, do a BFS on vertex "start"
+// Avec une liste d'adjacence , faire un BFS a partir d'un sommet de depart
 void AdjListBFS(std::vector< std::vector<Edge> > adjList, Node start)
 {
     std::cout << "Tout les sommets ateignable dans l'ordre croissant : ";
     int n = adjList.size();
 
-    // Create a "visited" array (true or false) to keep track of if we visited a vertex.
+     // Cree un tableau de boolean pour les sommet deja visite pour garder une trace de quel sommet a ete visite
     bool visited[n] = { false };
 
-    // Create a queue for the nodes we visit.
+     // cree un une queue pour stocker les sommet
     std::queue<Node> q;
 
-    // Add the starting vertex to the queue and mark it as visited.
+    //mettre en premier point de la queue le sommet de depart et le marque comme visite
     q.push(start);
     visited[start.getVertex()] = true;
 
-    // While the queue is not empty..
+    // tant que la queue contient un sommmet
     while(q.empty() == false)
     {
         Node ver = q.front();
         int vertex=ver.getVertex();
         q.pop();
 
-        // Doing +1 in the cout because our graph is 1-based indexing, but our code is 0-based.
         std::cout << vertex << " ";
 
-        // Loop through all of it's friends.
+       // boucle pour connaitre tout ses voisin
         int taille = adjList[vertex].size();
         for(int i = 0; i <taille ; i++)
         {
-            // If the friend hasn't been visited yet, add it to the queue and mark it as visited
+           //Si le voisin d'a pas encore ete visite on le rentre dans la queue et on le marque comme visite
             Node neighbor = adjList[vertex][i].getDest();
 
             if(visited[neighbor.getVertex()] == false)
