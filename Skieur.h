@@ -22,7 +22,7 @@ public :
     void setPseudo(std::string _pseudo);
     void setMdp(std::string _mdp);
     void setParam1(std::string newParam1);
-    void setParam2(char newParam2);
+    void setParam2(std::string newParam2);
     void afficher();
     void afficherSkieur();
     void sauvegardeParam();
