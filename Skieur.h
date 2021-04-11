@@ -23,6 +23,14 @@ public :
     void setParam1(std::string newParam1);
     void setParam2(char newParam2);
     void afficher();
+    void afficherSkieur();
+    void sauvegardeParam();
+    void choixParam();
+    void archivageProfil();
+    void creationProfil();
+    bool verifFichier(std::string _pseudo, std::string _mdp); // vérifier que le compte de l'utilisateur existe
+    void connexionPage();
+
 
 };
 
