@@ -16,327 +16,7 @@
 #include "Node.h"
 #include "Skieur.h"
 
-Skieur creationProfil()
-{
 
-    Skieur s;
-    std::string _pseudo;
-    std::string _mdp;
-    std::cout << std::endl;
-    std::cout << "---------- Bienvenue nous allons creer votre profil ----------" << std::endl;
-    std::cout << std::endl;
-    std::cout << "Veuillez entrer le pseudo de votre choix : " << std::endl;
-    std::cout << std::endl;
-    std::cin >> _pseudo;
-    s.setPseudo(_pseudo);
-    std::cout << std::endl;
-    std::cout << "Veuillez a present creer un mot de passe : " << std::endl;
-    std::cout << std::endl;
-    std::cin >> _mdp;
-
-    s.setMdp(_mdp);
-
-    return s;
-}
-
-void archivageProfil(Skieur s) // Ecriture (sauvegarde) dans un fichier le pseudo et le mdp de l'utilisateur
-{
-    std::string const fichierProfil("compte.txt");
-    std::ofstream monFlux(fichierProfil.c_str(), std::ios::app);
-    monFlux << s.getPseudo() << std::endl;
-    monFlux << s.getMdp() << std::endl;
-    monFlux << s.getParam1()<< std::endl;
-    monFlux << s.getParam2()<< std::endl;
-}
-
-std::string saisiePseudo()
-{
-    std::string _pseudo;
-    std::cout << "                            ";
-    std::cout << "Veuillez saisir votre pseudo : " << std::endl;
-    std::cout << "                            ";
-    std::cin >> _pseudo;
-    std::cout<<std::endl;
-    return _pseudo;
-}
-
-std::string saisieMdp()
-{
-    std::string _mdp;
-    std::cout << "                            ";
-    std::cout << "Veuillez saisir votre mot de passe : " <<std::endl;
-    std::cout << "                            ";
-    std::cin >> _mdp;
-
-    return _mdp;
-}
-
-bool verifFichier(std::string _pseudo, std::string _mdp) // vérifier que le compte de l'utilisateur existe
-{
-
-    int i = 0;
-    std::ifstream fichierProfil("compte.txt"); // ouverture du fichier en lectuer
-
-    std::vector<std::string> Id;
-
-    std::string ligne;
-
-    while(getline(fichierProfil, ligne)) // remplissage du vector : ligne par ligne (une ligne dans une case)
-    {
-        Id.push_back(ligne);
-    }
-int taille =Id.size();
-    while( (i <= taille-1) )
-    {
-
-        if (_pseudo == Id[i] && _mdp == Id[i+1])
-        {
-            return true;
-        }
-
-        i+=2;
-    }
-    fichierProfil.close();
-     return false;
-}
-
-bool Selection() // savoir si l'utilisateur veut se connecter ou créer un compte
-{
-    bool cond;
-
-    int a = 0;
-    char b;
-
-    do
-    {
-        std::cout << "                            ";
-        std::cout << "Bonjour, pour vous connecter entrez : 1 , " << std::endl;
-        std::cout << "                            ";
-        std::cout << "Pour creer un compte entrez : 2"<< std::endl;
-       std::cout<<std::endl;
-        std::cout << "                            ";
-        std::cin >> b;
-        std::cout<<std::endl;
-        a=b;
-         fflush(stdin);
-    }while(a!=49 && a!=50);
-
-    if(a == 49)
-        cond = true;
-    else
-        cond = false;
-
-    return cond;
-
-}
-
-Skieur connexionPage(Skieur& s) // on vérifie si le pseudo du joueur correspond a son mot de passe ou on lui créer un compte si il n'en possede pas (appel de la fonction créationProfil)
-{
-    int a = 1;
-
-    if (Selection() == true)
-    {
-
-
-        do
-        {
-            s.setPseudo(saisiePseudo());
-            s.setMdp(saisieMdp());
-            std::string pseudo= s.getPseudo() ;
-            std::string mdp = s.getMdp();
-            if (verifFichier(pseudo ,mdp ) != true)
-            {
-                a=1;
-                std::cout<<std::endl;
-                std::cout << "                            ";
-                std::cout << "Erreur d'authentification, veuillez reessayer ! " << std::endl;
-
-            }
-            else
-            {
-                 a = 0;
-                return s;
-            }
-
-        }while(a != 0);
-    }
-    else
-    {
-        s = creationProfil();
-        archivageProfil(s);
-        return s;
-    }
-return s ;
-}
-
-void afficherSkieur(Skieur s)
-{
-    std::cout<<std::endl;
-    std::cout << "                            ";
-    std::cout << s.getPseudo() <<" Est connecte(e) " <<std::endl;
-    std::cout << std::endl;
-    Sleep(1000);
-     std::system("cls");
-}
-
-void sauvegardeParam(Skieur& s)
-{
-    std::string const nomFichier("compte.txt");
-    std::ifstream monFlux1(nomFichier);
-    std::string ligne;
-    std::vector<std::string> Id;
-    while(getline(monFlux1, ligne))
-    {
-        Id.push_back(ligne);
-    }
-
-    monFlux1.close();
-
-    std::cout<< "vos parametre actuel sont "<< s.getParam2()<<std::endl;
-    int taille1=Id.size();
-    for(int i = 0; i < taille1; i++)
-    {
-
-        if(Id[i] == s.getPseudo())
-        {
-            Id[i+2] = s.getParam1();
-            Id[i+3] = s.getParam2();
-
-        }
-    }
-    /*
-     int taille2=Id.size();
-    for(int i = 0; i < taille2; i++)
-    {
-        std::cout << Id[i] << std::endl;
-    }*/
-
-
-    std::ofstream monFlux2(nomFichier.c_str());
-    int taille3=Id.size();
-    for(int i = 0; i < taille3; i++)
-    {
-        monFlux2 << Id[i] << std::endl;
-    }
-}
-
-void choixParam(Skieur& s)
-{
-    std::string choix;
-    char cond = false;
-    std::string newParam1;
-
-    do{
-
-        std::cout << " voulez vous modifier vos preferences ? 1 : oui / 2 : non " << std::endl;
-        std::cin >> choix;
-        if(choix == "1" || choix == "2")
-        {
-            cond = true;
-        }
-        else
-            cond = false;
-
-
-    }while(cond == false);
-
-    std::string choix1;
-    char choix2;
-    bool cond1 = false;
-    bool cond2 = false;
-
-    if(choix == "1")
-    {
-        do {
-            std::cout << "Entrez  ( 1 ) si vous souhaiter eviter les remontes et profiter au maximum des pistes et ( 0 ) si non : " << std::endl;
-            std::cout <<std::endl;
-            std::cout <<std::endl;
-            std::cin >> choix1;
-            std::cout <<std::endl;
-            std::cout <<std::endl;
-            if(choix1 == "1" || choix1 == "0")
-                cond1 = true;
-
-        }while(cond1 == false);
-
-        if(choix1 == "1" )
-        {
-            newParam1 = "1";
-            s.setParam1(newParam1);
-            cond2=true;
-        }
-        else
-        {
-            newParam1 = "0";
-            s.setParam1(newParam1);
-        }
-    if (cond2==(true))
-    { char b;
-    int secu;
-    do
-    {
-        std::cout<<std::endl;
-        std::cout<<std::endl;
-        std::cout<<std::endl;
-        std::cout<<std::endl;
-        std::cout<<std::endl;
-        std::cout <<"         ------------------------------                                     /%%%%%%"<<std::endl;
-        std::cout <<"         ------------------------------                                   %%%%.  #%%%&"<<std::endl;
-        std::cout <<"       || Que voulez vous faire ?      ||                               %%%%%        &%%%"<<std::endl ;
-        std::cout <<"       ||                              ||                             &%%%%&#*,.  .*(%&%%%%*" <<std::endl;
-        std::cout <<"       ||   1.Eviter les pistes bleues ||                           &%%% /%            % *%%%*"<<std::endl;
-        std::cout <<"       ||   2.Eviter les pistes rouges ||                          %%%%     &%        &(    /%%%"<<std::endl;
-        std::cout <<"       ||   3.Eviter les pistes noires ||                        .%%%.        %.    %&        &%%%"<<std::endl;
-        std::cout <<"       ||   4. Ne rien eviter          ||                       %%%%           *%  %            %%%&"<<std::endl;
-        std::cout <<"         ------------------------------                       *%%%   ./%&&&%%%%%%%%%%%%%%&&&%(,  .%%%"<<std::endl;
-        std::cout <<"         ------------------------------                      &%%%              #%  %               %%%("<<std::endl;
-        std::cout <<"                                                            %%%  %/           %     *%           %& #%%&"<<std::endl;
-        std::cout <<"                                                          .%%&    ,%        %#        &&        %     %%%"<<std::endl;
-        std::cout <<"                                                         *%%&       &(    %&            %     &&       %%%"<<std::endl;
-        std::cout <<"                                                        *%%&         .%  &               *%  %          %%%"<<std::endl;
-        std::cout <<"                                                       ,%%%      (&&%%%%&%%%%&&&&&&&&&&%%%%%%%%&@&*      %%%"<<std::endl;
-        std::cout <<"                                                       %%%&          %& .%               ,%  %          &#%%%"<<std::endl;
-        std::cout <<"                                                      %%%  %        %     &%            %/    (%        % (%%%"<<std::endl;
-        std::cout <<"                                                      #%%#  &&     %#        %         /%        &%     %.  &%%"<<std::endl;
-        std::cout <<"                                                      %%%    &/  %&           &&      %,           %   &(   .%%&"<<std::endl;
-        std::cout <<"                                                      %%%%%%&,%,%               %   %&              (%&/#&%%%%%%"<<std::endl;
-        std::cout <<"                                                           %%%%%%%%%%%%%&&%(*,.  &&%  ..,*#&&&%%%%%%%%%%%&#"<<std::endl;
-        std::cout <<"                                                                     .*%&&%%%%%%%%%%%%%%%%%%&&#,"<<std::endl;
-        std::cout <<std::endl;
-        std::cout <<std::endl;
-        std::cout<<std::endl;
-        std::cout<<std::endl;
-        std::cin>>b;
-        fflush(stdin);
-        secu =b ;
-    }while(secu!=49 && secu!=50 && secu !=51 && secu !=52 );
-    switch(secu)
-    {
-       case 49:
-           choix2=66;
-        break;
-        case 50:
-           choix2=82;
-        break;
-        case 51:
-           choix2=78;
-        break;
-        case 52:
-           choix2=79;
-        break;
-
-
-    }
-    s.setParam2(choix2);
-    }
-        sauvegardeParam(s);
-        return;
-    }
-    else
-    {
-         return;
-    }
-}
 
 /// -----------------------------------------------------------------------------------------------------------------------------
 
@@ -639,7 +319,7 @@ std::vector<Node> nodesTxt(int *v)
 
     flxPoints >> *v; // premiere ligne du texte  = nombre de sommet
 
-    while(flxPoints)  /// on creer la liste d'adjacence grace au valeur r�cup�r�es dans le fichier
+    while(flxPoints)  /// on creer la liste d'adjacence grace au valeur recuperees dans le fichier
     {
         flxPoints >> vertex >> nodeName >> alt;
         Node sommet(vertex, nodeName, alt);
@@ -730,7 +410,14 @@ void AllShortestPast(Graph const &graph, Node source, int v) /// Dijkstra tous l
             std::cout << std::endl;
             std::cout << std::endl;
             std::cout << "Chemin (" << source.getName() << " --> " << i << "): Temps estime = " << dist[i] <<" min"<< std::endl;
-            std::cout << "  Heure d'arrive estimee a : " <<heure << "h"<<  minEstime;
+           if(minEstime<10)
+           {
+                std::cout << "  Heure d'arrive estimee a : " <<heure << "h0"<<  minEstime;
+           }
+           else
+           {
+                 std::cout << "  Heure d'arrive estimee a : " <<heure << "h"<<  minEstime;
+           }
             std::cout << std::endl;
             std::cout << std::endl;
             std::cout << "           ------------------------------------------------------------" << std::endl;
@@ -883,25 +570,25 @@ void findShortestPaths(Graph const &graph, Node source, int v, Node fin ) /// Di
 }
 
 
-// Given an Adjacency List, do a BFS on vertex "start" and on vertex "finish"
+ // Donne la liste d'adjacence d'un BFS sur un sommet de depart et un sommet de fin
 void CheminBFS(std::vector< std::vector<Edge> > adjList, Node start,Node finish)
 {
     std::cout << "Chemin : ";
     int n = adjList.size();
 
-    // Create a "visited" array (true or false) to keep track of if we visited a vertex.
+// creation d,un tableau de boolean pour faire une liste des sommet deja visite
     bool visited[n] = { false };
     std::vector<int>ListeSommet;
 
-    // Create a queue for the nodes we visit.
+   // creation d'une file pour les sommet qu'om visite 
     std::queue<Node> q;
 
-    // Add the starting vertex to the queue and mark it as visited.
+  // ajout du point de depart dans la file et le marque comme visite 
     q.push(start);
     visited[start.getVertex()] = true;
     int fin = 0;
 
-    // While the queue is not empty..
+   // Tant que la queue n'est pas vide et qu'on est pa sarrive au point de fin 
     while(q.empty() == false && fin!=1)
     {
         Node ver = q.front();
@@ -909,11 +596,11 @@ void CheminBFS(std::vector< std::vector<Edge> > adjList, Node start,Node finish)
         ListeSommet.push_back(vertex);
         q.pop();
 
-        // Loop through all of it's friends.
+        // faire une boucle sur tout ses voisins 
         int taille = adjList[vertex].size();
         for(int i = 0; i <taille ; i++)
         {
-            // If the friend hasn't been visited yet, add it to the queue and mark it as visited
+         // Si le voisin n'a pas ete encore visite , ajout a la liste et le marque comme vue
             Node neighbor = adjList[vertex][i].getDest();
             if (vertex!=finish.getVertex())
             {
@@ -944,37 +631,37 @@ void CheminBFS(std::vector< std::vector<Edge> > adjList, Node start,Node finish)
     system("cls");
 }
 
-// Given an Adjacency List, do a BFS on vertex "start"
+// Donne la liste d'adjacence d'un BFS sur un sommet de depart
 void AdjListBFS(std::vector< std::vector<Edge> > adjList, Node start)
 {
     std::cout << "Tout les sommets ateignable dans l'ordre croissant : ";
     int n = adjList.size();
 
-    // Create a "visited" array (true or false) to keep track of if we visited a vertex.
+    // creation d,un tableau de boolean pour faire une liste des sommet deja visite
     bool visited[n] = { false };
 
-    // Create a queue for the nodes we visit.
+    // creation d'une file pour les sommet qu'om visite 
     std::queue<Node> q;
 
-    // Add the starting vertex to the queue and mark it as visited.
+    // ajout du point de depart dans la file et le marque comme visite 
     q.push(start);
     visited[start.getVertex()] = true;
 
-    // While the queue is not empty..
+    // Tant que la queue n'est pas vide
     while(q.empty() == false)
     {
         Node ver = q.front();
         int vertex=ver.getVertex();
         q.pop();
 
-        // Doing +1 in the cout because our graph is 1-based indexing, but our code is 0-based.
+      
         std::cout << vertex << " ";
 
-        // Loop through all of it's friends.
+        // faire une boucle sur tout ses voisins 
         int taille = adjList[vertex].size();
         for(int i = 0; i <taille ; i++)
         {
-            // If the friend hasn't been visited yet, add it to the queue and mark it as visited
+            // Si le voisin n'a pas ete encore visite , ajout a la liste et le marque comme vue 
             Node neighbor = adjList[vertex][i].getDest();
 
             if(visited[neighbor.getVertex()] == false)
@@ -1329,8 +1016,8 @@ int menu ()
     int choix ;
     char b ;
     Skieur s;
-    afficherSkieur(connexionPage(s));
-    choixParam(s);
+    s.connexionPage();
+   s.choixParam();
     std::cout<<""<<std::endl;
     do
     {
@@ -1419,14 +1106,14 @@ int main(int argc, char** argv)
         while (true)
         {
             cv::Mat imgRetourCam;
-            bool bSuccess = cap.read(imgRetourCam); // read a new frame from video
+            bool bSuccess = cap.read(imgRetourCam); // lire une nouvelle image de la cam
             if (!bSuccess) //recommencer la vidéo
             {
                 cap.set(cv::CAP_PROP_POS_FRAMES, 0);
                 cap.read(imgRetourCam);
             }
             cv::namedWindow("Original", cv::WINDOW_NORMAL);
-            cv::imshow("Original", imgRetourCam); //show the original image
+            cv::imshow("Original", imgRetourCam); //ouvrir une fenetre avec la video
             if (cv::waitKey(1) == 27)
                 break;
         }
