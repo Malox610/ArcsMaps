@@ -458,11 +458,9 @@ void findShortestPaths(Graph const &graph, Node source, int v, Node fin ) /// Di
 
     // mettre la distnace initial pour la source a l'infini
      std::vector<int> dist(v, INT_MAX);
-     std::vector<int> dure(v, INT_MAX);
 
     //distnace de la source a elle meme a 0
     dist[source.getVertex()] = 0;
-    dure[source.getVertex()] = 0;
 
     // tableau de boolean pour traquer les sommets pour trouver le chemin minimum pour chaque chemin
     std::vector<bool> done(v, false);
@@ -489,7 +487,6 @@ void findShortestPaths(Graph const &graph, Node source, int v, Node fin ) /// Di
             if (!done[v] && (dist[u] + weight) < dist[v])
             {
                 dist[v] = dist[u] + weight;
-                dure[v]=dure[u]+weight;
                 prev[v] = u;
                 min_heap.push({v," v ", dist[v]});
                 crossedEdge.push_back(i);
@@ -510,7 +507,7 @@ void findShortestPaths(Graph const &graph, Node source, int v, Node fin ) /// Di
             tm *ltm = localtime(&actuel);
             int heure =ltm->tm_hour ;
             int minute =ltm->tm_min ;
-            int tempsTrajet =dure[i];
+            int tempsTrajet =dist[i];
             int minEstime =minute+tempsTrajet ;
             do
             {
@@ -1010,10 +1007,10 @@ int menu ()
         std::cout <<"       ||   1. Maps                ||                                &%%% /%            % *%%%*"<<std::endl;
         std::cout <<"       ||   2. Chemin speciaux     ||                              %%%%     &%        &(    /%%%"<<std::endl;
         std::cout <<"       ||   3. LiveCam             ||                            .%%%.        %.    %&        &%%%"<<std::endl;
-        std::cout <<"       ||   4.Arret                ||                           %%%%           *%  %            %%%&"<<std::endl;
-        std::cout <<"         -------------------------                            *%%%   ./%&&&%%%%%%%%%%%%%%&&&%(,  .%%%"<<std::endl;
-        std::cout <<"         -------------------------                           &%%%              #%  %               %%%("<<std::endl;
-        std::cout <<"                                                             %%%  %/           %     *%           %& #%%&"<<std::endl;
+        std::cout <<"       ||   4. Contact             ||                           %%%%           *%  %            %%%&"<<std::endl;
+        std::cout <<"       ||   5. Quittez             ||                          *%%%   ./%&&&%%%%%%%%%%%%%%&&&%(,  .%%%"<<std::endl;
+        std::cout <<"         -------------------------                            &%%%              #%  %               %%%("<<std::endl;
+        std::cout <<"         -------------------------                           %%%  %/           %     *%           %& #%%&"<<std::endl;
         std::cout <<"                                                           .%%&    ,%        %#        &&        %     %%%"<<std::endl;
         std::cout <<"                                                          *%%&       &(    %&            %     &&       %%%"<<std::endl;
         std::cout <<"                                                         *%%&         .%  &               *%  %          %%%"<<std::endl;
@@ -1031,7 +1028,7 @@ int menu ()
             std::cin>>b;
             fflush(stdin);
             choix =b ;
-        }while(choix !=49 && choix !=50 && choix !=51 && choix !=52 );
+        }while(choix !=49 && choix !=50 && choix !=51 && choix !=52 && choix !=53 );
 
         switch(choix)
         {
@@ -1052,11 +1049,21 @@ int menu ()
             break ;
 
             case 52:
+               system("cls");
+               std::cout <<"                            Domaine skiable"<<std::endl;
+               std::cout <<"                                LES ARCS    "<<std::endl;
+               std::cout <<"                    Chalet des Villards - Arc 1800"<<std::endl;
+               std::cout <<"                        73700 Les Arcs - France"<<std::endl;
+               std::cout <<"                      Tel. +33 (0)4 79 04 24 00"<<std::endl;
+
+            break;
+
+            case 53:
                 exit(1);
             break;
         }
 
-    }while(choix !=52 );
+    }while(choix !=53 );
     return -1 ;
 }
 
