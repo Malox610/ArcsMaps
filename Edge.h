@@ -19,7 +19,6 @@ public:
 
       Edge();
       Edge(Node _source, Node _dest, int _weight);
-
       int getNum() const;
       Node getSource ()const;
       Node getDest ()const;
