@@ -319,7 +319,7 @@ std::vector<Node> nodesTxt(int *v)
 
     flxPoints >> *v; // premiere ligne du texte  = nombre de sommet
 
-    while(flxPoints)  /// on creer la liste d'adjacence grace au valeur recuperees dans le fichier
+    while(flxPoints)  /// on creer la liste d'adjacence grace au valeur r�cup�r�es dans le fichier
     {
         flxPoints >> vertex >> nodeName >> alt;
         Node sommet(vertex, nodeName, alt);
@@ -570,25 +570,25 @@ void findShortestPaths(Graph const &graph, Node source, int v, Node fin ) /// Di
 }
 
 
- // Donne la liste d'adjacence d'un BFS sur un sommet de depart et un sommet de fin
+// Given an Adjacency List, do a BFS on vertex "start" and on vertex "finish"
 void CheminBFS(std::vector< std::vector<Edge> > adjList, Node start,Node finish)
 {
     std::cout << "Chemin : ";
     int n = adjList.size();
 
-// creation d,un tableau de boolean pour faire une liste des sommet deja visite
+    // Create a "visited" array (true or false) to keep track of if we visited a vertex.
     bool visited[n] = { false };
     std::vector<int>ListeSommet;
 
-   // creation d'une file pour les sommet qu'om visite 
+    // Create a queue for the nodes we visit.
     std::queue<Node> q;
 
-  // ajout du point de depart dans la file et le marque comme visite 
+    // Add the starting vertex to the queue and mark it as visited.
     q.push(start);
     visited[start.getVertex()] = true;
     int fin = 0;
 
-   // Tant que la queue n'est pas vide et qu'on est pa sarrive au point de fin 
+    // While the queue is not empty..
     while(q.empty() == false && fin!=1)
     {
         Node ver = q.front();
@@ -596,11 +596,11 @@ void CheminBFS(std::vector< std::vector<Edge> > adjList, Node start,Node finish)
         ListeSommet.push_back(vertex);
         q.pop();
 
-        // faire une boucle sur tout ses voisins 
+        // Loop through all of it's friends.
         int taille = adjList[vertex].size();
         for(int i = 0; i <taille ; i++)
         {
-         // Si le voisin n'a pas ete encore visite , ajout a la liste et le marque comme vue
+            // If the friend hasn't been visited yet, add it to the queue and mark it as visited
             Node neighbor = adjList[vertex][i].getDest();
             if (vertex!=finish.getVertex())
             {
@@ -631,37 +631,37 @@ void CheminBFS(std::vector< std::vector<Edge> > adjList, Node start,Node finish)
     system("cls");
 }
 
-// Donne la liste d'adjacence d'un BFS sur un sommet de depart
+// Given an Adjacency List, do a BFS on vertex "start"
 void AdjListBFS(std::vector< std::vector<Edge> > adjList, Node start)
 {
     std::cout << "Tout les sommets ateignable dans l'ordre croissant : ";
     int n = adjList.size();
 
-    // creation d,un tableau de boolean pour faire une liste des sommet deja visite
+    // Create a "visited" array (true or false) to keep track of if we visited a vertex.
     bool visited[n] = { false };
 
-    // creation d'une file pour les sommet qu'om visite 
+    // Create a queue for the nodes we visit.
     std::queue<Node> q;
 
-    // ajout du point de depart dans la file et le marque comme visite 
+    // Add the starting vertex to the queue and mark it as visited.
     q.push(start);
     visited[start.getVertex()] = true;
 
-    // Tant que la queue n'est pas vide
+    // While the queue is not empty..
     while(q.empty() == false)
     {
         Node ver = q.front();
         int vertex=ver.getVertex();
         q.pop();
 
-      
+        // Doing +1 in the cout because our graph is 1-based indexing, but our code is 0-based.
         std::cout << vertex << " ";
 
-        // faire une boucle sur tout ses voisins 
+        // Loop through all of it's friends.
         int taille = adjList[vertex].size();
         for(int i = 0; i <taille ; i++)
         {
-            // Si le voisin n'a pas ete encore visite , ajout a la liste et le marque comme vue 
+            // If the friend hasn't been visited yet, add it to the queue and mark it as visited
             Node neighbor = adjList[vertex][i].getDest();
 
             if(visited[neighbor.getVertex()] == false)
@@ -886,9 +886,9 @@ void TrouverLeCheminLePlusCourtSpecial(Skieur s)
         std::cout <<"       ||                          ||                                  &%%%%&#*,.  .*(%&%%%%*" <<std::endl;
         std::cout <<"       ||   1. Dijkstra            ||                                &%%% /%            % *%%%*"<<std::endl;
         std::cout <<"       ||   2. Tout chemin         ||                              %%%%     &%        &(    /%%%"<<std::endl;
-        std::cout <<"       ||   3. BFS                 ||                            .%%%.        %.    %&        &%%%"<<std::endl;
-        std::cout <<"       ||   4. BFS 2 sommet        ||                           %%%%           *%  %            %%%&"<<std::endl;
-        std::cout <<"       ||   5. Retour au menu      ||                         *%%%   ./%&&&%%%%%%%%%%%%%%&&&%(,  .%%%"<<std::endl;
+        std::cout <<"       ||   3. BFS 2 sommet        ||                            .%%%.        %.    %&        &%%%"<<std::endl;
+        std::cout <<"       ||   4. Retour au menu      ||                           %%%%           *%  %            %%%&"<<std::endl;
+        std::cout <<"       ||                          ||                         *%%%   ./%&&&%%%%%%%%%%%%%%&&&%(,  .%%%"<<std::endl;
         std::cout <<"         -------------------------                           &%%%              #%  %               %%%("<<std::endl;
         std::cout <<"         -------------------------                          %%%  %/           %     *%           %& #%%&"<<std::endl;
         std::cout <<"                                                          .%%&    ,%        %#        &&        %     %%%"<<std::endl;
@@ -907,7 +907,7 @@ void TrouverLeCheminLePlusCourtSpecial(Skieur s)
             std::cin>>b;
             fflush(stdin);
             choix =b ;
-        }while(choix !=49 && choix !=50 && choix !=51 && choix !=52 && choix !=53);
+        }while(choix !=49 && choix !=50 && choix !=51 && choix !=52 );
 
 
         switch(choix)
@@ -955,31 +955,8 @@ void TrouverLeCheminLePlusCourtSpecial(Skieur s)
 
             break ;
 
-            case 51:    ///dijkra sans le type de piste choisi
-            system("cls");
-            do
-            {
-                do
-                {
-                    std::cout <<" De quel sommet voulez vous partir ?"<<std::endl;
-                    std::cin >>saisieSource;
-                }while(saisieSource<1);
-            }while(saisieSource>37);
-            do
-            {
-                do
-                {
-                    std::cout <<" Quel est le sommet d'arrive de votre choix ?"<<std::endl;
-                    std::cin>> saisieFin;
-                }while(saisieFin<1);
-            }while(saisieFin>37);
-            source = nodes[saisieSource-1];
-            fin = nodes[saisieFin-1];
-            findShortestPaths(graphDure,source, v , fin);
-            break ;
-
-            case 52 :   ///BFS d'un point a un autre
-            system("cls");
+            case 51:    ///BFS d'un point a un autre
+               system("cls");
             do
             {
                 do
@@ -1004,10 +981,11 @@ void TrouverLeCheminLePlusCourtSpecial(Skieur s)
             CheminBFS(graph.m_adjList, source,fin);
 
             break ;
+
         }
         system("cls");
 
-   }while(choix !=53);
+   }while(choix !=52);
 
 }
 
@@ -1016,8 +994,7 @@ int menu ()
     int choix ;
     char b ;
     Skieur s;
-    s.connexionPage();
-   s.choixParam();
+
     std::cout<<""<<std::endl;
     do
     {
@@ -1032,7 +1009,7 @@ int menu ()
         std::cout <<"       ||                          ||                                  &%%%%&#*,.  .*(%&%%%%*" <<std::endl;
         std::cout <<"       ||   1. Maps                ||                                &%%% /%            % *%%%*"<<std::endl;
         std::cout <<"       ||   2. Chemin speciaux     ||                              %%%%     &%        &(    /%%%"<<std::endl;
-        std::cout <<"       ||   3. ---                 ||                            .%%%.        %.    %&        &%%%"<<std::endl;
+        std::cout <<"       ||   3. LiveCam             ||                            .%%%.        %.    %&        &%%%"<<std::endl;
         std::cout <<"       ||   4.Arret                ||                           %%%%           *%  %            %%%&"<<std::endl;
         std::cout <<"         -------------------------                            *%%%   ./%&&&%%%%%%%%%%%%%%&&&%(,  .%%%"<<std::endl;
         std::cout <<"         -------------------------                           &%%%              #%  %               %%%("<<std::endl;
@@ -1070,7 +1047,7 @@ int menu ()
 
             case 51:
                 system("cls");
-                std:: cout<<" cam " << std::endl ;
+
                 return 4 ;
             break ;
 
@@ -1106,14 +1083,14 @@ int main(int argc, char** argv)
         while (true)
         {
             cv::Mat imgRetourCam;
-            bool bSuccess = cap.read(imgRetourCam); // lire une nouvelle image de la cam
+            bool bSuccess = cap.read(imgRetourCam); // read a new frame from video
             if (!bSuccess) //recommencer la vidéo
             {
                 cap.set(cv::CAP_PROP_POS_FRAMES, 0);
                 cap.read(imgRetourCam);
             }
             cv::namedWindow("Original", cv::WINDOW_NORMAL);
-            cv::imshow("Original", imgRetourCam); //ouvrir une fenetre avec la video
+            cv::imshow("Original", imgRetourCam); //show the original image
             if (cv::waitKey(1) == 27)
                 break;
         }
