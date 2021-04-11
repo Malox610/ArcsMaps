@@ -3,8 +3,18 @@
 #include <string>
 #include <windows.h>
 #include <fstream>
+#include <sstream>
 #include <vector>
 
+Skieur::Skieur()
+{
+    connexionPage();
+    choixParam();
+}
+Skieur::~Skieur()
+{
+
+}
 std::string Skieur::getPseudo()
 {
     return m_pseudo;
@@ -43,6 +53,7 @@ void Skieur::setParam1(std::string newParam1)
 void Skieur::setParam2(char newParam2)
 {
     m_param2 = newParam2;
+
 }
 
 
@@ -88,10 +99,9 @@ void Skieur::sauvegardeParam()
     monFlux1.close();
 
     std::cout<< "vos parametre actuel sont "<< getParam2()<<std::endl;
-    int taille1=Id.size();
-    for(int i = 0; i < taille1; i++)
-    {
-
+    int taille=Id.size();
+    for(int i = 0; i < taille; i++)
+    { ///plante dans cette boucle si c'est pas jps comme pseudo mais sauvegarde quand meme donc au lancement suivant on a la piste choisi quand ca a crash
         if(Id[i] == getPseudo())
         {
             Id[i+2] = getParam1();
@@ -99,10 +109,12 @@ void Skieur::sauvegardeParam()
 
         }
     }
+
     std::ofstream monFlux2(nomFichier.c_str());
-    int taille3=Id.size();
-    for(int i = 0; i < taille3; i++)
+
+    for(int i = 0; i < taille; i++)
     {
+         std::cout <<"bonjour 3 " ;
         monFlux2 << Id[i] << std::endl;
     }
 }
@@ -114,7 +126,7 @@ void Skieur::choixParam()
     std::string newParam1;
 
     do{
-
+        //std::cout<<" Votre preference actuel est : " << getParam2()<<std::endl;
         std::cout << " voulez vous modifier vos preferences ? 1 : oui / 2 : non " << std::endl;
         std::cin >> choix;
         if(choix == "1" || choix == "2")
@@ -157,12 +169,12 @@ void Skieur::choixParam()
             newParam1 = "0";
             setParam1(newParam1);
         }
-    if (cond2==(true))
-    {
-char b;
-    int secu;
-    do
-    {
+     if (cond2==(true))
+     {
+      char b;
+     int secu;
+      do
+      {
         std::cout<<std::endl;
         std::cout<<std::endl;
         std::cout<<std::endl;
@@ -197,9 +209,9 @@ char b;
         std::cin>>b;
         fflush(stdin);
         secu =b ;
-    }while(secu!=49 && secu!=50 && secu !=51 && secu !=52 );
-    switch(secu)
-    {
+      }while(secu!=49 && secu!=50 && secu !=51 && secu !=52 );
+     switch(secu)
+     {
        case 49:
            choix2=66;
         break;
@@ -214,15 +226,12 @@ char b;
         break;
 
 
-    }
+     }
     setParam2(choix2);
-    }
+     }
+
         sauvegardeParam();
-        return;
-    }
-    else
-    {
-         return;
+        std::cout<<" bonjour4 ";
     }
 }
 bool Skieur::verifFichier(std::string _pseudo, std::string _mdp) // vérifier que le compte de l'utilisateur existe
@@ -235,16 +244,22 @@ bool Skieur::verifFichier(std::string _pseudo, std::string _mdp) // vérifier qu
 
     std::string ligne;
 
+
     while(getline(fichierProfil, ligne)) // remplissage du vector : ligne par ligne (une ligne dans une case)
     {
         Id.push_back(ligne);
     }
-int taille =Id.size();
+    int taille =Id.size();
     while( (i <= taille-1) )
     {
 
         if (_pseudo == Id[i] && _mdp == Id[i+1])
         {
+            std::istringstream iss( Id[i+3] ); ///permet de recup parametre tant qu'on y est
+            int _param2;
+            iss>> _param2; ///convertie un string en int oiur ensuite mettre en char pour param2
+            setParam2(_param2);
+
             return true;
         }
 
