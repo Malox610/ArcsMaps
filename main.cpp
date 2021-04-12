@@ -122,7 +122,7 @@ std::vector<Edge> EdgesTxt(std::vector<Node> nodes)
     int num;
     char edgeType;
     std::string edgeName;
-    std::ifstream flxEdges("data_arcs.txt"); // ouverture du fichier arcs
+    std::ifstream flxEdges("fichier/data_arcs.txt"); // ouverture du fichier arcs
 
     while(flxEdges)
     {
@@ -219,7 +219,7 @@ std::vector<Edge> EdgesTxtEx(std::vector<Node> nodes,Skieur s)
     char edgeType;
     std::string edgeName;
     char pisteEnleve=s.getParam2();
-    std::ifstream flxEdges("data_arcs.txt"); // ouverture du fichier arcs
+    std::ifstream flxEdges("fichier/data_arcs.txt"); // ouverture du fichier arcs
 
     while(flxEdges)
     {
@@ -315,7 +315,7 @@ std::vector<Node> nodesTxt(int *v)
     int vertex;//
     int alt;//
     std::string nodeName;//
-    std::ifstream flxPoints("data_points.txt"); // ouverture du fichier points
+    std::ifstream flxPoints("fichier/data_points.txt"); // ouverture du fichier points
 
     flxPoints >> *v; // premiere ligne du texte  = nombre de sommet
 
@@ -1054,6 +1054,17 @@ int menu ()
                std::cout <<"                    Chalet des Villards - Arc 1800"<<std::endl;
                std::cout <<"                        73700 Les Arcs - France"<<std::endl;
                std::cout <<"                      Tel. +33 (0)4 79 04 24 00"<<std::endl;
+               std::cout<<" "<< std::endl ;
+               std::cout<<" "<< std::endl ;
+               int p;
+               char c;
+               do
+               {
+                  std::cout <<" <----  retour menu ( ecrire 1)"<< std::endl;
+                  std::cin>>c;
+                  fflush(stdin);
+                  p=c;
+               }while(p!=49);
 
             break;
 
