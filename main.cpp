@@ -631,7 +631,7 @@ void CheminBFS(std::vector< std::vector<Edge> > adjList, Node start,Node finish)
 // Avec une liste d'adjacence , faire un BFS a partir d'un sommet de depart
 void AdjListBFS(std::vector< std::vector<Edge> > adjList, Node start)
 {
-    std::cout << "Tout les sommets ateignable dans l'ordre croissant : ";
+    std::cout << "Tout les sommets ateignables dans l'ordre croissant : ";
     int n = adjList.size();
 
      // Cree un tableau de boolean pour les sommet deja visite pour garder une trace de quel sommet a ete visite
@@ -723,9 +723,9 @@ void TrouverLeCheminLePlusCourt()
         std::cout <<"       || Que voulez vous faire ?  ||                                    %%%%%        &%%%"<<std::endl ;
         std::cout <<"       ||                          ||                                  &%%%%&#*,.  .*(%&%%%%*" <<std::endl;
         std::cout <<"       ||   1. Dijkstra            ||                                &%%% /%            % *%%%*"<<std::endl;
-        std::cout <<"       ||   2. Tout chemin         ||                              %%%%     &%        &(    /%%%"<<std::endl;
+        std::cout <<"       ||   2. Tout chemins        ||                              %%%%     &%        &(    /%%%"<<std::endl;
         std::cout <<"       ||   3. BFS                 ||                            .%%%.        %.    %&        &%%%"<<std::endl;
-        std::cout <<"       ||   4. BFS 2 sommet        ||                           %%%%           *%  %            %%%&"<<std::endl;
+        std::cout <<"       ||   4. BFS 2 sommets       ||                           %%%%           *%  %            %%%&"<<std::endl;
         std::cout <<"       ||   5. Retour au menu      ||                         *%%%   ./%&&&%%%%%%%%%%%%%%&&&%(,  .%%%"<<std::endl;
         std::cout <<"         -------------------------                           &%%%              #%  %               %%%("<<std::endl;
         std::cout <<"         -------------------------                          %%%  %/           %     *%           %& #%%&"<<std::endl;
@@ -882,7 +882,7 @@ void TrouverLeCheminLePlusCourtSpecial(Skieur s)
         std::cout <<"       ||                          ||                                  &%%%%&#*,.  .*(%&%%%%*" <<std::endl;
         std::cout <<"       ||   1. Dijkstra            ||                                &%%% /%            % *%%%*"<<std::endl;
         std::cout <<"       ||   2. Tout chemin         ||                              %%%%     &%        &(    /%%%"<<std::endl;
-        std::cout <<"       ||   3. BFS 2 sommet        ||                            .%%%.        %.    %&        &%%%"<<std::endl;
+        std::cout <<"       ||   3. BFS 2 sommets       ||                            .%%%.        %.    %&        &%%%"<<std::endl;
         std::cout <<"       ||   4. Retour au menu      ||                           %%%%           *%  %            %%%&"<<std::endl;
         std::cout <<"       ||                          ||                         *%%%   ./%&&&%%%%%%%%%%%%%%&&&%(,  .%%%"<<std::endl;
         std::cout <<"         -------------------------                           &%%%              #%  %               %%%("<<std::endl;
@@ -1004,7 +1004,7 @@ int menu ()
         std::cout <<"       || Que voulez vous faire ?  ||                                    %%%%%        &%%%"<<std::endl ;
         std::cout <<"       ||                          ||                                  &%%%%&#*,.  .*(%&%%%%*" <<std::endl;
         std::cout <<"       ||   1. Maps                ||                                &%%% /%            % *%%%*"<<std::endl;
-        std::cout <<"       ||   2. Chemin speciaux     ||                              %%%%     &%        &(    /%%%"<<std::endl;
+        std::cout <<"       ||   2. Chemins speciaux    ||                              %%%%     &%        &(    /%%%"<<std::endl;
         std::cout <<"       ||   3. LiveCam             ||                            .%%%.        %.    %&        &%%%"<<std::endl;
         std::cout <<"       ||   4. Contact             ||                           %%%%           *%  %            %%%&"<<std::endl;
         std::cout <<"       ||   5. Quittez             ||                          *%%%   ./%&&&%%%%%%%%%%%%%%&&&%(,  .%%%"<<std::endl;
