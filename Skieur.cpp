@@ -113,7 +113,7 @@ void Skieur::sauvegardeParam()
 
     monFlux1.close();
 
-    std::cout<< "vos parametre actuel sont "<< getParam2()<<std::endl;
+    std::cout<< "vos parametres actuels sont "<< getParam2()<<std::endl;
     int taille=Id.size();
     for(int i = 0; i < taille; i++)
     {
@@ -142,8 +142,8 @@ void Skieur::choixParam()
     std::string newParam1;
 
     do{
-        std::cout<<" Votre preference actuel est : " << getParam2()<<std::endl;
-        std::cout << " voulez vous modifier vos preferences ? 1 : oui / 2 : non " << std::endl;
+        std::cout<<" Votre preference actuelle est : " << getParam2()<<std::endl;
+        std::cout << " Voulez vous modifier vos preferences ? 1 : oui / 2 : non " << std::endl;
         std::cin >> choix;
         if(choix == "1" || choix == "2")
         {
@@ -163,7 +163,7 @@ void Skieur::choixParam()
     if(choix == "1")
     {
         do {
-            std::cout << "Entrez  ( 1 ) si vous souhaiter eviter les remontes et profiter au maximum des pistes et ( 0 ) si non : " << std::endl;
+            std::cout << "Entrez  ( 1 ) si vous souhaitez eviter les remontes et profiter au maximum des pistes et ( 0 ) si non : " << std::endl;
             std::cout <<std::endl;
             std::cout <<std::endl;
             std::cin >> choix1;
@@ -203,7 +203,7 @@ void Skieur::choixParam()
         std::cout <<"       ||   1.Eviter les pistes bleues ||                           &%%% /%            % *%%%*"<<std::endl;
         std::cout <<"       ||   2.Eviter les pistes rouges ||                          %%%%     &%        &(    /%%%"<<std::endl;
         std::cout <<"       ||   3.Eviter les pistes noires ||                        .%%%.        %.    %&        &%%%"<<std::endl;
-        std::cout <<"       ||   4. Ne rien eviter          ||                       %%%%           *%  %            %%%&"<<std::endl;
+        std::cout <<"       ||   4.Ne rien eviter           ||                       %%%%           *%  %            %%%&"<<std::endl;
         std::cout <<"         ------------------------------                       *%%%   ./%&&&%%%%%%%%%%%%%%&&&%(,  .%%%"<<std::endl;
         std::cout <<"         ------------------------------                      &%%%              #%  %               %%%("<<std::endl;
         std::cout <<"                                                            %%%  %/           %     *%           %& #%%&"<<std::endl;
@@ -360,7 +360,7 @@ void Skieur::connexionPage()
             else
             {
                  a = 0;
-                  std::cout << "Connexion reussi ! " << std::endl;
+                  std::cout << "Connexion reussie ! " << std::endl;
 
             }
 
