@@ -82,7 +82,7 @@ void Skieur::afficher()
 
 void Skieur::archivageProfil()
 {
-    std::string const fichierProfil("compte.txt");
+    std::string const fichierProfil("fichier/compte.txt");
     std::ofstream monFlux(fichierProfil.c_str(), std::ios::app);
     monFlux << getPseudo() << std::endl;
     monFlux << getMdp() << std::endl;
@@ -102,7 +102,7 @@ void Skieur::afficherSkieur()
 
 void Skieur::sauvegardeParam()
 {
-    std::string const nomFichier("compte.txt");
+    std::string const nomFichier("fichier/compte.txt");
     std::ifstream monFlux1(nomFichier);
     std::string ligne;
     std::vector<std::string> Id;
@@ -254,7 +254,7 @@ bool Skieur::verifFichier(std::string _pseudo, std::string _mdp) // vérifier qu
 {
 
     int i = 0;
-    std::ifstream fichierProfil("compte.txt"); // ouverture du fichier en lectuer
+    std::ifstream fichierProfil("fichier/compte.txt"); // ouverture du fichier en lectuer
 
     std::vector<std::string> Id;
 
